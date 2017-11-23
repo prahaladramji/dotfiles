@@ -1,10 +1,15 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export GOPATH="$HOME/go"
-export PATH="$HOME/bin:$GOPATH/bin:$PATH"
+
+# go lang
+export GOPATH=$HOME/go
+export PATH="$HOME/go/bin:$PATH"
+
+# enable for gnu coreutils
+# export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 # Path to your oh-my-zsh installation.
-export ZSH=/home/pramji/.oh-my-zsh
+export ZSH=/Users/pramji/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -54,7 +59,7 @@ ZSH_THEME="classyTouch"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -71,6 +76,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -96,3 +102,11 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias ls='ls -GFhla'
+alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder; say cache flushed'
+
+# for nvim
+export EDITOR='nvim'
+alias vi='nvim'
+alias vim='nvim'
