@@ -123,11 +123,16 @@ super + {Left,Down,Up,Right}
 #
 # media keys
 #
-XF86AudioRaiseVolume
-	amixer set Master 2%+
+XF86Audio{RaiseVolume,LowerVolume}
+	amixer set Master {5%+,5%-}
 
-XF86AudioLowerVolume
-	amixer set Master 2%-
+#XF86AudioLowerVolume
+#	amixer set Master 2%-
 
 XF86AudioMute
 	amixer -D pulse set Master 1+ toggle
+
+
+# temp tweaking polybar
+super + alt + p
+	~/.config/polybar/launch.sh

@@ -1,0 +1,5 @@
+set imap_user		= "prahaladramji@gmail.com"
+set imap_pass		= "ylyzzgayjxuyyjrr"
+set folder			= "imaps://prahaladramji@imap.gmail.com/"
+set spoolfile		= +INBOX
+mailboxes			= +INBOX

@@ -10,5 +10,6 @@ PS1='[\u@\h \W]\$ '
 
 export GOPATH="$HOME/go"
 export PATH="$PATH:$HOME/bin:$GOPATH/bin"
+export EDITOR="nvim"
 
 complete -cf sudo
