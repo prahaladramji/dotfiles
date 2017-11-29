@@ -1,0 +1,20 @@
+! Arc-Dark
+#define background		#404552
+#define foreground		#d3d7cf
+#define cursor			#06989a
+#define black			#2e3436
+#define bblack			#202426
+#define red				#cc0000
+#define bred			#cc0000
+#define green			#4e9a06
+#define bgreen			#4e9a06
+#define yellow			#c4a000
+#define byellow			#c4a000
+#define blue			#3465a4
+#define bblue			#3465a4
+#define magenta			#75507b
+#define bmagenta		#75507b
+#define cyan			#06989a
+#define bcyan			#06989a
+#define white			#d3d7cf
+#define bwhite			#d3d7cf

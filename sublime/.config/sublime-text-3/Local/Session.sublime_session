@@ -1,0 +1,623 @@
+{
+	"folder_history":
+	[
+		"/home/pramji/Documents/ansible-test",
+		"/home/pramji"
+	],
+	"last_version": 3154,
+	"last_window_id": 11,
+	"log_indexing": false,
+	"settings":
+	{
+		"new_window_height": 858.0,
+		"new_window_settings":
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"ses",
+						"sesiList"
+					]
+				]
+			},
+			"build_system_choices":
+			[
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"console":
+			{
+				"height": 143.0,
+				"history":
+				[
+					"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"file_history":
+			[
+				"/home/pramji/Downloads/#V.W.P.14.K.K#/First Read me , PASSWORD HERE !!!.txt",
+				"/home/pramji/Downloads/synergy/PKGBUILD",
+				"/home/pramji/.config/Synergy/Synergy.conf",
+				"/home/pramji/Downloads/maya/PKGBUILD",
+				"/home/pramji/Downloads/test/synergy_2.0.2.stable_b1046+665fa610_amd64/data/usr/lib/systemd/system/synergy.service",
+				"/home/pramji/Downloads/test/synergy_2.0.2.stable_b1046+665fa610_amd64/data/usr/share/applications/synergy.desktop",
+				"/var/lib/synergy/synergy.conf",
+				"/var/log/synergy/synergy-combined.log",
+				"/var/log/synergy/synergy-core.log",
+				"/var/lib/synergy/synergy-user.cfg",
+				"/home/pramji/Downloads/synergy/pkg/synergy/usr/lib/systemd/system/synergy.service",
+				"/home/pramji/Downloads/test/synergy_2.0.2.stable_b1046+665fa610_amd64/data/lib/systemd/system/synergy.service",
+				"/home/pramji/Downloads/dunstrc1",
+				"/home/pramji/Downloads/test/usr/share/applications/synergy.desktop",
+				"/home/pramji/Downloads/test/usr/lib/systemd/system/synergy.service",
+				"/home/pramji/Downloads/test/synergy_2.0.2.stable_b1046+665fa610_amd64 (1)/control/prerm",
+				"/home/pramji/Downloads/test/synergy_2.0.2.stable_b1046+665fa610_amd64 (1)/control/postrm",
+				"/usr/lib/systemd/system/wpa_supplicant.service",
+				"/usr/share/applications/sublime_text.desktop",
+				"/usr/lib/systemd/system/sesinetd.service",
+				"/home/pramji/Documents/ansible-test/roles/common/tasks/main.yml",
+				"/home/pramji/Documents/ansible-test/setup.yml",
+				"/home/pramji/Documents/ansible-test/roles/common/vars/main.yml",
+				"/home/pramji/Documents/ansible-test/HOSTS",
+				"/home/pramji/.config/nvim/init.vim",
+				"/home/pramji/dotfiles/.gitmodules",
+				"/home/pramji/.xprofile",
+				"/home/pramji/.config/Unknown Organization/setup.conf",
+				"/home/pramji/.config/nvim/autoload/plug.vim",
+				"/home/pramji/.config/nvim/.netrwhist",
+				"/home/pramji/.gitconfig",
+				"/home/pramji/.gitkraken/profiles/d6e5a8ca26e14325a4275fc33b17e16f/profile",
+				"/home/pramji/.gitkraken/profiles/d6e5a8ca26e14325a4275fc33b17e16f/github/secFile",
+				"/home/pramji/.gitkraken/config",
+				"/home/pramji/.Xresources",
+				"/home/pramji/.ssh/config",
+				"/home/pramji/.zshrc",
+				"/home/pramji/.zsh_history",
+				"/home/pramji/.zshrc.pre-oh-my-zsh",
+				"/usr/share/icons/pixelfun3/cursor.theme",
+				"/usr/share/icons/pixelfun3/index.theme",
+				"/home/pramji/.xinitrc",
+				"/home/pramji/Downloads/dotfiles/xresources/.Xresources",
+				"/home/pramji/.config/bspwm/bspwmrc",
+				"/home/pramji/Downloads/PragmataPro/PKGBUILD",
+				"/usr/share/spotify/spotify.desktop",
+				"/home/pramji/Downloads/3de/pkg/3dequalizer/opt/3DE4_linux64_r4/bin/3DE4",
+				"/home/pramji/Downloads/houdini/16.0/PKGBUILD",
+				"/home/pramji/Downloads/3de/PKGBUILD",
+				"/home/pramji/Downloads/3de/src/3dequalizer.desktop",
+				"/home/pramji/Downloads/3de/3dequalizer.desktop",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/desktop/sesi_gplay.desktop",
+				"/home/pramji/Downloads/3de/pkg/3dequalizer/usr/share/applications",
+				"/home/pramji/Downloads/3de/pkg/3dequalizer/opt/3DE4_linux64_r4/sys_data/py_vl_sdv/vl_vmcommon_sdv.py",
+				"/home/pramji/Downloads/maya/maya.desktop",
+				"/home/pramji/Downloads/3de/3dequalizer.desktop.desktop",
+				"/home/pramji/Downloads/3de/3DE4_linux64_r4/user_data/environment_config4r2",
+				"/home/pramji/.aws/config",
+				"/home/pramji/.aws/credentials",
+				"/home/pramji/.bashrc",
+				"/home/pramji/Downloads/houdini/crk/license.txt",
+				"/home/pramji/Downloads/houdini/crk/keygen.sh",
+				"/home/pramji/.ssh/known_hosts",
+				"/home/pramji/.config/polybar/launch.sh",
+				"/home/pramji/Downloads/houdini/16.0/pkg/houdini/usr/lib/sesi/sesinetd_safe",
+				"/home/pramji/Downloads/houdini/16.0/sesinetd.service",
+				"/home/pramji/Downloads/houdini/crk/houdinikeys",
+				"/home/pramji/Downloads/houdini/crk/keys.txt",
+				"/home/pramji/Downloads/houdini/crk/install-lnx.txt",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/sesinetd.install",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/houdini.install",
+				"/home/pramji/Downloads/houdini/16.0/pkg/houdini/usr/lib/sesi/sesinetd.startup",
+				"/home/pramji/Downloads/houdini/16.0/pkg/houdini/usr/lib/systemd/system/sesinetd.service",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/installDesktopItems.py",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/desktop/sesi_houdini.menu",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/desktop/sesi_houdini.desktop",
+				"/home/pramji/Downloads/houdini/16.0/pkg/houdini/usr/share/applications/sesi_houdinifx.desktop",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/desktop/sesi_orbolt_url.desktop",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/desktop/sesi_uninstall.desktop",
+				"/home/pramji/Downloads/houdini/16.0/pkg/houdini/usr/share/applications/sesi_gplay.desktop",
+				"/home/pramji/Downloads/houdini/houdini-16.5.268-linux_x86_64_gcc4.8/installDesktopItems.py",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/mime/application-x-otllc.xml",
+				"/home/pramji/Downloads/spotify/data/usr/share/spotify/spotify.desktop",
+				"/home/pramji/Downloads/spotify/data/usr/bin/spotify",
+				"/home/pramji/Downloads/spotify/control/postinst",
+				"/home/pramji/Downloads/spotify/control/prerm",
+				"/home/pramji/Downloads/spotify/control/control",
+				"/home/pramji/Downloads/spotify/control/md5sums",
+				"/home/pramji/Downloads/spotify/debian-binary",
+				"/home/pramji/Downloads/git-lfs-linux-amd64-2.3.4/git-lfs-2.3.4/install.sh",
+				"/usr/lib/sesi/licenses.disabled",
+				"/usr/lib/sesi/licenses",
+				"/home/pramji/Downloads/test/PKGBUILD",
+				"/home/pramji/Downloads/test/pkg/houdini/opt/hfs16.0.736/engine/maya/maya2017/houdiniEngine-maya2017",
+				"/home/pramji/Downloads/test/pkg/houdini/opt/hfs16.0.736/engine/maya/houdiniEngine-maya2017",
+				"/home/pramji/Downloads/test/pkg/houdini/usr/lib/systemd/system/sesinetd.service",
+				"/home/pramji/Downloads/test/pkg/houdini/usr/autodesk/maya2018/modules/houdiniEngine-maya2018",
+				"/home/pramji/Downloads/test/sesinetd.service",
+				"/home/pramji/Downloads/houdini/houdini-16.5.268-linux_x86_64_gcc4.8/houdini.install",
+				"/home/pramji/Downloads/houdini/houdini-16.5.268-linux_x86_64_gcc4.8/desktop/sesi_houdinifx.desktop",
+				"/home/pramji/Downloads/houdini/houdini-16.5.268-linux_x86_64_gcc4.8/houdini/houdini/sbin/sesinetd.startup",
+				"/usr/lib/sesi/sesinetd.startup",
+				"/usr/lib/sesi/sesinetd_safe",
+				"/usr/lib/sesi/license.auth",
+				"/usr/lib/sesi/license.dat",
+				"/mnt/data/Softwares/linux/autodesk/maya_crk/readme",
+				"/mnt/data/Softwares/linux/autodesk/maya_crk/Installer/readme",
+				"/home/pramji/.ssh/id_rsa.pub",
+				"/usr/share/applications/jetbrains-toolbox.desktop",
+				"/home/pramji/Downloads/nuke/crk/xf_foundry.lic",
+				"/home/pramji/Downloads/nuke/crk/install-lnx.txt",
+				"/home/pramji/Downloads/nuke/installarch.sh",
+				"/home/pramji/Downloads/nuke/foundryrlm.service",
+				"/home/pramji/Downloads/houdini/houdini-16.5.268-linux_x86_64_gcc4.8/sesinetd.install"
+			],
+			"find":
+			{
+				"height": 25.0
+			},
+			"find_in_files":
+			{
+				"height": 0.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+					"! "
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"show_context": true,
+				"use_buffer2": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"incremental_find":
+			{
+				"height": 25.0
+			},
+			"input":
+			{
+				"height": 0.0
+			},
+			"menu_visible": true,
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"pinned_build_system": "",
+			"replace":
+			{
+				"height": 46.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"show_minimap": true,
+			"show_open_files": true,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 231.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			}
+		},
+		"new_window_width": 1568.0
+	},
+	"windows":
+	[
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"bred",
+						"bred"
+					],
+					[
+						"ses",
+						"sesiList"
+					]
+				]
+			},
+			"buffers":
+			[
+				{
+					"contents": "ps3\ndb34enHR5TNW\n\n1password\nA3-NLTKSL-JNP8JQ-T4JLK-4JX2R-48VMA-M3DZ8\n\ngmail\nylyzzgayjxuyyjrr\n\n\n/jabber add gtalk prahaladramji@gmail.com ylyzzgayjxuyyjrr talk.google.com:5223",
+					"settings":
+					{
+						"buffer_size": 174,
+						"line_ending": "Unix",
+						"name": "ps3"
+					}
+				}
+			],
+			"build_system": "",
+			"build_system_choices":
+			[
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"console":
+			{
+				"height": 143.0,
+				"history":
+				[
+					"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"expanded_folders":
+			[
+				"/home/pramji",
+				"/home/pramji/.config",
+				"/home/pramji/.config/polybar",
+				"/home/pramji/.config/sxhkd"
+			],
+			"file_history":
+			[
+				"/home/pramji/.config/polybar/config",
+				"/home/pramji/.Xresources",
+				"/home/pramji/dotfiles/neomutt/.config/neomutt/gmail.box",
+				"/home/pramji/Downloads/packages/3de/PKGBUILD",
+				"/home/pramji/.termcolors/TomorrowNight",
+				"/home/pramji/.termcolors/Arc-Dark",
+				"/home/pramji/.config/sxhkd/sxhkdrc",
+				"/home/pramji/.config/bspwm/bspwmrc",
+				"/home/pramji/.config/polybar/pavolume.sh",
+				"/home/pramji/.config/polybar/launch.sh",
+				"/home/pramji/.zshrc",
+				"/etc/neomuttrc",
+				"/usr/share/applications/vmware-workstation.desktop",
+				"/home/pramji/Downloads/#V.W.P.14.K.K#/First Read me , PASSWORD HERE !!!.txt",
+				"/home/pramji/Downloads/synergy/PKGBUILD",
+				"/home/pramji/.config/Synergy/Synergy.conf",
+				"/home/pramji/Downloads/maya/PKGBUILD",
+				"/home/pramji/Downloads/test/synergy_2.0.2.stable_b1046+665fa610_amd64/data/usr/lib/systemd/system/synergy.service",
+				"/home/pramji/Downloads/test/synergy_2.0.2.stable_b1046+665fa610_amd64/data/usr/share/applications/synergy.desktop",
+				"/var/lib/synergy/synergy.conf",
+				"/var/log/synergy/synergy-combined.log",
+				"/var/log/synergy/synergy-core.log",
+				"/var/lib/synergy/synergy-user.cfg",
+				"/home/pramji/Downloads/synergy/pkg/synergy/usr/lib/systemd/system/synergy.service",
+				"/home/pramji/Downloads/test/synergy_2.0.2.stable_b1046+665fa610_amd64/data/lib/systemd/system/synergy.service",
+				"/home/pramji/Downloads/dunstrc1",
+				"/home/pramji/Downloads/test/usr/share/applications/synergy.desktop",
+				"/home/pramji/Downloads/test/usr/lib/systemd/system/synergy.service",
+				"/home/pramji/Downloads/test/synergy_2.0.2.stable_b1046+665fa610_amd64 (1)/control/prerm",
+				"/home/pramji/Downloads/test/synergy_2.0.2.stable_b1046+665fa610_amd64 (1)/control/postrm",
+				"/usr/lib/systemd/system/wpa_supplicant.service",
+				"/usr/share/applications/sublime_text.desktop",
+				"/usr/lib/systemd/system/sesinetd.service",
+				"/home/pramji/Documents/ansible-test/roles/common/tasks/main.yml",
+				"/home/pramji/Documents/ansible-test/setup.yml",
+				"/home/pramji/Documents/ansible-test/roles/common/vars/main.yml",
+				"/home/pramji/Documents/ansible-test/HOSTS",
+				"/home/pramji/.config/nvim/init.vim",
+				"/home/pramji/dotfiles/.gitmodules",
+				"/home/pramji/.xprofile",
+				"/home/pramji/.config/Unknown Organization/setup.conf",
+				"/home/pramji/.config/nvim/autoload/plug.vim",
+				"/home/pramji/.config/nvim/.netrwhist",
+				"/home/pramji/.gitconfig",
+				"/home/pramji/.gitkraken/profiles/d6e5a8ca26e14325a4275fc33b17e16f/profile",
+				"/home/pramji/.gitkraken/profiles/d6e5a8ca26e14325a4275fc33b17e16f/github/secFile",
+				"/home/pramji/.gitkraken/config",
+				"/home/pramji/.ssh/config",
+				"/home/pramji/.zsh_history",
+				"/home/pramji/.zshrc.pre-oh-my-zsh",
+				"/usr/share/icons/pixelfun3/cursor.theme",
+				"/usr/share/icons/pixelfun3/index.theme",
+				"/home/pramji/.xinitrc",
+				"/home/pramji/Downloads/dotfiles/xresources/.Xresources",
+				"/home/pramji/Downloads/PragmataPro/PKGBUILD",
+				"/usr/share/spotify/spotify.desktop",
+				"/home/pramji/Downloads/3de/pkg/3dequalizer/opt/3DE4_linux64_r4/bin/3DE4",
+				"/home/pramji/Downloads/houdini/16.0/PKGBUILD",
+				"/home/pramji/Downloads/3de/PKGBUILD",
+				"/home/pramji/Downloads/3de/src/3dequalizer.desktop",
+				"/home/pramji/Downloads/3de/3dequalizer.desktop",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/desktop/sesi_gplay.desktop",
+				"/home/pramji/Downloads/3de/pkg/3dequalizer/usr/share/applications",
+				"/home/pramji/Downloads/3de/pkg/3dequalizer/opt/3DE4_linux64_r4/sys_data/py_vl_sdv/vl_vmcommon_sdv.py",
+				"/home/pramji/Downloads/maya/maya.desktop",
+				"/home/pramji/Downloads/3de/3dequalizer.desktop.desktop",
+				"/home/pramji/Downloads/3de/3DE4_linux64_r4/user_data/environment_config4r2",
+				"/home/pramji/.aws/config",
+				"/home/pramji/.aws/credentials",
+				"/home/pramji/.bashrc",
+				"/home/pramji/Downloads/houdini/crk/license.txt",
+				"/home/pramji/Downloads/houdini/crk/keygen.sh",
+				"/home/pramji/.ssh/known_hosts",
+				"/home/pramji/Downloads/houdini/16.0/pkg/houdini/usr/lib/sesi/sesinetd_safe",
+				"/home/pramji/Downloads/houdini/16.0/sesinetd.service",
+				"/home/pramji/Downloads/houdini/crk/houdinikeys",
+				"/home/pramji/Downloads/houdini/crk/keys.txt",
+				"/home/pramji/Downloads/houdini/crk/install-lnx.txt",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/sesinetd.install",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/houdini.install",
+				"/home/pramji/Downloads/houdini/16.0/pkg/houdini/usr/lib/sesi/sesinetd.startup",
+				"/home/pramji/Downloads/houdini/16.0/pkg/houdini/usr/lib/systemd/system/sesinetd.service",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/installDesktopItems.py",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/desktop/sesi_houdini.menu",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/desktop/sesi_houdini.desktop",
+				"/home/pramji/Downloads/houdini/16.0/pkg/houdini/usr/share/applications/sesi_houdinifx.desktop",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/desktop/sesi_orbolt_url.desktop",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/desktop/sesi_uninstall.desktop",
+				"/home/pramji/Downloads/houdini/16.0/pkg/houdini/usr/share/applications/sesi_gplay.desktop",
+				"/home/pramji/Downloads/houdini/houdini-16.5.268-linux_x86_64_gcc4.8/installDesktopItems.py",
+				"/home/pramji/Downloads/houdini/16.0/src/houdini-16.0.736-linux_x86_64_gcc4.8/mime/application-x-otllc.xml",
+				"/home/pramji/Downloads/spotify/data/usr/share/spotify/spotify.desktop",
+				"/home/pramji/Downloads/spotify/data/usr/bin/spotify",
+				"/home/pramji/Downloads/spotify/control/postinst",
+				"/home/pramji/Downloads/spotify/control/prerm",
+				"/home/pramji/Downloads/spotify/control/control",
+				"/home/pramji/Downloads/spotify/control/md5sums",
+				"/home/pramji/Downloads/spotify/debian-binary",
+				"/home/pramji/Downloads/git-lfs-linux-amd64-2.3.4/git-lfs-2.3.4/install.sh",
+				"/usr/lib/sesi/licenses.disabled",
+				"/usr/lib/sesi/licenses",
+				"/home/pramji/Downloads/test/PKGBUILD",
+				"/home/pramji/Downloads/test/pkg/houdini/opt/hfs16.0.736/engine/maya/maya2017/houdiniEngine-maya2017",
+				"/home/pramji/Downloads/test/pkg/houdini/opt/hfs16.0.736/engine/maya/houdiniEngine-maya2017",
+				"/home/pramji/Downloads/test/pkg/houdini/usr/lib/systemd/system/sesinetd.service",
+				"/home/pramji/Downloads/test/pkg/houdini/usr/autodesk/maya2018/modules/houdiniEngine-maya2018",
+				"/home/pramji/Downloads/test/sesinetd.service",
+				"/home/pramji/Downloads/houdini/houdini-16.5.268-linux_x86_64_gcc4.8/houdini.install",
+				"/home/pramji/Downloads/houdini/houdini-16.5.268-linux_x86_64_gcc4.8/desktop/sesi_houdinifx.desktop",
+				"/home/pramji/Downloads/houdini/houdini-16.5.268-linux_x86_64_gcc4.8/houdini/houdini/sbin/sesinetd.startup",
+				"/usr/lib/sesi/sesinetd.startup",
+				"/usr/lib/sesi/sesinetd_safe",
+				"/usr/lib/sesi/license.auth",
+				"/usr/lib/sesi/license.dat",
+				"/mnt/data/Softwares/linux/autodesk/maya_crk/readme",
+				"/mnt/data/Softwares/linux/autodesk/maya_crk/Installer/readme",
+				"/home/pramji/.ssh/id_rsa.pub",
+				"/usr/share/applications/jetbrains-toolbox.desktop",
+				"/home/pramji/Downloads/nuke/crk/xf_foundry.lic",
+				"/home/pramji/Downloads/nuke/crk/install-lnx.txt",
+				"/home/pramji/Downloads/nuke/installarch.sh",
+				"/home/pramji/Downloads/nuke/foundryrlm.service",
+				"/home/pramji/Downloads/houdini/houdini-16.5.268-linux_x86_64_gcc4.8/sesinetd.install"
+			],
+			"find":
+			{
+				"height": 35.0
+			},
+			"find_in_files":
+			{
+				"height": 0.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+					"grey",
+					"label",
+					"! "
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"show_context": true,
+				"use_buffer2": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"folders":
+			[
+				{
+					"path": "/home/pramji"
+				}
+			],
+			"groups":
+			[
+				{
+					"selected": 0,
+					"sheets":
+					[
+						{
+							"buffer": 0,
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 174,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										174,
+										174
+									]
+								],
+								"settings":
+								{
+									"auto_name": "ps3",
+									"syntax": "Packages/Text/Plain text.tmLanguage"
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 0,
+							"type": "text"
+						}
+					]
+				}
+			],
+			"incremental_find":
+			{
+				"height": 38.0
+			},
+			"input":
+			{
+				"height": 0.0
+			},
+			"layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			},
+			"menu_visible": true,
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"pinned_build_system": "",
+			"position": "0,0,0,0,0,4,39,3834,2154,5760,2160",
+			"project": "",
+			"replace":
+			{
+				"height": 72.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"selected_group": 0,
+			"settings":
+			{
+			},
+			"show_minimap": true,
+			"show_open_files": true,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 207.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			},
+			"window_id": 4,
+			"workspace_name": ""
+		}
+	],
+	"workspaces":
+	{
+		"recent_workspaces":
+		[
+		]
+	}
+}

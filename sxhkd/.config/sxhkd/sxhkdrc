@@ -8,11 +8,16 @@ super + Return
 
 # program launcher
 super + @space
-	dmenu_run
+	dmenu_run -fn 'PragmataPro Mono-10' -nb "#1d1f21" -nf "#c5c8c6" -sb "#373b41" -sf "#c5c8c6"
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
+
+
+# reload polybar
+super + alt + p
+	~/.config/polybar/launch.sh
 
 #
 # bspwm hotkeys
@@ -126,13 +131,5 @@ super + {Left,Down,Up,Right}
 XF86Audio{RaiseVolume,LowerVolume}
 	amixer set Master {5%+,5%-}
 
-#XF86AudioLowerVolume
-#	amixer set Master 2%-
-
 XF86AudioMute
 	amixer -D pulse set Master 1+ toggle
-
-
-# temp tweaking polybar
-super + alt + p
-	~/.config/polybar/launch.sh

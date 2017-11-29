@@ -1,0 +1,8 @@
+{
+	"color_scheme": "Packages/Tomorrow Color Schemes/Tomorrow-Night.tmTheme",
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"theme": "Minimist.sublime-theme"
+}

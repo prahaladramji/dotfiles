@@ -7,4 +7,5 @@
 Thumbs.db
 
 # weechat
-/logs/
+*logs/
+*.log

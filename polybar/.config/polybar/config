@@ -2,7 +2,7 @@
 background = ${xrdb:background:#222}
 foreground = ${xrdb:foreground:#dfdfdf}
 black = ${xrdb:color0}
-grey = ${xrdb:color8}
+bblack = ${xrdb:color8}
 red = ${xrdb:color1}
 bred = ${xrdb:color9}
 green = ${xrdb:color2}
@@ -45,7 +45,7 @@ module-margin-right = 1
 
 modules-left = bspwm 
 modules-center = xwindow
-modules-right = spotify memory cpu wlan date
+modules-right = spotify pavolume memory cpu wlan date
 
 click-left = 
 click-middle = 
@@ -173,6 +173,19 @@ ramp-signal-2 = ▃
 ramp-signal-3 = ▄
 ramp-signal-4 = ▆
 ramp-signal-5 = █
+
+[module/pavolume]
+type = custom/script
+interval = 1
+format-background = ${colors.background}
+format-underline = ${colors.green}
+format-padding = 0
+label = %output%
+exec = ~/.config/polybar/pavolume.sh
+click-right = exec urxvt -name "pulsemixer" --geometry 120x10 -e zsh -c "pulsemixer"
+click-left = ~/.config/polybar/pavolume.sh --togmute
+scroll-up = ~/.config/polybar/pavolume.sh --up
+scroll-down = ~/.config/polybar/pavolume.sh --down
 
 [module/spotify]
 type = custom/script
