@@ -1,22 +1,22 @@
 [colors]
-background = ${xrdb:background:#222}
-foreground = ${xrdb:foreground:#dfdfdf}
-black = ${xrdb:color0}
-bblack = ${xrdb:color8}
-red = ${xrdb:color1}
-bred = ${xrdb:color9}
-green = ${xrdb:color2}
-bgreen = ${xrdb:color10}
-yellow = ${xrdb:color3}
-byellow = ${xrdb:color11}
-blue = ${xrdb:color4}
-bblue = ${xrdb:color12}
-magenta = ${xrdb:color5}
-bmagenta = ${xrdb:color13}
-cyan = ${xrdb:color6}
-bcyan = ${xrdb:color14}
-white = ${xrdb:color7}
-bwhite = ${xrdb:color15}
+BackGround = ${xrdb:background:#222}
+ForeGround = ${xrdb:foreground:#dfdfdf}
+Black = ${xrdb:color0}
+DarkGrey = ${xrdb:color8}
+DarkRed = ${xrdb:color1}
+Red = ${xrdb:color9}
+DarkGreen = ${xrdb:color2}
+Green = ${xrdb:color10}
+DarkYellow = ${xrdb:color3}
+Yellow = ${xrdb:color11}
+DarkBlue = ${xrdb:color4}
+Blue = ${xrdb:color12}
+DarkMagenta = ${xrdb:color5}
+Magenta = ${xrdb:color13}
+DarkCyan = ${xrdb:color6}
+Cyan = ${xrdb:color14}
+LightGrey = ${xrdb:color7}
+White = ${xrdb:color15}
 
 [global/wm]
 margin-top = 1
@@ -25,9 +25,9 @@ margin-bottom = 1
 [bar/base]
 monitor = ${env:MONITOR:DP-4}
 
-width = 50%
+width = 100%
 height = 25
-offset-x = 25%
+offset-x = 0
 offset-y = 0
 line-size = 2
 line-color = #f00
@@ -36,11 +36,11 @@ border-size = 0
 border-color = #00000000
 fixed-center = true
 font-0 = PragmataPro Mono:pixelsize:10;2
-background = ${colors.background}
-foreground = ${colors.foreground}
+background = ${colors.BackGround}
+foreground = ${colors.ForeGround}
 tray-position = right
 
-module-margin-left = 1
+module-margin-left = 0
 module-margin-right = 1
 
 modules-left = bspwm 
@@ -71,26 +71,26 @@ ws-icon-4 = web;♞
 ws-icon-default = ♟
 
 label-focused = %index%
-label-focused-background = ${colors.white}
-label-focused-underline= ${colors.blue}
+label-focused-background = ${colors.White}
+label-focused-underline= ${colors.Blue}
 label-focused-padding = 1
 
 label-occupied = %index%
 label-occupied-padding = 1
 
 label-urgent = %index%!
-label-urgent-background = ${colors.red}
+label-urgent-background = ${colors.Red}
 label-urgent-padding = 1
 
 label-empty = %index%
-label-empty-foreground = ${colors.bwhite}
+label-empty-foreground = ${colors.LightGrey}
 label-empty-padding = 1
 
 [module/cpu]
 type = internal/cpu
 interval = 2
 format = <ramp-load><label> 
-format-underline = ${colors.yellow}
+format-underline = ${colors.Yellow}
 label = %percentage%%
 
 ramp-load-0 = ▁
@@ -106,7 +106,7 @@ ramp-load-7 = █
 type = internal/memory
 interval = 3
 format = <label>
-format-underline = ${colors.byellow}
+format-underline = ${colors.Yellow}
 label = %gb_used%
 
 [module/date]
@@ -114,7 +114,7 @@ type = internal/date
 interval = 5
 date = " %Y-%m-%d"
 time = %H:%M
-format-underline = ${colors.magenta}
+format-underline = ${colors.Magenta}
 
 label = %date% %time%
 
@@ -127,18 +127,18 @@ mount-1 = /home
 
 label-mounted = %mountpoint%: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
-label-unmounted-foreground = ${colors.bred}
+label-unmounted-foreground = ${colors.Red}
 
 [module/menu-apps]
 type = custom/menu
 format-spacing = 1
 
 label-open = Shutdown
-label-open-foreground = ${colors.red}
+label-open-foreground = ${colors.Red}
 label-close =  cancel
-label-close-foreground = ${colors.green}
+label-close-foreground = ${colors.Green}
 label-separator = |
-label-separator-foreground = ${colors.yellow}
+label-separator-foreground = ${colors.Yellow}
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1
@@ -163,8 +163,8 @@ udspeed-minwidth = 5
 accumulate-stats = true
 format-connected = <ramp-signal> <label-connected>
 format-disconnected = <label-disconnected>
-format-connected-underline = ${colors.green}
-format-disconnected-underline = ${colors.red}
+format-connected-underline = ${colors.Green}
+format-disconnected-underline = ${colors.Red}
 label-connected = %essid%
 label-disconnected = not connected
 ramp-signal-0 = ▁
@@ -177,8 +177,8 @@ ramp-signal-5 = █
 [module/pavolume]
 type = custom/script
 interval = 1
-format-background = ${colors.background}
-format-underline = ${colors.green}
+format-background = ${colors.BackGround}
+format-underline = ${colors.Cyan}
 format-padding = 0
 label = %output%
 exec = ~/.config/polybar/pavolume.sh
@@ -192,7 +192,7 @@ type = custom/script
 exec = echo "$(~/bin/spotify-cli --status)"
 tail = true
 interval = 2
-format-underline = ${colors.green}
+format-underline = ${colors.Cyan}
 
 [settings]
 screenchange-reload = true

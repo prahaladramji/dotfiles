@@ -10,29 +10,29 @@ Xcursor.theme:                        pixelfun3
 
 
 ! define colors
-#include </home/pramji/.termcolors/TomorrowNight>
-*.foreground:   foreground
-*.background:   background
-*.cursorColor:  cursor
+#include "/home/pramji/.termcolors/TomorrowNight"
+*.foreground:   ForeGround
+*.background:   BackGround
+*.cursorColor:  Cursor
 
-*.color0:       black
-*.color8:       bblack
-*.color1:       red
-*.color9:       bred
-*.color2:       green
-*.color10:      bgreen
-*.color3:       yellow
-*.color11:      byellow
-*.color4:       blue
-*.color12:      bblue
-*.color5:       magenta
-*.color13:      bmagenta
-*.color6:       cyan
-*.color14:      bcyan
+*.color0:       Black
+*.color8:       DarkGrey
+*.color1:       DarkRed
+*.color9:       Red
+*.color2:       DarkGreen
+*.color10:      Green
+*.color3:       DarkYellow
+*.color11:      Yellow
+*.color4:       DarkBlue
+*.color12:      Blue
+*.color5:       DarkMagenta
+*.color13:      Magenta
+*.color6:       DarkCyan
+*.color14:      Cyan
 
 ! Selection + Current Line
-*.color7:       white
-*.color15:      bwhite
+*.color7:       LightGrey
+*.color15:      White
 
 URxvt*termName:                       rxvt-256color
 URxvt*scrollBar:                      false
@@ -40,7 +40,9 @@ URxvt*cursorBlink:                    true
 URxvt*font:                           xft:PragmataPro Mono:pixelsize:10
 URxvt*depth:                          32
 URxvt*lineSpace:                      1
-URxvt*perl-ext-common:                default,clipboard
-URxvt*keysym.Shift-Control-C:         perl:clipboard:copy
-URxvt*keysym.Shift-Control-V:         perl:clipboard:paste
-URxvt.clipboard.autocopy:       		true
+URxvt.iso14755:						  false
+URxvt.iso14755_52:					  false
+URxvt*perl-ext-common:                default
+URxvt*keysym.Shift-Control-C:         eval:selection_to_clipboard
+URxvt*keysym.Shift-Control-V:         eval:paste_clipboard
+

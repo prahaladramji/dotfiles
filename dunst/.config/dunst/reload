@@ -1,0 +1,13 @@
+#!/bin/bash
+pkill dunst
+dunst -config ~/.config/dunst/dunstrc &
+
+notify-send Test "critical test 1" -u critical
+notify-send Test "normal test 2" -u normal
+notify-send Test "low test 3" -u low
+notify-send Test "critical test 4" -u critical
+notify-send Test "normal test 5" -u normal
+notify-send Test "low test 6" -u low
+notify-send Test "critical test 7" -u critical
+notify-send Test "normal test 8" -u normal
+notify-send Test "low test 9" -u low
