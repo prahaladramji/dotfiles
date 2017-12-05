@@ -2,6 +2,10 @@
 
 # disable gpu led
 nvidia-settings --assign GPULogoBrightness=0
+
+# enable numlock
+numlockx &
+
 xrdb -merge ~/.Xresources
 
 xsetroot -name background # set 'Root' window.

@@ -2,8 +2,10 @@
 
 # startup applications
 sxhkd &
+compton &
 dropbox &
-jetbrains-toolbox &
+wmname LG3D
+# jetbrains-toolbox &
 
 # wallpaper
 hsetroot -center '/home/pramji/Pictures/montage.jpg'
@@ -30,10 +32,16 @@ bspc config presel_feedback_color "#81a2be"
 
 bspc config external_rules_command '/home/pramji/.config/bspwm/windowclassname.sh'
 
+# bspc config wm_name LG3D
+
 bspc rule -a URxvt:pulsemixer state=floating
+bspc rule -a URxvt:calculator state=floating
 bspc rule -a Gimp desktop=^4 follow=on state=floating
 bspc rule -a Gnome-mplayer follow=on state=floating
 bspc rule -a Evolution desktop=^3 follow=on
+bspc rule -a Vmware desktop=^4 follow=on state=floating
+bspc rule -a Synergy state=floating
+bspc rule -a Transmission-gtk state=floating
 
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK

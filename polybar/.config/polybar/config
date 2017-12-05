@@ -1,5 +1,6 @@
 [colors]
-BackGround = ${xrdb:background:#222}
+;BackGround = ${xrdb:background:#222}
+BackGround = #e51d1f21
 ForeGround = ${xrdb:foreground:#dfdfdf}
 Black = ${xrdb:color0}
 DarkGrey = ${xrdb:color8}
@@ -39,13 +40,14 @@ font-0 = PragmataPro Mono:pixelsize:10;2
 background = ${colors.BackGround}
 foreground = ${colors.ForeGround}
 tray-position = right
+tray-background = ${colors.BackGround}
 
 module-margin-left = 0
 module-margin-right = 1
 
-modules-left = bspwm 
+modules-left = bspwm
 modules-center = xwindow
-modules-right = spotify pavolume memory cpu wlan date
+modules-right = spotify pavolume memory cpu wlan date menu-power blank
 
 click-left = 
 click-middle = 
@@ -112,7 +114,7 @@ label = %gb_used%
 [module/date]
 type = internal/date
 interval = 5
-date = " %Y-%m-%d"
+date = "%a %d %b"
 time = %H:%M
 format-underline = ${colors.Magenta}
 
@@ -129,7 +131,7 @@ label-mounted = %mountpoint%: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.Red}
 
-[module/menu-apps]
+[module/menu-power]
 type = custom/menu
 format-spacing = 1
 
@@ -193,6 +195,12 @@ exec = echo "$(~/bin/spotify-cli --status)"
 tail = true
 interval = 2
 format-underline = ${colors.Cyan}
+click-left = spotify-cli --playpause
+click-right = spotify-cli --next
+
+[module/blank]
+type = custom/text
+content = "  "
 
 [settings]
 screenchange-reload = true

@@ -17,7 +17,7 @@ super + Escape
 
 # reload tests
 super + alt + p
-	~/.config/dunst/reload
+	~/.config/polybar/launch.sh
 
 #
 # bspwm hotkeys
@@ -133,3 +133,12 @@ XF86Audio{RaiseVolume,LowerVolume}
 
 XF86AudioMute
 	amixer -D pulse set Master 1+ toggle
+
+XF86Calculator
+	urxvt -name "calculator" --geometry 30x20 -e zsh -c "bc -ql"
+
+#
+# screenshots
+#
+ctrl + shift + 4
+	maim -s ~/Pictures/screenshots/$(date +%y%m%d%H%M%S).jpg
