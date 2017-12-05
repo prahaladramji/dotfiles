@@ -2,7 +2,7 @@
 Install stow and use stow to manage symlinks or copy files manually.
 
 ### Basic usage
-```
+```bash
 git clone git@github.com:prahaladramji/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 stow <config-folder-name>
