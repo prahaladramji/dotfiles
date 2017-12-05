@@ -9,7 +9,11 @@ stow <config-folder-name>
 ```
 
 ### Stow from a different folder to a different target
-`stow -d /path/to/dotfiles -t /path/to/target <config-folder-name>`
+```bash
+stow -d /path/to/dotfiles -t /path/to/target <config-folder-name>
+```
 
 ### In order to restow
-`stow -R <config-folder-name>`
+```bash
+stow -R <config-folder-name>
+```
