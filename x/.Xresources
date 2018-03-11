@@ -36,13 +36,13 @@ Xcursor.theme:                        pixelfun3
 
 URxvt*termName:                       rxvt-256color
 URxvt*scrollBar:                      false
-URxvt.saveLines:					  8192
+URxvt.saveLines:                      8192
 URxvt*cursorBlink:                    true
 URxvt*font:                           xft:PragmataPro Mono:pixelsize:10
 URxvt*depth:                          32
 URxvt*lineSpace:                      1
-URxvt.iso14755:						  false
-URxvt.iso14755_52:					  false
+URxvt.iso14755:                       false
+URxvt.iso14755_52:                    false
 URxvt*perl-ext-common:                default
 URxvt*keysym.Shift-Control-C:         eval:selection_to_clipboard
 URxvt*keysym.Shift-Control-V:         eval:paste_clipboard
