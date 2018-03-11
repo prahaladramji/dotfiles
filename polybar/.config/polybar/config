@@ -37,6 +37,7 @@ border-size = 0
 border-color = #00000000
 fixed-center = true
 font-0 = PragmataPro Mono:pixelsize:10;2
+font-1 = FontAwesome:pixelsize=12;2
 background = ${colors.BackGround}
 foreground = ${colors.ForeGround}
 tray-position = right
@@ -47,7 +48,7 @@ module-margin-right = 1
 
 modules-left = bspwm
 modules-center = xwindow
-modules-right = spotify pavolume memory cpu wlan date menu-power blank
+modules-right = spotify pavolume memory cpu gpu wlan date menu-power blank
 
 click-left = 
 click-middle = 
@@ -110,6 +111,13 @@ interval = 3
 format = <label>
 format-underline = ${colors.Yellow}
 label = %gb_used%
+
+[module/gpu]
+type = custom/script
+exec = nvidia-smi | grep % | awk '{print $13}'
+interval = 2
+label = GPU: %output%
+format-underline = ${colors.Yellow}
 
 [module/date]
 type = internal/date
@@ -182,8 +190,8 @@ interval = 1
 format-background = ${colors.BackGround}
 format-underline = ${colors.Cyan}
 format-padding = 0
-label = %output%
-exec = ~/.config/polybar/pavolume.sh
+label =  %output%
+exec = ~/.config/polybar/pavolume.sh | awk '{print $2}'
 click-right = exec urxvt -name "pulsemixer" --geometry 120x10 -e zsh -c "pulsemixer"
 click-left = ~/.config/polybar/pavolume.sh --togmute
 scroll-up = ~/.config/polybar/pavolume.sh --up
@@ -191,12 +199,39 @@ scroll-down = ~/.config/polybar/pavolume.sh --down
 
 [module/spotify]
 type = custom/script
-exec = echo "$(~/bin/spotify-cli --status)"
+exec = echo "$(/usr/local/bin/spotify-cli --status)"
 tail = true
 interval = 2
 format-underline = ${colors.Cyan}
-click-left = spotify-cli --playpause
-click-right = spotify-cli --next
+click-left = /usr/local/bin/spotify-cli --playpause
+click-right = /usr/local/bin/spotify-cli --next
+
+[module/mousebattery]
+type = internal/battery
+battery = hidpp_battery_0
+;battery = wacom_battery_0
+;adapter = hidpp_battery_0
+
+format-charging = <animation-charging> <label-charging>
+format-discharging = <ramp-capacity> <label-discharging>
+
+label-charging = %percentage%%
+label-discharging = %percentage%%
+label-full = Fully charged
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+
+animation-charging-framerate = 750
 
 [module/blank]
 type = custom/text
@@ -204,3 +239,5 @@ content = "  "
 
 [settings]
 screenchange-reload = true
+
+; vim:ft=dosini

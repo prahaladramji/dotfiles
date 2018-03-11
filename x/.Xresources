@@ -36,6 +36,7 @@ Xcursor.theme:                        pixelfun3
 
 URxvt*termName:                       rxvt-256color
 URxvt*scrollBar:                      false
+URxvt.saveLines:					  8192
 URxvt*cursorBlink:                    true
 URxvt*font:                           xft:PragmataPro Mono:pixelsize:10
 URxvt*depth:                          32

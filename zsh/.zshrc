@@ -1,7 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export GOPATH="$HOME/go"
-export PATH="$HOME/bin:$GOPATH/bin:$PATH"
+export PATH="$HOME/bin:$GOPATH/bin:/opt/rez/bin/rez:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/pramji/.oh-my-zsh
@@ -38,7 +38,7 @@ ZSH_THEME="classyTouch"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# ccminer -a lyra2v2 -o stratum+tcp://lyra2v2.mine.zpool.ca:4533 -u DKHoHZkUDd35utZU2NB99Y5KtMmqdKjUWj -p c=XVG,
+# ccminer -a lyra2v2 -o stratum+tcp://lyra2v2.mine.zpool.ca:4533 -u D5tEYy7yq2buA5btRaKZKPtXf8zXfJomeh -p c=XVG,
+# ccminer -a equihash -o stratum+tcp://equihash.mine.zpool.ca:2142 -u t1PrWCwGk21RYXbXxBpHUjiBujKhfy2fcWp -p c=ZCL,
+ccminer -a neoscrypt -o stratum+tcp://neoscrypt.mine.zpool.ca:4233 -u GNoKSW92dvaduqwzLgDx8SKcZ9UcupZWiq -p c=GBX,

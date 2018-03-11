@@ -134,6 +134,15 @@ XF86Audio{RaiseVolume,LowerVolume}
 XF86AudioMute
 	amixer -D pulse set Master 1+ toggle
 
+XF86AudioPlay
+	/usr/local/bin/spotify-cli --playpause
+
+XF86AudioNext
+	/usr/local/bin/spotify-cli --next
+
+XF86AudioPrev
+	/usr/local/bin/spotify-cli --prev
+
 XF86Calculator
 	urxvt -name "calculator" --geometry 30x20 -e zsh -c "bc -ql"
 
