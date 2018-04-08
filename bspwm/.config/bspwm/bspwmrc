@@ -8,6 +8,7 @@ solaar &
 synergy &
 wmname LG3D
 jetbrains-toolbox &
+mailspring &
 
 # wallpaper
 hsetroot -center '/home/pramji/Pictures/montage.jpg'
@@ -41,13 +42,15 @@ bspc rule -a URxvt:calculator state=floating
 bspc rule -a Gimp desktop=^4 follow=on state=floating
 bspc rule -a Gnome-mplayer follow=on state=floating
 bspc rule -a MPlayer follow=on state=floating
-bspc rule -a Evolution desktop=^3 follow=on
 bspc rule -a Vmware desktop=^4 follow=on state=floating
 bspc rule -a Synergy state=floating
 bspc rule -a Transmission-gtk state=floating
 bspc rule -a Rv.bin follow=on state=floating
 bspc rule -a Solaar:solaar state=floating
 bspc rule -a Shotgun:shotgun follow=on state=floating
+bspc rule -a Wine:TeamViewer.exe follow=on state=floating
+bspc rule -a TeamViewer:TeamViewer follow=on state=floating
+bspc rule -a Mailspring:mailspring desktop=^3
 
 eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK

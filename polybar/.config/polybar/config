@@ -48,7 +48,7 @@ module-margin-right = 1
 
 modules-left = bspwm
 modules-center = xwindow
-modules-right = spotify pavolume memory cpu gpu wlan date menu-power blank
+modules-right = spotify pavolume memory cpu gpu date lan openvpn menu-power blank
 
 click-left = 
 click-middle = 
@@ -183,6 +183,24 @@ ramp-signal-2 = ▃
 ramp-signal-3 = ▄
 ramp-signal-4 = ▆
 ramp-signal-5 = █
+
+[module/lan]
+type = internal/network
+interface = enp5s0
+format-connected = <label-connected>
+format-disconnected = <label-disconnected>
+format-connected-underline = ${colors.Green}
+format-disconnected-underline = ${colors.Red}
+label-connected = %local_ip%
+label-disconnected = not connected
+
+[module/openvpn]
+type = custom/script
+exec = ~/.config/polybar/isrunning-openvpn.sh
+interval = 5
+format-underline = ${colors.Red}
+click-right = exec sudo pkill openvpn
+click-left = exec sudo openvpn ~/Genbook-VPN/Genbook.ovpn
 
 [module/pavolume]
 type = custom/script
