@@ -197,10 +197,10 @@ label-disconnected = not connected
 [module/openvpn]
 type = custom/script
 exec = ~/.config/polybar/isrunning-openvpn.sh
-interval = 5
+interval = 2
 format-underline = ${colors.Red}
-click-right = exec sudo pkill openvpn
-click-left = exec sudo openvpn ~/Genbook-VPN/Genbook.ovpn
+click-right = "sudo pkill openvpn"
+click-left = "sudo openvpn /home/pramji/Genbook-VPN/Genbook.ovpn &"
 
 [module/pavolume]
 type = custom/script
