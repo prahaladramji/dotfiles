@@ -51,7 +51,7 @@ COMPLETION_WAITING_DOTS="true"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
@@ -70,6 +70,10 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# google-cloud-sdk
+source /opt/google-cloud-sdk/path.zsh.inc
+source /opt/google-cloud-sdk/completion.zsh.inc
 
 export MANPATH="/usr/local/man:$MANPATH"
 
@@ -105,3 +109,8 @@ fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ls="ls -Fhla --color=auto"
 
+export WORKON_HOME=/mnt/data/projects/.virtualenvs
+export PROJECT_HOME=/mnt/data/projects
+source /usr/bin/virtualenvwrapper.sh
+
+source /usr/share/autoenv/activate.sh
