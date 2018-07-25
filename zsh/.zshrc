@@ -3,7 +3,7 @@
 
 # go lang
 export GOPATH=$HOME/go
-export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/bin:$HOME/go/bin:$HOME/git/personal/rez-install/bin/rez:$PATH"
 
 # enable for gnu coreutils
 # export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
@@ -14,7 +14,7 @@ export ZSH=/Users/pramji/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="classyTouch"
+ZSH_THEME="hedgehog" # "classyTouch"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -56,7 +56,7 @@ ZSH_THEME="classyTouch"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -66,6 +66,7 @@ ZSH_THEME="classyTouch"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  aws
   git
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -74,6 +75,10 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# google-cloud-sdk
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
 # export MANPATH="/usr/local/man:$MANPATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
@@ -93,6 +98,18 @@ export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+	ssh-agent > ~/.ssh-agent-thing
+fi
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+	eval "$(<~/.ssh-agent-thing)"
+fi
+
+# ssh-add -K ~/.ssh/id_rsa &>/dev/null
+ssh-add -K ~/.ssh/genbook &>/dev/null
+ssh-add -K ~/.ssh/google_compute_engine &>/dev/null
+# ssh-add -K ~/.ssh/aws/genbook/* &>/dev/null
+
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -104,9 +121,22 @@ export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias ls='ls -GFhla'
-alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder; say cache flushed'
+alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
 
 # for nvim
 export EDITOR='nvim'
 alias vi='nvim'
 alias vim='nvim'
+
+# Virtualenv python
+export WORKON_HOME=$HOME/git/.virtualenvs
+export PROJECT_HOME=$HOME/git
+source /usr/local/bin/virtualenvwrapper.sh
+
+# nvm for node
+export NVM_DIR="$HOME/.nvm"
+source /usr/local/opt/nvm/nvm.sh
+
+# autoenv
+source /usr/local/opt/autoenv/activate.sh
+
