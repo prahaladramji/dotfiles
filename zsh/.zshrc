@@ -9,7 +9,7 @@ export PATH="$HOME/bin:$HOME/go/bin:$HOME/git/personal/rez-install/bin/rez:$PATH
 # export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/pramji/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -79,7 +79,6 @@ source $ZSH/oh-my-zsh.sh
 # google-cloud-sdk
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
-
 # export MANPATH="/usr/local/man:$MANPATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
@@ -105,10 +104,9 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
 	eval "$(<~/.ssh-agent-thing)"
 fi
 
-# ssh-add -K ~/.ssh/id_rsa &>/dev/null
-ssh-add -K ~/.ssh/genbook &>/dev/null
+ssh-add -K ~/.ssh/id_rsa &>/dev/null
 ssh-add -K ~/.ssh/google_compute_engine &>/dev/null
-# ssh-add -K ~/.ssh/aws/genbook/* &>/dev/null
+ssh-add -K ~/.ssh/aws/* &>/dev/null
 
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
