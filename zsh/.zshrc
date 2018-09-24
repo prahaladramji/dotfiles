@@ -89,7 +89,7 @@ export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='nvim'
 # fi
 
 # Compilation flags
@@ -131,10 +131,16 @@ export WORKON_HOME=$HOME/git/.virtualenvs
 export PROJECT_HOME=$HOME/git
 source /usr/local/bin/virtualenvwrapper.sh
 
+# direnv
+eval "$(direnv hook zsh)"
+show_virtual_env() {
+  if [ -n "$VIRTUAL_ENV" ]; then
+    echo "($(basename $VIRTUAL_ENV))"
+  fi
+}
+export show_virtual_env
+PS1='$(show_virtual_env)'$PS1
+
 # nvm for node
 export NVM_DIR="$HOME/.nvm"
 source /usr/local/opt/nvm/nvm.sh
-
-# autoenv
-source /usr/local/opt/autoenv/activate.sh
-

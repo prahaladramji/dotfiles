@@ -9,4 +9,4 @@ call plug#begin('~/.config/nvim/plugged')
 
 set tabstop=4
 set shiftwidth=4
-
+set number

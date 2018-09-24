@@ -33,9 +33,9 @@ export WORKON_HOME=$HOME/git/.virtualenvs
 export PROJECT_HOME=$HOME/git
 source /usr/local/bin/virtualenvwrapper.sh
 
+# direnv
+eval "$(direnv hook bash)"
+
 # nvm for node
 export NVM_DIR="$HOME/.nvm"
 source /usr/local/opt/nvm/nvm.sh
-
-# autoenv
-source /usr/local/opt/autoenv/activate.sh
