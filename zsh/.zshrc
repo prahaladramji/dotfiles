@@ -132,15 +132,15 @@ export PROJECT_HOME=$HOME/git
 source /usr/local/bin/virtualenvwrapper.sh
 
 # direnv
-eval "$(direnv hook zsh)"
-show_virtual_env() {
-  if [ -n "$VIRTUAL_ENV" ]; then
-    echo "($(basename $VIRTUAL_ENV))"
-  fi
-}
-export show_virtual_env
-PS1='$(show_virtual_env)'$PS1
+# eval "$(direnv hook zsh)"
+# show_virtual_env() {
+#   if [ -n "$VIRTUAL_ENV" ]; then
+#     echo "($(basename $VIRTUAL_ENV))"
+#   fi
+# }
+# export show_virtual_env
+# PS1='$(show_virtual_env)'$PS1
 
 # nvm for node
-export NVM_DIR="$HOME/.nvm"
-source /usr/local/opt/nvm/nvm.sh
+# export NVM_DIR="$HOME/.nvm"
+# source /usr/local/opt/nvm/nvm.sh
