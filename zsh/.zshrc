@@ -105,8 +105,9 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
 fi
 
 ssh-add -K ~/.ssh/id_rsa &>/dev/null
+ssh-add -K ~/.ssh/genbook &>/dev/null
 ssh-add -K ~/.ssh/google_compute_engine &>/dev/null
-ssh-add -K ~/.ssh/aws/* &>/dev/null
+# ssh-add -K ~/.ssh/aws/* &>/dev/null
 
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -131,16 +132,18 @@ export WORKON_HOME=$HOME/git/.virtualenvs
 export PROJECT_HOME=$HOME/git
 source /usr/local/bin/virtualenvwrapper.sh
 
-# direnv
-# eval "$(direnv hook zsh)"
-# show_virtual_env() {
-#   if [ -n "$VIRTUAL_ENV" ]; then
-#     echo "($(basename $VIRTUAL_ENV))"
-#   fi
+eval "$(direnv hook zsh)"
+
+# show_virtual_env () {
+#     if [ -n "$VIRTUAL_ENV" ]
+#     then
+#         echo "($(basename $VIRTUAL_ENV))"
+#     fi
 # }
 # export show_virtual_env
 # PS1='$(show_virtual_env)'$PS1
 
-# nvm for node
-# export NVM_DIR="$HOME/.nvm"
-# source /usr/local/opt/nvm/nvm.sh
+source /Users/Shared/rlm/rlmenvset.sh
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/vault vault
