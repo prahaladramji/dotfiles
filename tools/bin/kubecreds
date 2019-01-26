@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+contexts=($(kubectx))
+projects=$@
+kube_rm_creds() {
+  if [ ${#contexts[@]} -eq 0 ]; then
+    echo "No contexts to clear"
+  else
+    for context in "${contexts[@]}"; do
+      kubectx -d $context;
+    done
+  fi
+}
+
+kube_get_creds() {
+  kube_rm_creds
+  for project in ${projects[@]}; do
+    clusters=($(gcloud container clusters list --project $project | awk '{if(NR>1)print $1}'));
+    for cluster in "${clusters[@]}"; do
+      gcloud container clusters get-credentials --project $project $cluster;
+    done
+  done
+}
+
+if [ ${#@} -eq 0 ]; then
+  tee <<EOS
+please enter the google cloud project to authorize all kubernetes clusters.
+example. kubecreds project-1 project-2
+EOS
+else
+  kube_get_creds
+fi
