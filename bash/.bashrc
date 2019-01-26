@@ -7,17 +7,32 @@ export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 export HISTTIMEFORMAT="%d/%m/%y %T "
 
+# brew
+export PATH="$HOME/bin:/usr/local/bin:$PATH:/opt/X11/bin"
+
+# ruby and ruby gems
+export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
+
 # go lang
 export GOPATH=$HOME/go
 export PATH="$HOME/go/bin:$PATH"
 
 # enable for gnu coreutils
-# export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
-# google-cloud-sdk
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
+# ssh
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+	ssh-agent > ~/.ssh-agent-thing
+fi
+if [[ "$SSH_AGENT_PID" == "" ]]; then
+	eval "$(<~/.ssh-agent-thing)"
+fi
 
+ssh-add -K ~/.ssh/id_rsa &>/dev/null
+ssh-add -K ~/.ssh/google_compute_engine &>/dev/null
+
+alias bashconfig="subl ~/.bashrc"
 # for nvim
 export EDITOR='nvim'
 alias vi='nvim'
@@ -28,22 +43,11 @@ alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
 
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
-# Virtualenv python
-export WORKON_HOME=$HOME/git/.virtualenvs
-export PROJECT_HOME=$HOME/git
-source /usr/local/bin/virtualenvwrapper.sh
-
 eval "$(direnv hook bash)"
+eval "$(pipenv --completion)"
 
-# show_virtual_env () {
-#     if [ -n "$VIRTUAL_ENV" ]
-#     then
-#         echo "($(basename $VIRTUAL_ENV))"
-#     fi
-# }
-# export show_virtual_env
-# PS1='$(show_virtual_env)'$PS1
-
-source /Users/Shared/rlm/rlmenvset.sh
+# google-cloud-sdk
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
 
 complete -C /usr/local/bin/vault vault

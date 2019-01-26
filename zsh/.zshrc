@@ -1,12 +1,16 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH:/opt/X11/bin"
+
+# ruby and ruby gems
+export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
 
 # go lang
 export GOPATH=$HOME/go
-export PATH="$HOME/bin:$HOME/go/bin:$HOME/git/personal/rez-install/bin/rez:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 
 # enable for gnu coreutils
-# export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -14,7 +18,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="hedgehog" # "classyTouch"
+ZSH_THEME="hedgehog"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -56,7 +60,7 @@ ZSH_THEME="hedgehog" # "classyTouch"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -66,7 +70,6 @@ HIST_STAMPS="mm/dd/yyyy"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  aws
   git
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -75,12 +78,6 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# google-cloud-sdk
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
-# export MANPATH="/usr/local/man:$MANPATH"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -105,10 +102,7 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
 fi
 
 ssh-add -K ~/.ssh/id_rsa &>/dev/null
-ssh-add -K ~/.ssh/genbook &>/dev/null
 ssh-add -K ~/.ssh/google_compute_engine &>/dev/null
-# ssh-add -K ~/.ssh/aws/* &>/dev/null
-
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -116,34 +110,23 @@ ssh-add -K ~/.ssh/google_compute_engine &>/dev/null
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
+alias zshconfig="subl ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-alias ls='ls -GFhla'
-alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
 
 # for nvim
 export EDITOR='nvim'
 alias vi='nvim'
 alias vim='nvim'
 
-# Virtualenv python
-export WORKON_HOME=$HOME/git/.virtualenvs
-export PROJECT_HOME=$HOME/git
-source /usr/local/bin/virtualenvwrapper.sh
+alias ls='ls -GFhla'
+alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
 
 eval "$(direnv hook zsh)"
+eval "$(pipenv --completion)"
 
-# show_virtual_env () {
-#     if [ -n "$VIRTUAL_ENV" ]
-#     then
-#         echo "($(basename $VIRTUAL_ENV))"
-#     fi
-# }
-# export show_virtual_env
-# PS1='$(show_virtual_env)'$PS1
-
-source /Users/Shared/rlm/rlmenvset.sh
+# google-cloud-sdk
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/vault vault
