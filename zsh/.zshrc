@@ -120,6 +120,7 @@ alias vim='nvim'
 
 alias ls='ls -GFhla'
 alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
+alias pr='cd $(git rev-parse --show-toplevel)'
 
 eval "$(direnv hook zsh)"
 eval "$(pipenv --completion)"
