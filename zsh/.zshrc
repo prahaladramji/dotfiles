@@ -122,12 +122,14 @@ alias ls='ls -GFhla'
 alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
 alias pr='cd $(git rev-parse --show-toplevel)'
 
+autoload -U +X bashcompinit && bashcompinit
+
 eval "$(direnv hook zsh)"
 eval "$(pipenv --completion)"
+eval "$(jira --completion-script-zsh)"
 
 # google-cloud-sdk
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
-autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/vault vault

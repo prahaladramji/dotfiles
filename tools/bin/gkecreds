@@ -15,10 +15,11 @@ kube_rm_creds() {
 kube_get_creds() {
   kube_rm_creds
   for project in ${projects[@]}; do
-    clusters=($(gcloud container clusters list --project $project | awk '{if(NR>1)print $1}'));
-    for cluster in "${clusters[@]}"; do
-      gcloud container clusters get-credentials --project $project $cluster;
-    done
+    while read cluster; do
+      gcloud container clusters get-credentials $cluster --project $project;
+    done << EOF
+$(gcloud container clusters list --project $project --format json | jq -r '.[] | "\(.name) --region \(.location)"')
+EOF
   done
 }
 
