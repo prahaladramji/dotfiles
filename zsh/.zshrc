@@ -71,6 +71,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
+  history
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -118,7 +119,7 @@ export EDITOR='nvim'
 alias vi='nvim'
 alias vim='nvim'
 
-alias ls='ls -GFhla'
+alias ls='ls -AGhl'
 alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
 alias pr='cd $(git rev-parse --show-toplevel)'
 
