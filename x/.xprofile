@@ -4,11 +4,11 @@
 nvidia-settings --assign GPULogoBrightness=0
 
 # enable numlock
-numlockx &
+# numlockx &
 
-xrdb -merge ~/.Xresources
+# xrdb -merge ~/.Xresources
 
-xsetroot -name background # set 'Root' window.
-xsetroot -cursor_name left_ptr # set cursor
+# xsetroot -name background # set 'Root' window.
+# xsetroot -cursor_name left_ptr # set cursor
 
 # xset -dpms

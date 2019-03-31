@@ -2,9 +2,6 @@
 # ~/.bashrc
 #
 
-# Source global definitions
-[[ -f ~/.bashrc ]] && . ~/.bashrc
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -15,9 +12,7 @@ export HISTTIMEFORMAT="%d/%m/%y %T "
 
 # go lang
 export GOPATH=$HOME/go
-export PATH="$HOME/go/bin:$PATH"
-
-alias ls='ls -Fhla --color=auto'
+export PATH="$HOME/bin:$HOME/go/bin:$PATH"
 
 # ssh-agent
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
@@ -37,5 +32,13 @@ alias vim='nvim'
 
 alias bashconfig="subl ~/.bashrc"
 alias ls='ls -AFhl --color=auto'
+alias pr='cd $(git rev-parse --show-toplevel)'
+
+eval "$(direnv hook bash)"
+eval "$(pipenv --completion)"
+
+# google-cloud-sdk
+source '/usr/lib64/google-cloud-sdk/completion.bash.inc'
 
 complete -cf sudo
+complete -o nospace -C /usr/local/bin/vault vault

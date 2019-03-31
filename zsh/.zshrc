@@ -1,7 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export GOPATH="$HOME/go"
-export PATH="$HOME/bin:$GOPATH/bin:/opt/rez/bin/rez:$PATH"
+export PATH="$HOME/bin:$GOPATH/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH=/home/pramji/.oh-my-zsh
@@ -9,7 +9,7 @@ export ZSH=/home/pramji/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="hedgehog" #"classyTouch"
+ZSH_THEME="hedgehog"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -41,7 +41,7 @@ ZSH_THEME="hedgehog" #"classyTouch"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -51,7 +51,7 @@ COMPLETION_WAITING_DOTS="true"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
 
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
@@ -61,8 +61,8 @@ ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  aws
   git
+  history
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -70,12 +70,6 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# google-cloud-sdk
-source /opt/google-cloud-sdk/path.zsh.inc
-source /opt/google-cloud-sdk/completion.zsh.inc
-
-export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -99,18 +93,32 @@ if [[ "$SSH_AGENT_PID" == "" ]]; then
     eval "$(<~/.ssh-agent-thing)"
 fi
 
+ssh-add -K ~/.ssh/id_rsa &>/dev/null
+ssh-add -K ~/.ssh/google_compute_engine &>/dev/null
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
+alias zshconfig="subl ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ls="ls -Fhla --color=auto"
 
-export WORKON_HOME=/mnt/data/projects/.virtualenvs
-export PROJECT_HOME=/mnt/data/projects
-source /usr/bin/virtualenvwrapper.sh
+# for nvim
+alias vi='nvim'
+alias vim='nvim'
 
-source /usr/share/autoenv/activate.sh
+alias ls="ls -AGhl --color=auto"
+alias pr='cd $(git rev-parse --show-toplevel)'
+
+autoload -U +X bashcompinit && bashcompinit
+
+eval "$(direnv hook zsh)"
+eval "$(pipenv --completion)"
+# eval "$(jira --completion-script-zsh)"
+
+# google-cloud-sdk
+source '/usr/lib64/google-cloud-sdk/completion.zsh.inc'
+
+complete -o nospace -C /usr/local/bin/vault vault
