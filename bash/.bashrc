@@ -38,7 +38,7 @@ export EDITOR='nvim'
 alias vi='nvim'
 alias vim='nvim'
 
-alias ls='ls -GFhla'
+alias ls='ls -AFhl'
 alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
 alias pr='cd $(git rev-parse --show-toplevel)'
 alias sshkill='pkill -fl "ssh(uttle|:| -)"'
