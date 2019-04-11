@@ -40,6 +40,8 @@ alias vim='nvim'
 
 alias ls='ls -GFhla'
 alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
+alias pr='cd $(git rev-parse --show-toplevel)'
+alias sshkill='pkill -fl "ssh(uttle|:| -)"'
 
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
