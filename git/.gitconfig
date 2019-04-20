@@ -7,6 +7,7 @@
 	process = git-lfs filter-process
 [alias]
 	lg = log --all --decorate --graph --abbrev-commit  --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+	tagm = "!git tag -f $1 && git push -f --tags #"
 
 [includeIf "gitdir:~/dotfiles/"]
     path = ~/.gitconfig_personal
