@@ -1,6 +1,10 @@
 # If you come from bash you might have to change your $PATH.
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH:/opt/X11/bin"
 
+# language settings
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # ruby and ruby gems
 export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
 
@@ -122,7 +126,7 @@ alias vim='nvim'
 alias ls='ls -AFhl'
 alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
 alias pr='cd $(git rev-parse --show-toplevel)'
-alias sshkill='pkill -fl "ssh(uttle|:| -)"'
+alias sshkill='pkill -fl "ssh(uttle -D| -)"'
 
 autoload -U +X bashcompinit && bashcompinit
 

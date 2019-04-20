@@ -10,6 +10,10 @@ export HISTTIMEFORMAT="%d/%m/%y %T "
 # brew
 export PATH="$HOME/bin:/usr/local/bin:$PATH:/opt/X11/bin"
 
+# language settings
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 # ruby and ruby gems
 export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
 
