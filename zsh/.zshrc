@@ -99,12 +99,6 @@ source $ZSH/oh-my-zsh.sh
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-	ssh-agent > ~/.ssh-agent-thing
-fi
-if [[ "$SSH_AGENT_PID" == "" ]]; then
-	eval "$(<~/.ssh-agent-thing)"
-fi
 
 ssh-add -K ~/.ssh/id_rsa &>/dev/null
 ssh-add -K ~/.ssh/google_compute_engine &>/dev/null
@@ -132,7 +126,6 @@ autoload -U +X bashcompinit && bashcompinit
 
 eval "$(direnv hook zsh)"
 eval "$(pipenv --completion)"
-eval "$(jira --completion-script-zsh)"
 
 # google-cloud-sdk
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'

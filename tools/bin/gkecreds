@@ -7,7 +7,9 @@ kube_rm_creds() {
     echo "No contexts to clear"
   else
     for context in "${contexts[@]}"; do
-      kubectx -d $context;
+      if [ $context != "minikube" ]; then
+        kubectx -d $context
+      fi
     done
   fi
 }
@@ -26,7 +28,7 @@ EOF
 if [ ${#@} -eq 0 ]; then
   tee <<EOS
 please enter the google cloud project to authorize all kubernetes clusters.
-example. kubecreds project-1 project-2
+example. gkecreds project-1 project-2
 EOS
 else
   kube_get_creds
