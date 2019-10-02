@@ -9,8 +9,8 @@ export LC_ALL=en_US.UTF-8
 export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
 
 # go lang
-export GOPATH=$HOME/go
-export PATH="$HOME/go/bin:$PATH"
+export GOPATH="$HOME/golib:$HOME/git/go"
+export PATH="$PATH:$HOME/golib/bin:$HOME/git/go/bin"
 
 # enable for gnu coreutils
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
