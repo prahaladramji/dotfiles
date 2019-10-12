@@ -5,3 +5,10 @@
 .Spotlight-V100
 .Trashes
 Thumbs.db
+
+# Jetbrains IDE files
+.idea/*
+
+# Credentials
+.git-credentials
+.gitconfig_personal
