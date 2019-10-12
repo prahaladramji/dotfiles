@@ -1,3 +1,7 @@
+---------------------
+-- Watch for changes in config files
+---------------------
+
 function reloadConfig(files)
     local doReload = false
     for _,file in pairs(files) do

@@ -11,85 +11,12 @@ hs.alert.defaultStyle.radius = 10
 hs.window.animationDuration = 0
 
 require("configWatcher")
+require("windowPositions")
 
 -- Modifier sets that I use
 modKeys = {"shift", "alt" }
 
----------------------
--- Window positioning
----------------------
-
-function setWindow(position)
-    local position = position or "maximize"
-
-    local window = hs.window.focusedWindow()
-    local frame = window:frame()
-    local max = window:screen():frame()
-
-    -- Default maximize
-    frame.x = max.x
-    frame.y = max.y
-    frame.w = max.w
-    frame.h = max.h
-
-    local case = {
-        leftHalf = function (frame, max)
-            frame.w = max.w / 2
-        end,
-
-        rightHalf = function (frame, max)
-            frame.x = max.x + (max.w / 2)
-            frame.w = max.w / 2
-        end,
-
-        topLeft = function (frame, max)
-            frame.w = max.w / 2
-            frame.h = max.h / 2
-        end,
-
-        topRight = function (frame, max)
-            frame.x = max.x + (max.w / 2)
-            frame.w = max.w / 2
-            frame.h = max.h / 2
-        end,
-
-        bottomLeft = function (frame, max)
-            frame.y = max.y + (max.h / 2)
-            frame.w = max.w / 2
-            frame.h = max.h / 2
-        end,
-
-        bottomRight = function (frame, max)
-            frame.x = max.x + (max.w / 2)
-            frame.y = max.y + (max.h / 2)
-            frame.w = max.w / 2
-            frame.h = max.h / 2
-        end,
-
-        topLarge = function (frame, max)
-            frame.h = max.h * 2 / 3
-        end,
-
-        bottomSmall = function (frame, max)
-            frame.y = max.y + (max.h * 2 / 3)
-            frame.h = max.h / 3
-        end,
-    }
-
-    if case[position] then
-        case[position](frame, max)
-    end
-
-    window:setFrame(frame)
-end
-
-function moveToScreen(screenPos)
-    local window = hs.window.focusedWindow()
-    local screen = hs.screen.find({x=screenPos, y=0})
-    window:moveToScreen(screen)
-    setWindow()
-end
-
+-- Bind hotkeys
 hs.hotkey.bind(modKeys, "D", function() setWindow("leftHalf") end)
 hs.hotkey.bind(modKeys, "G", function() setWindow("rightHalf") end)
 hs.hotkey.bind(modKeys, "R", function() setWindow("topLeft") end)
@@ -100,8 +27,12 @@ hs.hotkey.bind(modKeys, "Y", function() setWindow("topLarge") end)
 hs.hotkey.bind(modKeys, "B", function() setWindow("bottomSmall") end)
 hs.hotkey.bind(modKeys, "F", setWindow)
 
+hs.hotkey.bind(modKeys, "E", cycleVertical)
+hs.hotkey.bind(modKeys, "X", cycleHorizontal)
+
 hs.hotkey.bind(modKeys, "1", function() moveToScreen(0) end)
 hs.hotkey.bind(modKeys, "2", function() moveToScreen(1) end)
 hs.hotkey.bind(modKeys, "3", function() moveToScreen(2) end)
 
+-- Successfully loaded config
 hs.alert.show("Config loaded")
