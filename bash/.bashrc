@@ -26,17 +26,13 @@ export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # ssh
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-	ssh-agent > ~/.ssh-agent-thing
-fi
-if [[ "$SSH_AGENT_PID" == "" ]]; then
-	eval "$(<~/.ssh-agent-thing)"
-fi
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 ssh-add -K ~/.ssh/id_rsa &>/dev/null
 ssh-add -K ~/.ssh/google_compute_engine &>/dev/null
 
 alias bashconfig="subl ~/.bashrc"
+
 # for nvim
 export EDITOR='nvim'
 alias vi='nvim'
