@@ -67,11 +67,11 @@ function setWindow(position)
         end,
 
         topLarge = function (frame, max)
-            frame.h = max.h - (max.h / 3)
+            frame.h = max.h * 2 / 3
         end,
 
         bottomSmall = function (frame, max)
-            frame.y = max.y + (max.h - (max.h / 3))
+            frame.y = max.y + (max.h * 2 / 3)
             frame.h = max.h / 3
         end,
     }
