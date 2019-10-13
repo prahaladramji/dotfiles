@@ -12,6 +12,7 @@ hs.window.animationDuration = 0
 
 require("configWatcher")
 require("windowPositions")
+require("screenPositions")
 
 -- Modifier sets that I use
 modKeys = {"shift", "alt" }
