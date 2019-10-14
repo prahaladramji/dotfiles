@@ -30,10 +30,7 @@ hs.hotkey.bind(modKeys, "F", setWindow)
 
 hs.hotkey.bind(modKeys, "E", cycleVertical)
 hs.hotkey.bind(modKeys, "X", cycleHorizontal)
-
-hs.hotkey.bind(modKeys, "1", function() moveToScreen(0) end)
-hs.hotkey.bind(modKeys, "2", function() moveToScreen(1) end)
-hs.hotkey.bind(modKeys, "3", function() moveToScreen(2) end)
+hs.hotkey.bind(modKeys, "tab", function() cycleScreens() end)
 
 -- Successfully loaded config
 hs.alert.show("Config loaded")
