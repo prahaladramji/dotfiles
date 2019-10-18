@@ -2,9 +2,9 @@
 -- Screen positioning
 ---------------------
 
-function moveToScreen(screenPos)
+function cycleScreens()
     local window = hs.window.focusedWindow()
-    local screen = hs.screen.find({x=screenPos, y=0})
-    window:moveToScreen(screen)
-    setWindow()
+    local currentScreen = window:screen()
+
+    window:moveToScreen(currentScreen:next(), ensureInScreenBounds)
 end
