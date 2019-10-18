@@ -77,6 +77,7 @@ plugins=(
   git
   history
   zsh-autosuggestions
+  zsh-nvm
   zsh-syntax-highlighting
 )
 
