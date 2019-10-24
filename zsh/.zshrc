@@ -12,6 +12,9 @@ export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
 export GOPATH="$HOME/golib:$HOME/git/go"
 export PATH="$PATH:$HOME/golib/bin:$HOME/git/go/bin"
 
+# nvm
+export NVM_LAZY_LOAD=true
+
 # enable for gnu coreutils
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
