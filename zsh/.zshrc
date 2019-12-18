@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH:/opt/X11/bin"
+export PATH="$HOME/bin:/usr/local/sbin:$PATH"
 
 # language settings
 export LANG=en_US.UTF-8

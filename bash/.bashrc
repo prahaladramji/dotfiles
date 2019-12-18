@@ -8,7 +8,7 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 export HISTTIMEFORMAT="%d/%m/%y %T "
 
 # brew
-export PATH="$HOME/bin:/usr/local/bin:$PATH:/opt/X11/bin"
+export PATH="$HOME/bin:/usr/local/sbin:$PATH"
 
 # language settings
 export LANG=en_US.UTF-8
