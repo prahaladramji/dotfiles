@@ -15,6 +15,12 @@ export PATH="$PATH:$HOME/golib/bin:$HOME/git/go/bin"
 # nvm
 export NVM_LAZY_LOAD=true
 
+# python 3.8
+export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+
+# openssl
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
 # enable for gnu coreutils
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"

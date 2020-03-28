@@ -21,6 +21,12 @@ export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
 export GOPATH="$HOME/golib:$HOME/git/go"
 export PATH="$PATH:$HOME/golib/bin:$HOME/git/go/bin"
 
+# python 3.8
+export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+
+# openssl
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
 # enable for gnu coreutils
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
