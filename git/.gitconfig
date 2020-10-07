@@ -1,13 +1,19 @@
 [core]
-	excludesfile = ~/.gitignore_global
+    excludesfile = ~/.gitignore_global
 [filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+[credential]
+    helper = osxkeychain
+
 [alias]
-	lg = log --all --decorate --graph --abbrev-commit  --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
-	tagm = "!git tag -f $1 && git push -f --tags #"
+    lg = log --all --decorate --graph --abbrev-commit  --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)'
+    tagm = "!git tag -f $1 && git push -f --tags #"
+
+[gpg]
+    program = gpg
 
 [includeIf "gitdir:~/dotfiles/"]
     path = ~/.gitconfig_personal

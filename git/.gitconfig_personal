@@ -1,0 +1,9 @@
+[user]
+    name = Prahalad Ramji
+    email = prahaladramji@gmail.com
+    signingkey = F63CFC6D7ECC6DF3
+[credential]
+    helper = store --file ~/.git-credentials
+    helper = cache --timeout 30000
+[commit]
+    gpgsign = true
