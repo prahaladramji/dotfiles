@@ -142,3 +142,20 @@ source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.in
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
 complete -o nospace -C /usr/local/bin/vault vault
+
+# tmux
+function tmux_group_session {
+  GRPSC_GID=${1:=grpsc}
+  GRPSC_CID=${GRPSC_GID}-$(date +'%H%M%S')
+  if ! tmux has-session -t main &>/dev/null; then
+    tmux new-session -d -s main
+  fi
+  tmux new-session -A -t main -s ${GRPSC_CID} \; set-option destroy-unattached
+}
+
+if ! [[ -n "${TMUX}" || "${TERM}" =~ "tmux.*" || "${TERM}" =~ "screen.*" ]]; then
+  # we are (probably) not in a tmux session
+  tmux_group_session
+  sleep 1
+  exit
+fi
