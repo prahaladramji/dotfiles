@@ -119,7 +119,7 @@ ssh-add -K ~/.ssh/google_compute_engine &>/dev/null
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="subl ~/.zshrc"
+alias zshconfig="vi ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # for nvim
@@ -153,9 +153,9 @@ function tmux_group_session {
   tmux new-session -A -t main -s ${GRPSC_CID} \; set-option destroy-unattached
 }
 
-if ! [[ -n "${TMUX}" || "${TERM}" =~ "tmux.*" || "${TERM}" =~ "screen.*" ]]; then
+if ! [[ -n "${TMUX}" || "${TERM}" =~ "tmux.*" || "${TERM}" =~ "screen.*" || "${TERMINAL_EMULATOR}" =~ "JetBrains.*" ]]; then
   # we are (probably) not in a tmux session
   tmux_group_session
-  sleep 1
+  sleep 0.5
   exit
 fi
