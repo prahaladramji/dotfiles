@@ -1,6 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 export PATH="$HOME/bin:/usr/local/sbin:$PATH"
 
+# When using 
+export PATH="/Applications/VMware Fusion.app/Contents/Public:/Applications/Wireshark.app/Contents/MacOS:/Library/Apple/usr/bin:/opt/X11/bin:/usr/local/MacGPG2/bin:/usr/local/bin:$PATH"
+
 # language settings
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -83,8 +86,10 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  direnv
   git
   history
+  history-substring-search
   zsh-autosuggestions
   zsh-nvm
   zsh-syntax-highlighting
@@ -139,7 +144,6 @@ alias sshkill='pkill -fl "ssh(uttle -D| -)"'
 
 autoload -U +X bashcompinit && bashcompinit
 
-eval "$(direnv hook zsh)"
 eval "$(pipenv --completion)"
 
 # google-cloud-sdk
