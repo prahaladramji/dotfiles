@@ -1,3 +1,6 @@
 [user]
 	name = Prahalad Ramji
 	email = pramji@digitalvagabond.tech
+[credential]
+    helper = store --file ~/.git-credentials
+    helper = cache --timeout 30000
