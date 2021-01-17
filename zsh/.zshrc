@@ -1,7 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 export PATH="$HOME/bin:/usr/local/sbin:$PATH"
 
-# When using 
+# When using shell without login shell.
 export PATH="/Applications/VMware Fusion.app/Contents/Public:/Applications/Wireshark.app/Contents/MacOS:/Library/Apple/usr/bin:/opt/X11/bin:/usr/local/MacGPG2/bin:/usr/local/bin:$PATH"
 
 # language settings
@@ -9,7 +9,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # ruby and ruby gems
-export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
+export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
 
 # go lang
 export GOPATH="$HOME/golib:$HOME/git/go"
@@ -78,6 +78,8 @@ ZSH_THEME="maia"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
 
+setopt SHARE_HISTORY
+
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -90,12 +92,22 @@ plugins=(
   git
   history
   history-substring-search
+  kubectl
+  timer
   zsh-autosuggestions
   zsh-nvm
   zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
+
+# auto suggest configs
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+
+# Timer configs
+TIMER_FORMAT='[%d]'
+TIMER_PRECISION=2
 
 # User configuration
 # Base16 Shell
@@ -117,12 +129,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-ssh-add -K ~/.ssh/id_rsa &>/dev/null
-ssh-add -K ~/.ssh/google_compute_engine &>/dev/null
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -130,6 +136,7 @@ ssh-add -K ~/.ssh/google_compute_engine &>/dev/null
 #
 # Example aliases
 alias zshconfig="vi ~/.zshrc"
+alias tmuxconfig="vi ~/.tmux.conf"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # for nvim
@@ -143,17 +150,19 @@ alias pr='cd $(git rev-parse --show-toplevel)'
 alias sshkill='pkill -fl "ssh(uttle -D| -)"'
 
 autoload -U +X bashcompinit && bashcompinit
-
 eval "$(pipenv --completion)"
 
 # google-cloud-sdk
+export CLOUDSDK_PYTHON=python3
+export CLOUDSDK_GSUTIL_PYTHON=python3
+export CLOUDSDK_BQ_PYTHON=python3
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
 complete -o nospace -C /usr/local/bin/vault vault
 
-# tmux
-function tmux_group_session {
+# tmux session wrangling
+function tmux_group_session() {
   GRPSC_GID=${1:=grpsc}
   GRPSC_CID=${GRPSC_GID}-$(date +'%H%M%S')
   if ! tmux has-session -t main &>/dev/null; then
@@ -163,7 +172,7 @@ function tmux_group_session {
 }
 
 if ! [[ -n "${TMUX}" || "${TERM}" =~ "tmux.*" || "${TERM}" =~ "screen.*" || "${TERMINAL_EMULATOR}" =~ "JetBrains.*" ]]; then
-  # we are (probably) not in a tmux session
+  # we are (probably) not in a tmux session or in intellij
   tmux_group_session
   sleep 0.5
   exit
