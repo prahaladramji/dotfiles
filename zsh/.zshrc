@@ -1,32 +1,38 @@
-# If you come from bash you might have to change your $PATH.
-export PATH="$HOME/bin:/usr/local/sbin:$PATH"
+# set PATH and other variables that need to be appended, and avoid duplicates when in tmux.
+if [[ -z "${TMUX}" ]]; then
+  # If you come from bash you might have to change your $PATH.
+  export PATH="$HOME/bin:/usr/local/sbin:$PATH"
 
-# When using shell without login shell.
-export PATH="/Applications/VMware Fusion.app/Contents/Public:/Applications/Wireshark.app/Contents/MacOS:/Library/Apple/usr/bin:/opt/X11/bin:/usr/local/MacGPG2/bin:/usr/local/bin:$PATH"
+  # ruby and ruby gems
+  export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
+
+  # go lang
+  export PATH="$PATH:$HOME/golib/bin:$HOME/git/go/bin"
+
+  # python 3.8
+  export PATH="/usr/local/opt/python@3.8/bin:$PATH"
+
+  # openssl
+  export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
+  # enable for gnu coreutils
+  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+  # google-cloud-sdk
+  source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
+  source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+fi
 
 # language settings
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# ruby and ruby gems
-export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
-
 # go lang
 export GOPATH="$HOME/golib:$HOME/git/go"
-export PATH="$PATH:$HOME/golib/bin:$HOME/git/go/bin"
 
 # nvm
 export NVM_LAZY_LOAD=true
-
-# python 3.8
-export PATH="/usr/local/opt/python@3.8/bin:$PATH"
-
-# openssl
-export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-
-# enable for gnu coreutils
-export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -77,7 +83,6 @@ ZSH_THEME="maia"
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="yyyy-mm-dd"
-
 setopt SHARE_HISTORY
 
 # Would you like to use another custom folder than $ZSH/custom?
@@ -156,8 +161,6 @@ eval "$(pipenv --completion)"
 export CLOUDSDK_PYTHON=python3
 export CLOUDSDK_GSUTIL_PYTHON=python3
 export CLOUDSDK_BQ_PYTHON=python3
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
 
 complete -o nospace -C /usr/local/bin/vault vault
 
