@@ -1,16 +1,13 @@
 # set PATH and other variables that need to be appended, and avoid duplicates when in tmux.
 if [[ -z "${TMUX}" ]]; then
   # If you come from bash you might have to change your $PATH.
-  export PATH="$HOME/bin:/usr/local/sbin:$PATH"
+  export PATH="$HOME/bin:$PATH"
 
   # ruby and ruby gems
   export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
 
   # go lang
   export PATH="$PATH:$HOME/golib/bin:$HOME/git/go/bin"
-
-  # python 3.8
-  export PATH="/usr/local/opt/python@3.8/bin:$PATH"
 
   # openssl
   export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
