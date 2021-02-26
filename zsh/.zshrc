@@ -152,7 +152,6 @@ alias pr='cd $(git rev-parse --show-toplevel)'
 alias sshkill='pkill -fl "ssh(uttle -D| -)"'
 
 autoload -U +X bashcompinit && bashcompinit
-eval "$(pipenv --completion)"
 
 # google-cloud-sdk
 export CLOUDSDK_PYTHON=python3
