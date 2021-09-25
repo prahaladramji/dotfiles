@@ -1,29 +1,14 @@
 # set PATH and other variables that need to be appended, and avoid duplicates when in tmux.
 if [[ -z "${TMUX}" ]]; then
   # If you come from bash you might have to change your $PATH.
-  export PATH="$HOME/bin:$PATH"
-
-  # ruby and ruby gems
-  export PATH="/usr/local/opt/ruby/bin:/usr/local/lib/ruby/gems/3.0.0/bin:$PATH"
+  export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
   # go lang
   export PATH="$PATH:$HOME/golib/bin:$HOME/git/go/bin"
 
-  # openssl
-  export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-
-  # enable for gnu coreutils
-  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-  export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-
   # google-cloud-sdk
-  source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
-  source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+  source '/usr/share/google-cloud-sdk/completion.zsh.inc'
 fi
-
-# language settings
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
 
 # go lang
 export GOPATH="$HOME/golib:$HOME/git/go"
@@ -119,7 +104,8 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
         eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -139,7 +125,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 # Example aliases
 alias zshconfig="vi ~/.zshrc"
 alias tmuxconfig="vi ~/.tmux.conf"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # for nvim
 export EDITOR='nvim'
@@ -147,7 +132,6 @@ alias vi='nvim'
 alias vim='nvim'
 
 alias ls='ls -AFhl --color=auto'
-alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder'
 alias pr='cd $(git rev-parse --show-toplevel)'
 alias sshkill='pkill -fl "ssh(uttle -D| -)"'
 

@@ -1,7 +1,7 @@
 [user]
   name = Prahalad Ramji
-  email = prahaladramji@gmail.com
-  signingkey = F63CFC6D7ECC6DF3
+  email = prahaladramji@users.noreply.github.com
+  signingkey = 7F7BC0427C4E2630
 [credential]
   helper = store --file ~/.git-credentials
   helper = cache --timeout 30000

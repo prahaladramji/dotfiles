@@ -9,3 +9,6 @@ RPROMPT="%{$fg[red]%} %(?..[%?])"
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}["
 ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%}"
+
+# Print a greeting message when shell is started
+#echo $(lsb_release -ds) $(uname -rm)

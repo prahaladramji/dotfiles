@@ -75,12 +75,11 @@ export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-R
 
 
-## Plugins section: Enable fish style features
 # bind UP and DOWN arrow keys to history substring search
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
-bindkey '^[[A' history-substring-search-up			
+bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # Set terminal window and tab/icon title
