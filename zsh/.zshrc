@@ -4,14 +4,20 @@ if [[ -z "${TMUX}" ]]; then
   export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 
   # go lang
-  export PATH="$PATH:$HOME/golib/bin:$HOME/git/go/bin"
+  export GOPATH="$HOME/go"
+  export PATH="$PATH:$HOME/go/bin"
+
+  # pyenv
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  eval "$(pyenv init --path)"
 
   # google-cloud-sdk
+  export CLOUDSDK_PYTHON=python3
+  export CLOUDSDK_GSUTIL_PYTHON=python3
+  export CLOUDSDK_BQ_PYTHON=python3
   source '/usr/share/google-cloud-sdk/completion.zsh.inc'
 fi
-
-# go lang
-export GOPATH="$HOME/golib:$HOME/git/go"
 
 # nvm
 export NVM_LAZY_LOAD=true
@@ -80,6 +86,7 @@ plugins=(
   history
   history-substring-search
   kubectl
+  pyenv
   timer
   zsh-autosuggestions
   zsh-nvm
@@ -133,14 +140,9 @@ alias vim='nvim'
 
 alias ls='ls -AFhl --color=auto'
 alias pr='cd $(git rev-parse --show-toplevel)'
-alias sshkill='pkill -fl "ssh(uttle -D| -)"'
+alias sshkill='pkill -f "ssh(uttle -D| -)"'
 
 autoload -U +X bashcompinit && bashcompinit
-
-# google-cloud-sdk
-export CLOUDSDK_PYTHON=python3
-export CLOUDSDK_GSUTIL_PYTHON=python3
-export CLOUDSDK_BQ_PYTHON=python3
 
 complete -o nospace -C /usr/local/bin/vault vault
 
