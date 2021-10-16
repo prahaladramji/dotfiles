@@ -1,0 +1,9 @@
+[user]
+  name = Prahalad Ramji
+  email = prahalad.ramji@safetyculture.io
+  signingkey = F36E578725454606
+[credential]
+  helper = store --file ~/.git-credentials
+  helper = cache --timeout 30000
+[commit]
+  gpgsign = true

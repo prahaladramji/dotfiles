@@ -1,27 +1,3 @@
-# set PATH and other variables that need to be appended, and avoid duplicates when in tmux.
-if [[ -z "${TMUX}" ]]; then
-  # If you come from bash you might have to change your $PATH.
-  export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-
-  # go lang
-  export GOPATH="$HOME/go"
-  export PATH="$PATH:$HOME/go/bin"
-
-  # pyenv
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  eval "$(pyenv init --path)"
-
-  # google-cloud-sdk
-  export CLOUDSDK_PYTHON=python3
-  export CLOUDSDK_GSUTIL_PYTHON=python3
-  export CLOUDSDK_BQ_PYTHON=python3
-  source '/usr/share/google-cloud-sdk/completion.zsh.inc'
-fi
-
-# nvm
-export NVM_LAZY_LOAD=true
-
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -86,6 +62,7 @@ plugins=(
   history
   history-substring-search
   kubectl
+  os
   pyenv
   timer
   zsh-autosuggestions
@@ -98,6 +75,10 @@ source $ZSH/oh-my-zsh.sh
 # auto suggest configs
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+
+# syntax highlighting configs
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[comment]='fg=8'
 
 # Timer configs
 TIMER_FORMAT='[%d]'
@@ -138,13 +119,21 @@ export EDITOR='nvim'
 alias vi='nvim'
 alias vim='nvim'
 
-alias ls='ls -AFhl --color=auto'
 alias pr='cd $(git rev-parse --show-toplevel)'
-alias sshkill='pkill -f "ssh(uttle -D| -)"'
 
+autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
-complete -o nospace -C /usr/local/bin/vault vault
+# kube-ps1
+KUBE_PS1_NS_ENABLE=true
+KUBE_PS1_PREFIX='('
+KUBE_PS1_SYMBOL_ENABLE=false
+KUBE_PS1_SYMBOL_DEFAULT='*'
+KUBE_PS1_SYMBOL_USE_IMG=flase
+KUBE_PS1_SEPARATOR='|'
+KUBE_PS1_DIVIDER=':'
+KUBE_PS1_SUFFIX=')'
+PROMPT='$(kube_ps1)'$PROMPT
 
 # tmux session wrangling
 function tmux_group_session() {
@@ -156,7 +145,7 @@ function tmux_group_session() {
   tmux new-session -A -t main -s ${GRPSC_CID} \; set-option destroy-unattached
 }
 
-if ! [[ -n "${TMUX}" || "${TERM}" =~ "tmux.*" || "${TERM}" =~ "screen.*" || "${TERMINAL_EMULATOR}" =~ "JetBrains.*" ]]; then
+if [[ $- == *i* ]] && ! [[ -n "${INTELLIJ_ENVIRONMENT_READER}" || -n "${TMUX}" || "${TERM}" =~ "tmux.*" || "${TERM}" =~ "screen.*" || "${TERMINAL_EMULATOR}" =~ "JetBrains.*" || "${TERM_PROGRAM}" == "vscode" ]]; then
   # we are (probably) not in a tmux session or in intellij
   tmux_group_session
   sleep 0.5

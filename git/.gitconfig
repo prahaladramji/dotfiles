@@ -13,12 +13,23 @@
 [gpg]
     program = gpg
 
+[init]
+	defaultBranch = main
+
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+
 [includeIf "gitdir:~/dotfiles/"]
     path = ~/.gitconfig_personal
-[includeIf "gitdir:~/git/personal/"]
+[includeIf "gitdir:**/git/notes/org/"]
+    path = ~/.gitconfig_personal
+[includeIf "gitdir:**/git/personal/"]
     path = ~/.gitconfig_personal
 [includeIf "gitdir:~/go/src/github.com/"]
     path = ~/.gitconfig_personal
 
-[includeIf "gitdir:~/git/digitalvagabond/"]
+[includeIf "gitdir:**/git/digitalvagabond/"]
     path = ~/.gitconfig_digitalvagabond
+
+[includeIf "gitdir:**/git/safetyculture/"]
+    path = ~/.gitconfig_safetyculture
