@@ -21,8 +21,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "Source Code Pro" :size 13 :weight 'medium)
-      doom-variable-pitch-font (font-spec :family "Source Code Pro" :size 13))
+(setq doom-font (font-spec :family "Source Code Pro" :size 17 :weight 'medium)
+      doom-variable-pitch-font (font-spec :family "Source Code Pro" :size 17))
 (after! doom-themes
       (setq doom-themes-enable-bold t
             doom-themes-enable-italic t))
