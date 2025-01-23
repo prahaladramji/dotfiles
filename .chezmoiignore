@@ -1,0 +1,8 @@
+LICENSE
+README.md
+
+{{- if ne .chezmoi.os "darwin" }}
+.hammerspoon
+.ssh/config.d/01-home
+{{- end }}
+

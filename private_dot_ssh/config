@@ -1,0 +1,16 @@
+Include config.d/*
+
+HOST *
+    AddKeysToAgent yes
+    Compression yes
+    ControlMaster auto
+    ControlPath /tmp/ssh_mux_%h
+    ControlPersist 3h
+    ForwardAgent yes
+    LogLevel ERROR
+    Protocol 2
+    ServerAliveCountMax 10
+    ServerAliveInterval 60
+    StrictHostKeyChecking no
+    UserKnownHostsFile=/dev/null
+

@@ -1,0 +1,9 @@
+[global]
+  load_dotenv = false
+
+[whitelist]
+  prefix = [
+    "/home",
+    "/Users"
+  ]
+

@@ -1,0 +1,52 @@
+ZSH_CUSTOM="$HOME/.config/oh-my-zsh"
+ZSH_THEME="maia"
+
+zstyle ':omz:update' mode disabled
+typeset -U path cdpath fpath manpath
+
+{{- if eq .chezmoi.os "darwin" }}
+eval $(/opt/homebrew/bin/brew shellenv)
+fpath+=(/opt/homebrew/share/zsh/site-functions)
+{{- if eq .profile "personal" }}
+path=(/opt/homebrew/opt/coreutils/libexec/gnubin $path)
+manpath=(/opt/homebrew/opt/coreutils/libexec/gnuman $manpath)
+{{- end }}
+{{- end }}
+
+plugins=(
+  direnv
+  git
+  history
+  history-substring-search
+  timer
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+HIST_STAMPS="yyyy-mm-dd"
+
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[comment]=fg=8,bold
+
+TIMER_FORMAT="[%d]"
+TIMER_PRECISION="2"
+
+export EDITOR="nvim"
+
+source $ZSH/oh-my-zsh.sh
+
+HISTSIZE=999999999
+SAVEHIST=999999999
+
+# Aliases
+alias vi="nvim"
+alias vim="nvim"
+alias ls="ls -AFhl --color=auto"
+{{- if eq .chezmoi.os "darwin" }}
+alias sshkill='pkill -fl "ssh(uttle -D| -|:)"'
+{{- end }}
+{{- if eq .chezmoi.os "linux" }}
+alias sshkill='pkill -f "ssh(uttle -D| -|:)"'
+{{- end }}
+

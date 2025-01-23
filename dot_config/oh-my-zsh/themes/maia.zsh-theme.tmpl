@@ -1,0 +1,11 @@
+# enable substitution for prompt
+setopt prompt_subst
+# Maia prompt
+{{- if eq .chezmoi.os "darwin" }}
+PROMPT="%B%{$fg[cyan]%}%(4~|%-1~/.../%2~|%~)%u%b >%{$fg[cyan]%}>%B%(?.%{$fg[cyan]%}.%{$fg[red]%})>%{$reset_color%}%b "
+{{- end }}
+{{- if eq .chezmoi.os "linux" }}
+PROMPT="%B%{$fg[cyan]%}%(4~|%-1~/.../%2~|%~)%u%b >%{$fg[yellow]%}>%B%(?.%{$fg[yellow]%}.%{$fg[red]%})>%{$reset_color%}%b "
+{{- end }}
+RPROMPT="%{$fg[red]%} %(?..[%?])"
+

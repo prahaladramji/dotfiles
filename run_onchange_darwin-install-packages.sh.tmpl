@@ -1,0 +1,21 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range .packages.darwin.common.brews -}}
+brew  {{ . | quote }}
+{{ end -}}
+{{ if eq .profile "personal" -}}
+{{ range .packages.darwin.personal.brews -}}
+brew  {{ . | quote }}
+{{ end -}}
+{{ range .packages.darwin.personal.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+{{ end -}}
+{{ range .packages.darwin.common.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+EOF
+{{ end -}}
+

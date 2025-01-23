@@ -1,0 +1,10 @@
+auto-key-retrieve
+no-emit-version
+{{- if eq .chezmoi.os "darwin" }}
+no-tty
+{{- end }}
+{{- if eq .chezmoi.os "linux" }}
+pinentry-mode loopback
+{{- end  }}
+use-agent
+

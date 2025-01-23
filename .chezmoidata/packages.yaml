@@ -1,0 +1,38 @@
+packages:
+  darwin:
+    common:
+      brews:
+        - chezmoi
+        - direnv
+        - fzf
+        - nvim
+        - tmux
+      casks:
+        - 1password
+        - 1password-cli
+        - alacritty
+        - alfred
+        - appcleaner
+        - font-source-code-pro
+        - gpg-suite
+        - hammerspoon
+    personal:
+      brews:
+        - coreutils
+        - ykman
+        - yubico-piv-tool
+      casks:
+        - adobe-creative-cloud
+        - dropbox
+        - expressvpn
+        - google-chrome
+        - google-drive
+        - signal
+        - slack
+        - steam
+        - sublime-merge
+        - wacom-tablet
+        - whatsapp
+        - yubico-authenticator
+        - yubico-yubikey-manager
+
