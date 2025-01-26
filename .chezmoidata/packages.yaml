@@ -4,16 +4,20 @@ packages:
       brews:
         - chezmoi
         - direnv
+        - fd
         - fzf
+        - luarocks
         - nvim
+        - ripgrep
         - tmux
+        - wget
       casks:
         - 1password
         - 1password-cli
         - alacritty
         - alfred
         - appcleaner
-        - font-source-code-pro
+        - font-hack-nerd-font
         - gpg-suite
         - hammerspoon
     personal:
