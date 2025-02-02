@@ -20,11 +20,14 @@ packages:
         - font-hack-nerd-font
         - gpg-suite
         - hammerspoon
+        - qmk-toolbox
+      taps: []
     personal:
       brews:
         - coreutils
         - ykman
         - yubico-piv-tool
+        - qmk
       casks:
         - adobe-creative-cloud
         - dropbox
@@ -39,4 +42,6 @@ packages:
         - whatsapp
         - yubico-authenticator
         - yubico-yubikey-manager
+      taps:
+        - qmk/qmk
 
