@@ -6,11 +6,13 @@ packages:
         - direnv
         - fd
         - fzf
+        - jq
         - luarocks
         - nvim
         - ripgrep
         - tmux
         - wget
+        - yq
       casks:
         - 1password
         - 1password-cli
