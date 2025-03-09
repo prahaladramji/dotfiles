@@ -27,14 +27,17 @@ packages:
     personal:
       brews:
         - coreutils
+        - lego
+        - pipx
+        - qmk
         - ykman
         - yubico-piv-tool
-        - qmk
       casks:
         - adobe-creative-cloud
         - dropbox
         - expressvpn
         - google-chrome
+        - google-cloud-sdk
         - google-drive
         - signal
         - slack

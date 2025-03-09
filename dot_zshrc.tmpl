@@ -8,7 +8,7 @@ typeset -U path cdpath fpath manpath
 eval $(/opt/homebrew/bin/brew shellenv)
 fpath+=(/opt/homebrew/share/zsh/site-functions)
 {{- if eq .profile "personal" }}
-path=(/opt/homebrew/opt/coreutils/libexec/gnubin $path)
+path=(/opt/homebrew/opt/coreutils/libexec/gnubin $HOME/.local/bin $path)
 manpath=(/opt/homebrew/opt/coreutils/libexec/gnuman $manpath)
 {{- end }}
 {{- end }}
