@@ -23,6 +23,7 @@ packages:
         - gpg-suite
         - hammerspoon
         - qmk-toolbox
+        - xquartz
       taps: []
     personal:
       brews:
