@@ -23,11 +23,13 @@ packages:
         - gpg-suite
         - hammerspoon
         - qmk-toolbox
+        - visual-studio-code
         - xquartz
       taps: []
     personal:
       brews:
         - coreutils
+        - internetarchive
         - lego
         - pipx
         - qmk
@@ -35,6 +37,7 @@ packages:
         - yubico-piv-tool
       casks:
         - adobe-creative-cloud
+        - balenaetcher
         - dropbox
         - expressvpn
         - google-chrome
@@ -43,7 +46,6 @@ packages:
         - signal
         - slack
         - steam
-        - sublime-merge
         - wacom-tablet
         - whatsapp
         - yubico-authenticator
