@@ -12,13 +12,14 @@ path=(/opt/homebrew/opt/coreutils/libexec/gnubin $path)
 manpath=(/opt/homebrew/opt/coreutils/libexec/gnuman $manpath)
 {{- end }}
 {{- end }}
-path=($HOME/.local/bin $path)
+path=($HOME/.local/bin $HOME/go/bin $path)
 
 plugins=(
   direnv
   git
   history
   history-substring-search
+  nvm
   timer
   zsh-autosuggestions
   zsh-syntax-highlighting
@@ -34,6 +35,9 @@ TIMER_FORMAT="[%d]"
 TIMER_PRECISION="2"
 
 export EDITOR="nvim"
+
+zstyle ':omz:plugins:nvm' lazy yes
+zstyle ':omz:plugins:nvm' autoload yes
 
 source $ZSH/oh-my-zsh.sh
 
