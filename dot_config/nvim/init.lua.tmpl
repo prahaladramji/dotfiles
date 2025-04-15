@@ -5,19 +5,23 @@ require 'core.autocommands'
 require('lazy').setup({
   require 'plugins.autopairs',
   require 'plugins.bufferline',
-  require 'plugins.colorscheme',
-  require 'plugins.completion',
-  require 'plugins.conform',
+  require 'plugins.colorscheme', 
   require 'plugins.gitsigns',
   require 'plugins.indent-blankline',
-  require 'plugins.lsp',
   require 'plugins.lualine',
   require 'plugins.neo-tree',
+  require 'plugins.notify',
   require 'plugins.nvim-treesitter',
-  require 'plugins.telescope',
   require 'plugins.todo-comments',
+  require 'plugins.trouble',
   require 'plugins.vim-sleuth',
   require 'plugins.which-key',
+{{- if or (eq .chezmoi.os "darwin") (eq .profile "personal") }}
+  require 'plugins.completion',
+  require 'plugins.conform',
+  require 'plugins.lsp',
+  require 'plugins.telescope',
+{{- end }}
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the

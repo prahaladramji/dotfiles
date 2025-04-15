@@ -19,10 +19,12 @@ plugins=(
   git
   history
   history-substring-search
-  nvm
   timer
   zsh-autosuggestions
   zsh-syntax-highlighting
+{{- if or (eq .chezmoi.os "darwin") (eq .profile "personal") }}
+  nvm
+{{- end }}
 )
 
 HIST_STAMPS="yyyy-mm-dd"
