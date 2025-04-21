@@ -6,7 +6,6 @@ packages:
         - direnv
         - fd
         - fzf
-        - go
         - jq
         - luarocks
         - nvim
@@ -30,6 +29,7 @@ packages:
       brews:
         - coreutils
         - internetarchive
+        - go
         - lego
         - pipx
         - qmk
