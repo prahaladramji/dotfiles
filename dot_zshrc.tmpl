@@ -52,9 +52,9 @@ alias vi="nvim"
 alias vim="nvim"
 alias ls="ls -AFhl --color=auto"
 {{- if eq .chezmoi.os "darwin" }}
-alias sshkill='pkill -fl "ssh(uttle -D| -|:)"'
-{{- end }}
+{{ template "useful-alias/darwin.zsh" . }}
+{{- end -}}
 {{- if eq .chezmoi.os "linux" }}
-alias sshkill='pkill -f "ssh(uttle -D| -|:)"'
-{{- end }}
+{{ template "useful-alias/linux.zsh" . }}
+{{- end -}}
 
