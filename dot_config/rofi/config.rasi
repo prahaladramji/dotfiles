@@ -1,0 +1,19 @@
+configuration {
+  modes: "window,drun,run,ssh";
+  font: "Hack Nerd Font Mono 12";
+  terminal: "alacritty";
+  drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
+}
+
+@theme "tokyonight.rasi"
+

@@ -6,6 +6,11 @@ README.md
 .ssh/config.d/01-home
 {{- end }}
 
+{{- if ne .chezmoi.os "linux" }}
+.config/i3
+.config/rofi
+{{- end }}
+
 .nvm/.cache
 .nvm/alias
 .nvm/versions
