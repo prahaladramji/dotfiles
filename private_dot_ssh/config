@@ -5,7 +5,7 @@ HOST *
     Compression yes
     ControlMaster auto
     ControlPath /tmp/ssh_mux_%h
-    ControlPersist 3h
+    ControlPersist yes
     ForwardAgent yes
     LogLevel ERROR
     Protocol 2
