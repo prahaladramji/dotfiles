@@ -22,6 +22,7 @@ packages:
         - font-hack-nerd-font
         - gpg-suite
         - hammerspoon
+        - iina
         - qmk-toolbox
         - visual-studio-code
       taps: []
