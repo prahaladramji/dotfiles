@@ -29,8 +29,9 @@ packages:
     personal:
       brews:
         - coreutils
-        - internetarchive
+        - ffmpeg
         - go
+        - internetarchive
         - lego
         - pipx
         - qmk
