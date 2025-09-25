@@ -16,7 +16,7 @@ require('lazy').setup({
   require 'plugins.trouble',
   require 'plugins.vim-sleuth',
   require 'plugins.which-key',
-{{- if or (eq .chezmoi.os "darwin") (eq .profile "personal") }}
+{{- if ne .profile.type "virtual" }}
   require 'plugins.completion',
   require 'plugins.conform',
   require 'plugins.lsp',

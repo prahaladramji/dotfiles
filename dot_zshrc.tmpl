@@ -7,7 +7,7 @@ typeset -U path cdpath fpath manpath
 {{- if eq .chezmoi.os "darwin" }}
 eval $(/opt/homebrew/bin/brew shellenv)
 fpath+=(/opt/homebrew/share/zsh/site-functions)
-{{- if eq .profile "personal" }}
+{{- if eq .profile.name "personal" }}
 path=(/opt/homebrew/opt/coreutils/libexec/gnubin $path)
 manpath=(/opt/homebrew/opt/coreutils/libexec/gnuman $manpath)
 {{- end }}
@@ -23,7 +23,7 @@ plugins=(
   timer
   zsh-autosuggestions
   zsh-syntax-highlighting
-{{- if or (eq .chezmoi.os "darwin") (eq .profile "personal") }}
+{{- if ne .profile.type "virtual" }}
   nvm
 {{- end }}
 )

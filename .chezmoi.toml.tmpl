@@ -4,7 +4,8 @@
 {{- $onePasswordsshHost := promptStringOnce . "onepassword.ssh.host" "1Password SSH HOST filter" -}}
 {{- $onePasswordsshKey := promptStringOnce . "onepassword.ssh.key" "1Password SSH Key item name" -}}
 {{- $onePasswordsshVault := promptStringOnce . "onepassword.ssh.vault" "1Password SSH Key vault" -}}
-{{- $profile := promptStringOnce . "profile" "Profile (personal | work)" -}}
+{{- $profileName := promptStringOnce . "profile.name" "Profile (personal | work)" -}}
+{{- $profileType := promptStringOnce . "profile.type" "Profile Type (laptop | workstation | virtual)" }}
 
 [data]
   name = {{ $name | quote }}
@@ -15,5 +16,6 @@
   onepassword.ssh.host = {{ $onePasswordsshHost | quote }}
   onepassword.ssh.key = {{ $onePasswordsshKey | quote }}
   onepassword.ssh.vault = {{ $onePasswordsshVault | quote }}
-  profile = {{ $profile | quote }}
+  profile.name = {{ $profileName | quote }}
+  profile.type = {{ $profileType | quote }}
 

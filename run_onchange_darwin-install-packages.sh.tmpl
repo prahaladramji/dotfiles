@@ -8,7 +8,7 @@ tap  {{ . | quote }}
 {{ range .packages.darwin.common.brews -}}
 brew  {{ . | quote }}
 {{ end -}}
-{{ if eq .profile "personal" -}}
+{{ if eq .profile.name "personal" -}}
 {{ range .packages.darwin.personal.taps -}}
 tap  {{ . | quote }}
 {{ end -}}

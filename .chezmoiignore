@@ -6,7 +6,7 @@ README.md
 .ssh/config.d/01-home
 {{- end }}
 
-{{- if ne .chezmoi.os "linux" }}
+{{- if ne .profile.type "virtual" }}
 .config/i3
 .config/rofi
 {{- end }}

@@ -16,7 +16,7 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
-{{- if or (eq .chezmoi.os "darwin") (eq .profile "personal") }}
+{{- if ne .profile.type "virtual" }}
 [".nvm"]
     type = "archive"
     url = "https://github.com/nvm-sh/nvm/archive/master.tar.gz"

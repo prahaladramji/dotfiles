@@ -1,4 +1,4 @@
-{{- if or (eq .chezmoi.os "darwin") (eq .profile "personal") -}}
+{{- if ne .profile.type "virtual" -}}
 {{- template "nvim/lazy-lock-default.json" . -}}
 {{- end -}}
 
