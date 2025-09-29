@@ -1,0 +1,14 @@
+profile laptop-only {
+    output eDP-1 enable
+}
+
+profile home-dual-head {
+    output eDP-1 disable
+    output "Dell Inc. DELL U2720Q DZQN023" mode 3840x2160 position 0,1060 transform normal
+    output "Dell Inc. DELL U2720Q 36SN023" mode 3840x2160 position 3840,0 transform 90
+}
+
+profile work-extended {
+    output eDP-1 enable position 0,850
+    output "Lenovo Group Limited LEN T32p-20 VNA939CD" mode 3840x2160 position 1920,0 transform normal
+}

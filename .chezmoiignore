@@ -1,14 +1,28 @@
 LICENSE
 README.md
 
-{{- if ne .chezmoi.os "darwin" }}
+{{- if eq .chezmoi.os "linux" }}
 .hammerspoon
 .ssh/config.d/01-home
+{{- if eq .profile.type "virtual" }}
+.config/kanshi
+.config/pulse
+.config/sway
+.config/swaync
+.config/waybar
+{{- else }}
+.config/i3
+{{- end }}
 {{- end }}
 
-{{- if ne .profile.type "virtual" }}
+{{- if eq .chezmoi.os "darwin" }}
 .config/i3
+.config/kanshi
+.config/pulse
 .config/rofi
+.config/sway
+.config/swaync
+.config/waybar
 {{- end }}
 
 .nvm/.cache
