@@ -1,25 +1,36 @@
 * {
-  font:   "Hack Nerd Font Mono 12";
+  font:   "Hack Nerd Font 12";
 
-  bg0     : #1a1b26;
-  bg1     : #1f2335;
-  bg2     : #24283b;
-  bg3     : #414868;
-  fg0     : #c0caf5;
-  fg1     : #a9b1d6;
-  fg2     : #737aa2;
-  red     : #f7768e;
-  green   : #9ece6a;
-  yellow  : #e0af68;
-  blue    : #7aa2f7;
-  magenta : #9a7ecc;
-  cyan    : #4abaaf;
+  background            : #1a1b26;
+  foreground            : #c0caf5;
+  border                : #16161e;
+  black                 : #15161e;
+  red                   : #f7768e;
+  green                 : #9ece6a;
+  yellow                : #e0af68;
+  blue                  : #7aa2f7;
+  magenta               : #bb9af7;
+  cyan                  : #7dcfff;
+  white                 : #a9b1d6;
 
-  accent: @red;
-  urgent: @yellow;
+  background-bright     : #24283b;
+  foreground-bright     : #a9b1d6;
+  black-bright          : #414868;
+  red-bright            : #ff899d;
+  green-bright          : #9fe044;
+  yellow-bright         : #faba4a;
+  blue-bright           : #8db0ff;
+  magenta-bright        : #c7a9ff;
+  cyan-bright           : #a4daff;
+  white-bright          : #c0caf5;
+
+
+  accent: @cyan;
+  urgent: @red;
 
   background-color : transparent;
-  text-color       : @fg0;
+  text-color       : @foreground;
+  text-color-invert: @black;
 
   margin  : 0;
   padding : 0;
@@ -34,9 +45,9 @@ window {
   location : center;
   width    : 640px;
 
-  background-color: @bg1;
+  background-color: @background;
   border: 1px;
-  border-color: @bg3;
+  border-color: @border;
   border-radius: 6px;
 }
 
@@ -45,22 +56,27 @@ inputbar {
   padding  : 4px 8px;
   children : [ icon-search, entry ];
 
-  background-color: @bg0;
+  background-color: @background;
 }
 
 icon-search, entry, element-icon, element-text {
   vertical-align: 0.5;
 }
 
+entry {
+  placeholder        : "Search";
+  placeholder-color  : @background-bright;
+}
+
 icon-search {
   expand   : false;
-  filename : "search-symbolic";
+  filename : "system-search";
   size     : 14px;
 }
 
 textbox {
   padding          : 4px 8px;
-  background-color : @bg2;
+  background-color : @background-bright;
 }
 
 listview {
@@ -90,16 +106,17 @@ element alternate active {
 }
 
 element selected {
-  text-color       : @bg1;
+  text-color       : @text-color-invert;
   background-color : @accent;
 }
 
 element selected urgent {
+  text-color      : @text-color-invert;
   background-color: @urgent;
 }
 
 element-icon {
-  size: 0.8em;
+  size: 1.0em;
 }
 
 element-text {
@@ -108,7 +125,7 @@ element-text {
 
 scrollbar {
   handle-width : 4px;
-  handle-color : @fg2;
+  handle-color : @foreground-bright;
   padding      : 0 4px;
 }
 

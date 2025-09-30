@@ -10,7 +10,7 @@ set $right l
 # Your preferred terminal emulator
 set $term alacritty
 # Your preferred application launcher
-set $menu "rofi -modi drun,run -show drun"
+set $menu "rofi -modi drun,run -show drun -show-icons"
 # Desktop background image
 set $bg_image "/home/icp/Pictures/3840_2160_interstellar_black_hole.png"
 # Lock screen
