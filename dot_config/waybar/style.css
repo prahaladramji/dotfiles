@@ -32,10 +32,12 @@
 @define-color battery-charging-color @green;
 @define-color battery-warning-color @yellow;
 @define-color battery-critical-color @red;
+@define-color bluetooth-color @blue;
+@define-color bluetooth-disabled-color @red;
 @define-color network-color @blue;
 @define-color network-disconnected-color @red;
-@define-color pulseaudio-color @orange;
-@define-color pulseaudio-muted-color @red;
+@define-color wireplumber-color @orange;
+@define-color wireplumber-muted-color @red;
 @define-color backlight-color @yellow;
 @define-color disk-color @cyan;
 @define-color uptime-color @green;
@@ -60,7 +62,7 @@ window#waybar {
 
 /* Common module styling with border-bottom */
 #mode, #custom-weather, #clock, #cpu,
-#memory, #temperature, #battery, #network, #pulseaudio,
+#memory, #temperature, #battery, #bluetooth, #network, #pulseaudio, #wireplumber,
 #backlight, #disk, #custom-uptime,
 #idle_inhibitor, #tray {
     padding: 0 10px;
@@ -149,6 +151,21 @@ window#waybar {
     border-bottom-color: @battery-critical-color;
 }
 
+#bluetooth {
+    color: @bluetooth-color;
+    border-bottom-color: @bluetooth-color;
+}
+
+#bluetooth.disabled {
+    color: @bluetooth-disabled-color;
+    border-bottom-color: @bluetooth-disabled-color;
+}
+
+#bluetooth.off {
+    color: @bluetooth-disabled-color;
+    border-bottom-color: @bluetooth-disabled-color;
+}
+
 #network {
     color: @network-color;
     border-bottom-color: @network-color;
@@ -159,14 +176,14 @@ window#waybar {
     border-bottom-color: @network-disconnected-color;
 }
 
-#pulseaudio {
-    color: @pulseaudio-color;
-    border-bottom-color: @pulseaudio-color;
+#wireplumber {
+    color: @wireplumber-color;
+    border-bottom-color: @wireplumber-color;
 }
 
-#pulseaudio.muted {
-    color: @pulseaudio-muted-color;
-    border-bottom-color: @pulseaudio-muted-color;
+#wireplumber.muted {
+    color: @wireplumber-muted-color;
+    border-bottom-color: @wireplumber-muted-color;
 }
 
 #backlight {

@@ -13,7 +13,8 @@
 	],
 	"modules-center": [],
 	"modules-right": [
-		"pulseaudio",
+		"bluetooth",
+		"wireplumber",
 		"network",
 		"cpu",
 		"memory",
@@ -100,6 +101,13 @@
 			"󰁹"
 		]
 	},
+	"bluetooth": {
+		"format": "",
+		"format-connected": " {num_connections}",
+		"tooltip-format": "{controller_alias} - {controller_address}",
+		"tooltip-format-connected": "{controller_alias} - {controller_address}\n\n{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias} - {device_address} - 󰁹 {device_battery_percentage}%"
+	},
 	"clock": {
 		"format": "󰥔 {:%H:%M}",
 		"format-alt": "󰃮 {:%Y-%m-%d}",
@@ -169,29 +177,6 @@
 		"tooltip-format": "{ifname}: {ipaddr}",
 		"on-click": "alacritty -e nmtui"
 	},
-	"pulseaudio": {
-		"format": "{icon} {volume}%",
-		"format-bluetooth": "󰂰 {volume}%",
-		"format-bluetooth-muted": "󰂲 {icon}",
-		"format-muted": "󰝟",
-		"format-icons": {
-			"headphone": "󰋋",
-			"hands-free": "󰥰",
-			"headset": "󰋎",
-			"phone": "󰏲",
-			"portable": "󰄝",
-			"car": "󰄋",
-			"default": [
-				"󰕿",
-				"󰖀",
-				"󰕾"
-			]
-		},
-		"on-click": "pavucontrol",
-		"on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-		"on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +2%",
-		"on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%"
-	},
 	"temperature": {
 		"critical-threshold": 80,
 		"format": "{icon} {temperatureC}°C",
@@ -205,6 +190,19 @@
 	"tray": {
 		"icon-size": 18,
 		"spacing": 5
+	},
+	"wireplumber": {
+		"format": "{icon} {volume}%",
+		"format-muted": "󰝟",
+		"format-icons": [
+			"󰕿",
+			"󰖀",
+			"󰕾"
+		],
+		"tooltip-format": "{node_name}",
+		"on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+		"on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +2%",
+		"on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%"
 	},
 	"custom/power": {
 		"format": "⏻ ",
