@@ -176,4 +176,5 @@ bar {
 gaps inner 5
 
 for_window [class=".*"] border none
+for_window [class="1Password"] floating enable
 
