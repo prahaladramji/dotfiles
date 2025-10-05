@@ -6,7 +6,7 @@ README.md
 .ssh/config.d/01-home
 {{- if eq .profile.type "virtual" }}
 .config/kanshi
-.config/pulse
+.config/pipewire
 .config/sway
 .config/swaync
 .config/waybar
@@ -18,7 +18,7 @@ README.md
 {{- if eq .chezmoi.os "darwin" }}
 .config/i3
 .config/kanshi
-.config/pulse
+.config/pipewire
 .config/rofi
 .config/sway
 .config/swaync
