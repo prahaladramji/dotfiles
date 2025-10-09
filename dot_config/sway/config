@@ -275,12 +275,19 @@ include /etc/sway/config.d/*
 
     default_border none
     default_floating_border none
+
+    # Window mode
+    # entire class of applications
     for_window [class=".*"] border none
     for_window [class="1Password"] floating enable
+
+    # specific application ids
     for_window [app_id="wdisplays"] floating enable, resize set width 1024px height 768px
-    for_window [title="Google Meet"] floating enable, resize set width 1920px height 1080px
-    for_window [title="Chrome Remote Desktop -"] floating enable, resize set width 1920px height 1080px
+
+    # title matches
     for_window [title="Chrome Remote Desktop"] floating enable
+    for_window [title="Chrome Remote Desktop -"] floating enable, resize set width 1920px height 1080px
+    for_window [title="Google Meet"] floating enable, resize set width 1920px height 1080px
 
     # TokyoNight theme
     # Property Name             Border  BG      Text    Indicator Child-border
