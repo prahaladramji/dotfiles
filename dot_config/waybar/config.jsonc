@@ -106,7 +106,8 @@
 		"format-connected": " {num_connections}",
 		"tooltip-format": "{controller_alias} - {controller_address}",
 		"tooltip-format-connected": "{controller_alias} - {controller_address}\n\n{device_enumerate}",
-		"tooltip-format-enumerate-connected": "{device_alias} - {device_address} - 󰁹 {device_battery_percentage}%"
+		"tooltip-format-enumerate-connected": "{device_alias} - {device_address} - 󰁹 {device_battery_percentage}%",
+		"on-click": "blueman-manager"
 	},
 	"clock": {
 		"format": "󰥔 {:%H:%M}",
@@ -138,7 +139,7 @@
 		"format": "󰘚 {usage}%",
 		"tooltip": true,
 		"interval": 1,
-		"on-click": "alacritty -e htop"
+		"on-click": "alacritty -e btop"
 	},
 	"disk": {
 		"interval": 30,
@@ -166,7 +167,7 @@
 	"memory": {
 		"format": "󰍛 {}%",
 		"interval": 1,
-		"on-click": "alacritty -e htop"
+		"on-click": "alacritty -e btop"
 	},
 	"network": {
 		"format-wifi": "󰖩 {essid} ({signalStrength}%)",
