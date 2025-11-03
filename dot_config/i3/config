@@ -34,7 +34,7 @@ bindsym $mod+Return exec alacritty
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindcode $mod+40 exec "rofi -modi drun,run -show drun"
+bindcode $mod+40 exec "rofi -modi drun,run -show drun -show-icons"
 
 # change focus
 bindsym $mod+j focus left
@@ -162,11 +162,11 @@ bar {
     statusline #C0CAF5
     separator  #565F89
 
-    focused_workspace  #7AA2F7 #7AA2F7 #15161E
-    active_workspace   #15161E #15161E #C0CAF5
-    inactive_workspace #15161E #15161E #565F89
-    urgent_workspace   #FF899D #FF899D #15161E
-    binding_mode       #FABA4A #FABA4A #15161E
+    focused_workspace  #1A1B26 #1A1B26 #7DCFFF
+    active_workspace   #1A1B26 #1A1B26 #A9B1D6
+    inactive_workspace #1A1B26 #1A1B26 #414868
+    urgent_workspace   #F7768E #F7768E #15161E
+    binding_mode       #F7768E #F7768E #15161E
   }
 
   position top
@@ -175,6 +175,18 @@ bar {
 
 gaps inner 5
 
+# Window mode
+# entire class of applications
 for_window [class=".*"] border none
 for_window [class="1Password"] floating enable
+
+# title matched
+for_window [title="Calculator"] floating enable
+
+# TokyoNight theme
+# Property Name             Border  BG      Text    Indicator Child-border
+client.focused              #16161e #1a1b26 #7dcfff #7aa2f7   #16161e
+client.focused_inactive     #16161e #1a1b26 #a9b1d6 #7aa2f7   #16161e
+client.unfocused            #16161e #1a1b26 #414868 #7aa2f7   #16161e
+client.urgent               #16161e #f7768e #15161e #7aa2f7   #16161e
 

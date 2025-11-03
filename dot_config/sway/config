@@ -254,7 +254,7 @@ bar {
       background #1A1B26
       statusline #C0CAF5
       separator  #565F89
-  
+
       focused_workspace  #7AA2F7 #7AA2F7 #15161E
       active_workspace   #15161E #15161E #C0CAF5
       inactive_workspace #15161E #15161E #565F89
