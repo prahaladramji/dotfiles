@@ -110,8 +110,8 @@
 		"on-click": "blueman-manager"
 	},
 	"clock": {
-		"format": "󰥔 {:%H:%M}",
-		"format-alt": "󰃮 {:%Y-%m-%d}",
+		"format": "󰥔 {:%R (%Z) 󰃮 %F}",
+		"format-alt": "󰥔 {:%R (%Z) 󰃮 %A, %B %d, %Y}",
 		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
 		"calendar": {
 			"mode": "month",
