@@ -139,13 +139,13 @@
 		"format": "󰘚 {usage}%",
 		"tooltip": true,
 		"interval": 1,
-		"on-click": "alacritty -e btop"
+		"on-click": "alacritty --class floater -e btop"
 	},
 	"disk": {
 		"interval": 30,
 		"format": "󰋊 {percentage_used}%",
 		"path": "/",
-		"on-click": "alacritty -e gdu"
+		"on-click": "alacritty --class floater -e gdu"
 	},
 	"idle_inhibitor": {
 		"format": "{icon}",
@@ -167,7 +167,7 @@
 	"memory": {
 		"format": "󰍛 {}%",
 		"interval": 1,
-		"on-click": "alacritty -e btop"
+		"on-click": "alacritty --class floater -e btop"
 	},
 	"network": {
 		"format-wifi": "󰖩 {essid} ({signalStrength}%)",
@@ -176,7 +176,7 @@
 		"format-disconnected": "󰖪 Disconnected",
 		"format-alt": "{ifname}: {ipaddr}/{cidr}",
 		"tooltip-format": "{ifname}: {ipaddr}",
-		"on-click": "alacritty -e nmtui"
+		"on-click-right": "alacritty --class floater -e nmtui"
 	},
 	"temperature": {
 		"critical-threshold": 80,
@@ -186,7 +186,7 @@
 			"󰔏",
 			"󱃂"
 		],
-		"on-click": "alacritty -e s-tui"
+		"on-click": "alacritty --class floater -e s-tui"
 	},
 	"tray": {
 		"icon-size": 18,

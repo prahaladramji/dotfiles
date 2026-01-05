@@ -287,6 +287,7 @@ include /etc/sway/config.d/*
     # specific application ids
     for_window [app_id="blueman-manager"] floating enable
     for_window [app_id="com.google.GoobuntuConfigWizard"] floating enable
+    for_window [app_id="floater"] floating enable, resize set width 1024px height 768px
     for_window [app_id="goobuntu_indicator.py"] floating enable
     for_window [app_id="wdisplays"] floating enable, resize set width 1024px height 768px
 
