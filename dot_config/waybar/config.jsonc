@@ -9,7 +9,9 @@
 		"sway/workspaces",
 		"sway/mode",
 		"sway/scratchpad",
-		"custom/weather"
+		"custom/weather",
+		"custom/public-ipv4",
+		"custom/public-ipv6"
 	],
 	"modules-center": [],
 	"modules-right": [
@@ -217,13 +219,25 @@
 			"hibernate": "systemctl hibernate"
 		}
 	},
+	"custom/public-ipv4": {
+		"exec": "curl api.ipify.org",
+		"interval": 300,
+		"format": "🌍 {} (v4)",
+		"tooltip": true
+	},
+	"custom/public-ipv6": {
+		"exec": "curl api6.ipify.org",
+		"interval": 300,
+		"format": "🌍 {} (v6)",
+		"tooltip": true
+	},
 	"custom/uptime": {
 		"format": "󰔟 {}",
 		"exec": "uptime -p | sed 's/up //; s/ days/d/; s/ hours/h/; s/ minutes/m/'",
 		"interval": 60
 	},
 	"custom/weather": {
-		"exec": "curl 'https://wttr.in/?format=1'",
+		"exec": "curl \"https://wttr.in/$(curl -sS ip-api.com/json | jq -r .city)?format=%l:+%c%t+(%f)++%h++%w+uv:%u\"",
 		"interval": 3600,
 		"format": "{}",
 		"tooltip": true

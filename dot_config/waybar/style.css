@@ -43,6 +43,7 @@
 @define-color uptime-color @green;
 @define-color idle-inhibitor-color @foreground;
 @define-color idle-inhibitor-active-color @red;
+@define-color public-ip-color @cyan;
 
 * {
     /* Base styling for all modules */
@@ -61,7 +62,7 @@ window#waybar {
 
 
 /* Common module styling with border-bottom */
-#mode, #custom-weather, #clock, #cpu,
+#mode, #custom-weather, #custom-public-ipv4, #custom-public-ipv6, #clock, #cpu,
 #memory, #temperature, #battery, #bluetooth, #network, #pulseaudio, #wireplumber,
 #backlight, #disk, #custom-uptime,
 #idle_inhibitor, #tray {
@@ -104,6 +105,11 @@ window#waybar {
 #custom-weather {
     color: @weather-color;
     border-bottom-color: @weather-color;
+}
+
+#custom-public-ipv4, #custom-public-ipv6 {
+    color: @public-ip-color;
+    border-bottom-color: @public-ip-color;
 }
 
 #clock {
