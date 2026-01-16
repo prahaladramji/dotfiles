@@ -16,7 +16,8 @@
 	"modules-center": [],
 	"modules-right": [
 		"bluetooth",
-		"wireplumber",
+		"wireplumber#sink",
+		"wireplumber#source",
 		"network",
 		"cpu",
 		"memory",
@@ -194,7 +195,7 @@
 		"icon-size": 18,
 		"spacing": 5
 	},
-	"wireplumber": {
+	"wireplumber#sink": {
 		"format": "{icon} {volume}%",
 		"format-muted": "󰝟",
 		"format-icons": [
@@ -206,6 +207,15 @@
 		"on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
 		"on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +2%",
 		"on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -2%"
+	},
+	"wireplumber#source": {
+		"node-type": "Audio/Source",
+		"format": "󰍬 {volume}%",
+		"format-muted": "󰍭",
+		"tooltip-format": "{node_name}",
+		"on-click-right": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+		"on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +2%",
+		"on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -2%"
 	},
 	"custom/power": {
 		"format": "⏻ ",
