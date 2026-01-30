@@ -12,7 +12,7 @@ set $term alacritty
 # Your preferred application launcher
 set $menu "rofi -modi drun,run -show drun -show-icons"
 # Desktop background image
-set $bg_image "/home/icp/Pictures/3840_2160_interstellar_black_hole.png"
+set $bg_image "/home/icp/Pictures/wallhaven-lyz3d2.png"
 # Lock screen
 set $screenlock "swaylock -f -i $bg_image -s fill"
 
