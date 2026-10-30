@@ -1,0 +1,17 @@
+{{- $profileName := promptChoiceOnce . "profile.name" "Profile" (list "personal" "work") -}}
+{{- $profileType := "laptop" -}}
+{{- if eq $profileName "work" -}}
+{{-   $profileType = promptChoiceOnce . "profile.type" "Profile Type" (list "laptop" "virtual" "workstation") -}}
+{{- end -}}
+
+umask = 0o027
+
+[data]
+  profile.name = {{ $profileName | quote }}
+  profile.type = {{ $profileType | quote }}
+{{- if eq $profileName "personal" }}
+{{-   $onePasswordsshKey := promptStringOnce . "onepassword.ssh.key" "1Password SSH Key item name" -}}
+{{-   $onePasswordsshVault := promptStringOnce . "onepassword.ssh.vault" "1Password SSH Key vault" }}
+  onepassword.ssh.key = {{ $onePasswordsshKey | quote }}
+  onepassword.ssh.vault = {{ $onePasswordsshVault | quote }}
+{{- end }}

@@ -1,0 +1,181 @@
+/* Tokyo Night Palette (Minimal Floating Pills) */
+@define-color background #1a1b26;
+@define-color pill-bg rgba(26, 27, 38, 0.91);
+@define-color pill-border #2f3549;
+@define-color background-light rgba(36, 40, 59, 0.95);
+@define-color foreground #c0caf5;
+@define-color subtext #a9b1d6;
+@define-color muted #565f89;
+@define-color black #15161e;
+@define-color red #f7768e;
+@define-color green #9ece6a;
+@define-color yellow #e0af68;
+@define-color blue #7aa2f7;
+@define-color magenta #bb9af7;
+@define-color cyan #7dcfff;
+@define-color white #a9b1d6;
+@define-color orange #ff9e64;
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Hack Nerd Font";
+  font-size: 13px;
+  min-height: 0;
+}
+
+/* Transparent top bar canvas for floating pills */
+window#waybar {
+  background-color: transparent;
+  color: @foreground;
+}
+
+/* Hover popup / tooltip styling */
+tooltip {
+  background-color: @background-light;
+  border: 1px solid @pill-border;
+  border-radius: 8px;
+}
+
+tooltip label {
+  color: @foreground;
+  font-family: "Hack Nerd Font Mono";
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+menu {
+  background-color: @background-light;
+  border: 1px solid @pill-border;
+  border-radius: 8px;
+  color: @foreground;
+  padding: 4px;
+}
+
+menuitem {
+  border-radius: 6px;
+  padding: 4px 10px;
+  color: @foreground;
+}
+
+menuitem:hover {
+  background-color: @pill-border;
+}
+
+/* Floating Pill Containers */
+#workspaces,
+#scratchpad,
+#custom-weather,
+#status,
+#clock-power,
+#tray {
+  background-color: @pill-bg;
+  border: 1px solid @pill-border;
+  border-radius: 13px;
+  padding: 2px 6px;
+}
+
+/* Workspaces Pill & Inner Workspace Buttons */
+#workspaces {
+  padding: 2px 4px;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  margin: 1px 2px;
+  border-radius: 10px;
+  background-color: transparent;
+  color: @subtext;
+  font-weight: normal;
+}
+
+#workspaces button:hover {
+  background: @background-light;
+  color: @foreground;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+#workspaces button.focused {
+  background-color: @blue;
+  color: @black;
+  font-weight: bold;
+  box-shadow: none;
+}
+
+#workspaces button.urgent {
+  background-color: @red;
+  color: @black;
+  font-weight: bold;
+}
+
+/* Binding Mode Pill (Orange pill with bold dark text) */
+#mode {
+  background-color: @orange;
+  color: @black;
+  font-weight: bold;
+  border-radius: 13px;
+  padding: 2px 12px;
+}
+
+/* Scratchpad Pill */
+#scratchpad {
+  padding: 2px 10px;
+  color: @foreground;
+}
+
+/* Weather Pill */
+#custom-weather {
+  color: @magenta;
+  padding: 2px 12px;
+}
+
+/* Items inside the Status Pill & Clock-Power Pill */
+#bluetooth,
+#wireplumber,
+#custom-network,
+#custom-cpu,
+#memory,
+#temperature,
+#backlight,
+#keyboard-state,
+#keyboard-state label,
+#disk,
+#battery,
+#idle_inhibitor,
+#clock,
+#custom-power {
+  padding: 0 7px;
+  margin: 0;
+  background-color: transparent;
+  color: @foreground;
+}
+
+#keyboard-state label {
+  padding: 0 4px;
+}
+
+#clock {
+  font-weight: bold;
+  padding-left: 8px;
+  padding-right: 6px;
+}
+
+#custom-power {
+  padding-left: 6px;
+  padding-right: 8px;
+}
+
+/* Tray Pill */
+#tray {
+  padding: 2px 10px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  color: @red;
+}

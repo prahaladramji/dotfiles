@@ -1,0 +1,38 @@
+LICENSE
+README.md
+
+{{- if ne .profile.name "personal" }}
+.config/1Password/ssh/agent.toml
+.ssh/config.d/00-1password
+.ssh/config.d/01-home
+{{- end }}
+
+{{- if eq .chezmoi.os "linux" }}
+.config/aerospace
+.config/sketchybar
+{{- if eq .profile.type "virtual" }}
+.config/kanshi
+.config/pipewire
+.config/sway
+.config/swaync
+.config/waybar
+.config/xdg-desktop-portal-wlr
+{{- else }}
+.config/i3
+{{- end }}
+{{- end }}
+
+{{- if eq .chezmoi.os "darwin" }}
+.config/i3
+.config/kanshi
+.config/pipewire
+.config/rofi
+.config/sway
+.config/swaync
+.config/waybar
+.config/xdg-desktop-portal-wlr
+{{- end }}
+
+.nvm/.cache
+.nvm/alias
+.nvm/versions

@@ -1,0 +1,65 @@
+packages:
+  darwin:
+    common:
+      brews:
+        - borders
+        - btop
+        - chezmoi
+        - direnv
+        - fd
+        - fzf
+        - gdu
+        - jq
+        - luarocks
+        - nvim
+        - pinentry-mac
+        - ripgrep
+        - sketchybar
+        - tmux
+        - wget
+        - yq
+      casks:
+        - 1password
+        - 1password-cli
+        - aerospace
+        - alacritty
+        - alfred
+        - appcleaner
+        - font-hack-nerd-font
+        - iina
+        - qmk-toolbox
+        - visual-studio-code
+      taps:
+        - FelixKratz/formulae
+        - nikitabobko/tap
+    personal:
+      brews:
+        - arduino-cli
+        - coreutils
+        - ffmpeg
+        - go
+        - internetarchive
+        - lego
+        - pipx
+        - qmk
+        - ykman
+        - yubico-piv-tool
+      casks:
+        - adobe-creative-cloud
+        - antigravity
+        - antigravity-cli
+        - arduino-ide
+        - balenaetcher
+        - colemak-dh
+        - dropbox
+        - gcloud-cli
+        - google-chrome
+        - google-drive
+        - signal
+        - steam
+        - tailscale-app
+        - wacom-tablet
+        - whatsapp
+        - yubico-authenticator
+      taps:
+        - qmk/qmk

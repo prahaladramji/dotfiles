@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Clean up legacy files previously tracked in ~/.config/oh-my-zsh and stale Zsh/portal artifacts
+rm -f "$HOME/.config/oh-my-zsh/fix-paste.zsh" \
+      "$HOME/.config/oh-my-zsh/manjaro-zsh-config.zsh" \
+      "$HOME/.config/oh-my-zsh/tmux-session.zsh"
+rm -rf "$HOME/.config/oh-my-zsh/themes" \
+       "$HOME/.zsh" \
+       "$HOME/.zcompdump"* \
+       "$HOME/.zcompdumps" \
+       "$HOME/.config/xdg-desktop-wlr"
+
+# Lock down chezmoi source & config directories (no group/world read/write/exec)
+chmod -R go-rwx "$HOME/.local/share/chezmoi"
+if [[ -d "$HOME/.config/chezmoi" ]]; then
+  chmod -R go-rwx "$HOME/.config/chezmoi"
+fi
+if [[ -d "$HOME/.config" ]]; then
+  chmod -R go-w "$HOME/.config"
+fi
+
+{{- if eq .profile.name "work" }}
+WORK_DIR="$HOME/.local/share/dotfiles-work"
+WORK_STATE="$HOME/.config/chezmoi/chezmoistate-work.boltdb"
+
+if [[ -d "$WORK_DIR" ]]; then
+  chmod -R go-rwx "$WORK_DIR"
+  chezmoi -S "$WORK_DIR" --persistent-state "$WORK_STATE" apply --no-tty
+fi
+{{- end }}

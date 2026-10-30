@@ -1,0 +1,257 @@
+# AeroSpace Configuration
+# Modeled after Sway & i3 configs
+# See: https://nikitabobko.github.io/AeroSpace/guide
+
+config-version = 2
+
+# Commands that run after AeroSpace startup (start SketchyBar and JankyBorders)
+after-startup-command = [
+  'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar',
+  'exec-and-forget /opt/homebrew/opt/borders/bin/borders active_color=0xff7aa2f7 inactive_color=0xff292e42 width=4.0',
+]
+
+# Notify SketchyBar when workspace changes
+exec-on-workspace-change = [
+  '/bin/zsh',
+  '-c',
+  '/opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+]
+
+# Start AeroSpace at login
+start-at-login = true
+
+# Automatically reload the config when the config file is saved
+auto-reload-config = true
+
+# Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+# Layout settings. See: https://nikitabobko.github.io/AeroSpace/guide#layouts
+accordion-padding = 30
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# Mouse follows focus only when focused monitor changes (matches i3/Sway default 'mouse_warping output')
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Effectively turn off macOS "Hide application" (cmd-h) feature if desired
+automatically-unhide-macos-hidden-apps = false
+
+# Workspaces that stay alive even when empty (1-10 like i3/sway)
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+
+# Notify SketchyBar when binding mode changes (main, resize, service)
+on-mode-changed = [
+  'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_mode_change',
+]
+focus-follows-mouse.enabled = false
+
+# Key mapping preset (qwerty|dvorak|colemak)
+key-mapping.preset = 'qwerty'
+
+# Gaps between windows (inner-*) and between monitor edges (outer-*).
+# 8px gaps for rounded windows & JankyBorders; 38px top outer gap reserves space for SketchyBar pills
+gaps.inner.horizontal = 8
+gaps.inner.vertical = 8
+gaps.outer.left = 8
+gaps.outer.bottom = 8
+gaps.outer.top = [{ monitor."built-in" = 0 }, 38]
+gaps.outer.right = 8
+
+# -----------------------------------------------------------------------------
+# Workspace-to-Monitor Assignment (matching Sway & Kanshi setup)
+# -----------------------------------------------------------------------------
+# Pin Workspace 1 to primary external monitor (Lenovo / Dell DZQN023 / main)
+# Pin Workspace 2 to secondary / laptop display (built-in / Dell 36SN023 / secondary)
+[workspace-to-monitor-force-assignment]
+1 = ['LEN T32p-20', 'DELL U2720Q', 'main']
+2 = ['built-in', 'secondary', 'main']
+
+# -----------------------------------------------------------------------------
+# Main Binding Mode ($mod = alt)
+# Note: Alt+Arrows are intentionally left unbound so Tmux pane navigation
+# and Alacritty word-jumping continue to work without conflict.
+# -----------------------------------------------------------------------------
+[mode.main.binding]
+
+# --- Basics ---
+# Start a terminal ($mod+Return in Sway/i3)
+alt-enter = 'exec-and-forget open -na Alacritty'
+
+# Kill focused window ($mod+Shift+q in Sway/i3)
+alt-shift-q = 'close'
+
+# Reload configuration ($mod+Shift+c and $mod+Shift+r in Sway/i3)
+alt-shift-c = 'reload-config'
+alt-shift-r = 'reload-config'
+
+# --- Focus (Vim keys: h/j/k/l) ---
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+
+# --- Move Focused Window (Shift + Vim keys) ---
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+
+# --- Splits & Layouts ---
+# Split horizontal / vertical ($mod+b and $mod+v in Sway)
+# Note: Manual splits work when enable-normalization-flatten-containers = false,
+# otherwise use join-with in service mode or layout toggles below.
+alt-b = 'split horizontal'
+alt-v = 'split vertical'
+
+# Container layouts ($mod+s stacking, $mod+w tabbed, $mod+e toggle split)
+alt-s = 'layout v_accordion'
+alt-w = 'layout h_accordion'
+alt-e = 'layout tiles horizontal vertical'
+
+# AeroSpace default layout toggles (kept for convenience)
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
+
+# Fullscreen toggle ($mod+f in Sway/i3)
+alt-f = 'fullscreen'
+
+# Toggle tiling / floating ($mod+Shift+space in Sway/i3)
+alt-shift-space = 'layout floating tiling'
+
+# Quick smart resize in main mode
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
+
+# --- Workspaces (1-10) ---
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+alt-0 = 'workspace 10'
+
+# Move focused container to workspace (1-10)
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-0 = 'move-node-to-workspace 10'
+
+# Workspace & Monitor switching
+alt-tab = 'workspace-back-and-forth'
+alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+# --- Modes ---
+# Enter resize mode ($mod+r in Sway/i3)
+alt-r = 'mode resize'
+
+# Enter service mode
+alt-shift-semicolon = 'mode service'
+
+# -----------------------------------------------------------------------------
+# Resize Mode ($mod+r, matching Sway & i3)
+# -----------------------------------------------------------------------------
+[mode.resize.binding]
+# Shrink/grow width and height with Vim keys
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+
+# Same bindings for arrow keys (safe inside resize mode)
+left = 'resize width -50'
+down = 'resize height +50'
+up = 'resize height -50'
+right = 'resize width +50'
+
+# Balance all window sizes in workspace
+equal = ['balance-sizes', 'mode main']
+
+# Return to main mode
+enter = 'mode main'
+esc = 'mode main'
+alt-r = 'mode main'
+
+# -----------------------------------------------------------------------------
+# Service Mode (alt-shift-semicolon)
+# -----------------------------------------------------------------------------
+[mode.service.binding]
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main'] # reset layout
+f = [
+  'layout floating tiling',
+  'mode main',
+] # toggle between floating and tiling layout
+backspace = ['close-all-windows-but-current', 'mode main']
+
+# Join with adjacent container (AeroSpace's normalized equivalent to creating nested splits)
+alt-shift-h = ['join-with left', 'mode main']
+alt-shift-j = ['join-with down', 'mode main']
+alt-shift-k = ['join-with up', 'mode main']
+alt-shift-l = ['join-with right', 'mode main']
+
+# -----------------------------------------------------------------------------
+# Window Detection & Floating Rules (matching Sway & i3 for_window rules)
+# -----------------------------------------------------------------------------
+
+# 1Password
+[[on-window-detected]]
+if.app-id = 'com.1password.1password'
+run = 'layout floating'
+
+# macOS Calculator
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = 'layout floating'
+
+# System Settings
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+# AppCleaner
+[[on-window-detected]]
+if.app-id = 'net.freemacsoft.AppCleaner'
+run = 'layout floating'
+
+# QMK Toolbox
+[[on-window-detected]]
+if.app-id = 'fm.qmk.toolbox'
+run = 'layout floating'
+
+# Yubico Authenticator
+[[on-window-detected]]
+if.app-id = 'com.yubico.yubioath'
+run = 'layout floating'
+
+# Archive Utility / Finder Info dialogs
+[[on-window-detected]]
+if.app-id = 'com.apple.archiveutility'
+run = 'layout floating'
+
+# Alacritty "floater" class / title (used in waybar/cli scripts)
+[[on-window-detected]]
+if.app-id = 'org.alacritty'
+if.window-title-regex-substring = 'floater'
+run = 'layout floating'
+
+# Chrome Remote Desktop
+[[on-window-detected]]
+if.window-title-regex-substring = 'Chrome Remote Desktop'
+run = 'layout floating'
+
+# Google Meet
+[[on-window-detected]]
+if.window-title-regex-substring = 'Google Meet'
+run = 'layout floating'

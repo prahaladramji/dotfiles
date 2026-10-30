@@ -1,0 +1,13 @@
+Include config.d/*
+
+Host *
+  AddKeysToAgent yes
+  Compression yes
+  ControlMaster auto
+  ControlPath ~/.ssh/cm-%C
+  ControlPersist 30m
+  ForwardAgent no
+  LogLevel ERROR
+  ServerAliveCountMax 3
+  ServerAliveInterval 30
+  StrictHostKeyChecking accept-new

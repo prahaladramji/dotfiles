@@ -1,0 +1,61 @@
+ZSH_CUSTOM="$HOME/.config/oh-my-zsh"
+ZSH_THEME=""
+
+zstyle ':omz:update' mode disabled
+typeset -U path cdpath fpath manpath
+
+{{- if eq .chezmoi.os "darwin" }}
+eval "$(/opt/homebrew/bin/brew shellenv)"
+fpath+=(/opt/homebrew/share/zsh/site-functions)
+{{- if eq .profile.name "personal" }}
+path=(/opt/homebrew/opt/coreutils/libexec/gnubin $path)
+manpath=(/opt/homebrew/opt/coreutils/libexec/gnuman $manpath)
+{{- end }}
+{{- end }}
+path=($HOME/.local/bin $HOME/go/bin $path)
+
+plugins=(
+  direnv
+  fzf
+  git
+  history
+  history-substring-search
+  timer
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+{{- if ne .profile.type "virtual" }}
+  nvm
+{{- end }}
+)
+
+HIST_STAMPS="yyyy-mm-dd"
+
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[comment]=fg=8,bold
+
+TIMER_FORMAT="[%d]"
+TIMER_PRECISION="2"
+
+export EDITOR="nvim"
+
+{{- if ne .profile.type "virtual" }}
+zstyle ':omz:plugins:nvm' lazy yes
+zstyle ':omz:plugins:nvm' autoload yes
+{{- end }}
+
+source $ZSH/oh-my-zsh.sh
+
+HISTSIZE=999999999
+SAVEHIST=999999999
+
+# Aliases
+alias vi="nvim"
+alias vim="nvim"
+alias ls="ls -AFhl --color=auto"
+alias sshkill='pkill -f "ssh(uttle -D| -|:)"'
+
+# Source drop-in configs (e.g., 00-dots.zsh and work overlay configs)
+for conf in "$HOME/.config/zsh/conf.d/"*.zsh(N); do
+  source "$conf"
+done

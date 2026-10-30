@@ -1,0 +1,364 @@
+#!/bin/zsh
+
+CONFIG_DIR="$HOME/.config/sketchybar"
+PLUGIN_DIR="$CONFIG_DIR/plugins"
+
+source "$CONFIG_DIR/colors.sh"
+
+# -----------------------------------------------------------------------------
+# Bar Appearance: Transparent canvas for Minimal Floating Pills
+# -----------------------------------------------------------------------------
+sketchybar --bar \
+  position=top \
+  height=32 \
+  margin=0 \
+  y_offset=3 \
+  padding_left=8 \
+  padding_right=8 \
+  color="$TRANSPARENT" \
+  border_width=0 \
+  topmost=window \
+  sticky=on \
+  font_smoothing=on
+
+# -----------------------------------------------------------------------------
+# Default Item Styling
+# -----------------------------------------------------------------------------
+sketchybar --default \
+  updates=when_shown \
+  icon.font="Hack Nerd Font:Regular:14.0" \
+  icon.color="$FG_COLOR" \
+  icon.padding_left=7 \
+  icon.padding_right=4 \
+  label.font="Hack Nerd Font:Regular:13.0" \
+  label.color="$FG_COLOR" \
+  label.padding_left=0 \
+  label.padding_right=7 \
+  padding_left=1 \
+  padding_right=1 \
+  background.drawing=off \
+  background.height=26 \
+  background.corner_radius=13 \
+  background.color="$TRANSPARENT" \
+  popup.background.color="$BG_LIGHT_COLOR" \
+  popup.background.corner_radius=8 \
+  popup.background.border_width=1 \
+  popup.background.border_color="$PILL_BORDER" \
+  popup.blur_radius=20 \
+  popup.align=right \
+  popup.y_offset=4
+
+# Helper function to add a standard hover tooltip popup item to a bar item
+add_tooltip() {
+  local parent="$1"
+  sketchybar --add item "${parent}.tooltip" "popup.${parent}" \
+    --set "${parent}.tooltip" \
+      icon.drawing=off \
+      label.font="Hack Nerd Font Mono:Regular:12.0" \
+      label.color="$FG_COLOR" \
+      label.padding_left=10 \
+      label.padding_right=10 \
+      background.drawing=off
+}
+
+# Helper function to add a transparent gap spacer between floating pills
+add_spacer() {
+  local name="$1"
+  local side="$2"
+  sketchybar --add item "$name" "$side" \
+    --set "$name" \
+      width=6 \
+      icon.drawing=off \
+      label.drawing=off \
+      background.drawing=off
+}
+
+# -----------------------------------------------------------------------------
+# Custom Events for AeroSpace Integration
+# -----------------------------------------------------------------------------
+sketchybar --add event aerospace_workspace_change
+sketchybar --add event aerospace_mode_change
+
+# -----------------------------------------------------------------------------
+# Left Floating Pills: [Workspaces Pill]  [Mode Pill]  [Weather Pill]
+# -----------------------------------------------------------------------------
+
+# 1. AeroSpace Workspaces (1-10) inside a Floating Pill Bracket
+for sid in 1 2 3 4 5 6 7 8 9 10; do
+  sketchybar --add item "space.$sid" left \
+    --subscribe "space.$sid" aerospace_workspace_change \
+    --set "space.$sid" \
+      icon.drawing=off \
+      label="$sid" \
+      label.padding_left=8 \
+      label.padding_right=8 \
+      padding_left=2 \
+      padding_right=2 \
+      background.drawing=off \
+      background.height=20 \
+      background.corner_radius=10 \
+      background.color="$WORKSPACES_FOCUSED_BG" \
+      click_script="/opt/homebrew/bin/aerospace workspace $sid" \
+      script="$PLUGIN_DIR/aerospace.sh $sid"
+done
+
+sketchybar --add bracket spaces_pill '/space\..*/' \
+  --set spaces_pill \
+    background.drawing=on \
+    background.color="$PILL_BG" \
+    background.corner_radius=13 \
+    background.height=26 \
+    background.border_width=1 \
+    background.border_color="$PILL_BORDER"
+
+add_spacer spacer.left.1 left
+
+# 2. AeroSpace Binding Mode Pill (hidden in 'main' mode, orange pill in 'resize'/'service')
+sketchybar --add item mode left \
+  --subscribe mode aerospace_mode_change \
+  --set mode \
+    drawing=off \
+    icon.drawing=off \
+    label.font="Hack Nerd Font:Bold:13.0" \
+    label.color="$BLACK" \
+    label.padding_left=10 \
+    label.padding_right=10 \
+    background.drawing=on \
+    background.color="$MODE_COLOR" \
+    background.corner_radius=13 \
+    background.height=26 \
+    script="$PLUGIN_DIR/mode.sh"
+
+# 3. Weather Pill (compact icon + temp on bar, full forecast on hover)
+sketchybar --add item weather left \
+  --subscribe weather system_woke mouse.entered mouse.exited \
+  --set weather \
+    icon.drawing=off \
+    label.color="$WEATHER_COLOR" \
+    label.padding_left=12 \
+    label.padding_right=12 \
+    background.drawing=on \
+    background.color="$PILL_BG" \
+    background.corner_radius=13 \
+    background.height=26 \
+    background.border_width=1 \
+    background.border_color="$PILL_BORDER" \
+    popup.align=left \
+    update_freq=3600 \
+    script="$PLUGIN_DIR/weather.sh"
+add_tooltip weather
+
+# -----------------------------------------------------------------------------
+# Right Floating Pills: [Status Metrics Pill]  [Clock + Power Pill]
+# -----------------------------------------------------------------------------
+
+# --- Pill A (Rightmost): Clock + Power ---
+sketchybar --add item power right \
+  --set power \
+    icon="⏻" \
+    icon.color="$RED" \
+    icon.padding_left=6 \
+    icon.padding_right=12 \
+    padding_right=4 \
+    label.drawing=off \
+    background.drawing=off \
+    popup.align=right \
+    click_script="$PLUGIN_DIR/power.sh toggle"
+
+for action in "lock:  Lock Screen" "sleep:󰤄  Suspend" "reboot:󰜉  Reboot" "shutdown:⏻  Shutdown"; do
+  key="${action%%:*}"
+  title="${action#*:}"
+  sketchybar --add item "power.$key" popup.power \
+    --set "power.$key" \
+      icon.drawing=off \
+      label="$title" \
+      label.padding_left=12 \
+      label.padding_right=12 \
+      background.drawing=off \
+      click_script="$PLUGIN_DIR/power.sh $key"
+done
+
+sketchybar --add item clock right \
+  --subscribe clock mouse.entered mouse.exited mouse.scrolled mouse.clicked \
+  --set clock \
+    icon="󰥔" \
+    icon.color="$CLOCK_COLOR" \
+    icon.padding_left=10 \
+    label.color="$FG_COLOR" \
+    label.font="Hack Nerd Font:Bold:13.0" \
+    label.padding_right=6 \
+    background.drawing=off \
+    update_freq=10 \
+    script="$PLUGIN_DIR/clock.sh"
+
+# Calendar popup item (2x Retina CoreText render matching Waybar colors & month/year modes)
+sketchybar --add item clock.cal popup.clock \
+  --set clock.cal \
+    padding_left=0 \
+    padding_right=0 \
+    icon.drawing=off \
+    label.drawing=off \
+    background.drawing=on \
+    background.color="$TRANSPARENT" \
+    background.image.scale=0.5 \
+    click_script="$PLUGIN_DIR/clock.sh mode"
+
+sketchybar --add bracket clock_pill clock power \
+  --set clock_pill \
+    background.drawing=on \
+    background.color="$PILL_BG" \
+    background.corner_radius=13 \
+    background.height=26 \
+    background.border_width=1 \
+    background.border_color="$PILL_BORDER"
+
+add_spacer spacer.right.1 right
+
+# --- Pill B: System Status Metrics ---
+
+# Idle Inhibitor (caffeinate toggle)
+sketchybar --add item idle_inhibitor right \
+  --subscribe idle_inhibitor mouse.entered mouse.exited \
+  --set idle_inhibitor \
+    icon="󰈉" \
+    icon.color="$IDLE_COLOR" \
+    icon.padding_left=6 \
+    icon.padding_right=10 \
+    label.drawing=off \
+    background.drawing=off \
+    script="$PLUGIN_DIR/idle_inhibitor.sh status" \
+    click_script="$PLUGIN_DIR/idle_inhibitor.sh toggle"
+add_tooltip idle_inhibitor
+
+# Battery
+sketchybar --add item battery right \
+  --subscribe battery power_source_change system_woke mouse.entered mouse.exited \
+  --set battery \
+    icon.color="$BATTERY_COLOR" \
+    label.color="$FG_COLOR" \
+    background.drawing=off \
+    update_freq=60 \
+    script="$PLUGIN_DIR/battery.sh"
+add_tooltip battery
+
+# Disk (/)
+sketchybar --add item disk right \
+  --subscribe disk mouse.entered mouse.exited \
+  --set disk \
+    icon="󰋊" \
+    icon.color="$DISK_COLOR" \
+    label.color="$FG_COLOR" \
+    background.drawing=off \
+    update_freq=30 \
+    script="$PLUGIN_DIR/disk.sh" \
+    click_script="open -na Alacritty --args --title floater -e /opt/homebrew/bin/gdu /"
+add_tooltip disk
+
+# Memory
+sketchybar --add item memory right \
+  --subscribe memory mouse.entered mouse.exited \
+  --set memory \
+    icon="󰍛" \
+    icon.color="$MEMORY_COLOR" \
+    label.color="$FG_COLOR" \
+    background.drawing=off \
+    update_freq=5 \
+    script="$PLUGIN_DIR/memory.sh" \
+    click_script="open -na Alacritty --args --title floater -e /opt/homebrew/bin/btop"
+add_tooltip memory
+
+# CPU (with Uptime + Load in hover tooltip)
+sketchybar --add item cpu right \
+  --subscribe cpu mouse.entered mouse.exited \
+  --set cpu \
+    icon="󰘚" \
+    icon.color="$CPU_COLOR" \
+    label.color="$FG_COLOR" \
+    background.drawing=off \
+    update_freq=2 \
+    script="$PLUGIN_DIR/cpu.sh" \
+    click_script="open -na Alacritty --args --title floater -e /opt/homebrew/bin/btop"
+add_tooltip cpu
+
+# Network (icon-only by default; hover shows Local IP + Public IPv4/IPv6)
+sketchybar --add item network right \
+  --subscribe network wifi_change system_woke mouse.entered mouse.exited \
+  --set network \
+    icon.color="$NETWORK_COLOR" \
+    label.color="$FG_COLOR" \
+    background.drawing=off \
+    update_freq=60 \
+    script="$PLUGIN_DIR/network.sh" \
+    click_script="$PLUGIN_DIR/network.sh toggle"
+for idx in 1 2 3; do
+  sketchybar --add item "network.tooltip.$idx" popup.network \
+    --set "network.tooltip.$idx" \
+      drawing=off \
+      icon.drawing=off \
+      label.font="Hack Nerd Font Mono:Regular:12.0" \
+      label.color="$FG_COLOR" \
+      label.padding_left=10 \
+      label.padding_right=10 \
+      background.drawing=off
+done
+
+# Microphone (icon-only on bar, % + device in tooltip)
+sketchybar --add item mic right \
+  --subscribe mic mouse.entered mouse.exited \
+  --set mic \
+    icon="󰍬" \
+    icon.color="$VOLUME_COLOR" \
+    label.drawing=off \
+    background.drawing=off \
+    update_freq=10 \
+    script="$PLUGIN_DIR/mic.sh" \
+    click_script="$PLUGIN_DIR/mic.sh toggle"
+add_tooltip mic
+
+# Volume (Audio Sink)
+sketchybar --add item volume right \
+  --subscribe volume volume_change mouse.scrolled mouse.entered mouse.exited \
+  --set volume \
+    icon="󰕾" \
+    icon.color="$VOLUME_COLOR" \
+    label.color="$FG_COLOR" \
+    background.drawing=off \
+    script="$PLUGIN_DIR/volume.sh" \
+    click_script="$PLUGIN_DIR/volume.sh toggle"
+add_tooltip volume
+
+# Bluetooth (Leftmost in Status Pill)
+sketchybar --add item bluetooth right \
+  --subscribe bluetooth mouse.entered mouse.exited \
+  --set bluetooth \
+    icon="" \
+    icon.color="$BLUETOOTH_COLOR" \
+    icon.padding_left=10 \
+    label.color="$FG_COLOR" \
+    background.drawing=off \
+    update_freq=30 \
+    script="$PLUGIN_DIR/bluetooth.sh" \
+    click_script="open 'x-apple.systempreferences:com.apple.BluetoothSettings'"
+for idx in 1 2 3 4 5; do
+  sketchybar --add item "bluetooth.tooltip.$idx" popup.bluetooth \
+    --set "bluetooth.tooltip.$idx" \
+      drawing=off \
+      icon.drawing=off \
+      label.font="Hack Nerd Font Mono:Regular:12.0" \
+      label.color="$FG_COLOR" \
+      label.padding_left=10 \
+      label.padding_right=10 \
+      background.drawing=off
+done
+
+sketchybar --add bracket status_pill bluetooth volume mic network cpu memory disk battery idle_inhibitor \
+  --set status_pill \
+    background.drawing=on \
+    background.color="$PILL_BG" \
+    background.corner_radius=13 \
+    background.height=26 \
+    background.border_width=1 \
+    background.border_color="$PILL_BORDER"
+
+# Initialize all items
+sketchybar --update

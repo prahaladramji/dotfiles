@@ -1,0 +1,129 @@
+* {
+  font:   "Hack Nerd Font 12";
+
+  background            : #1a1b26;
+  foreground            : #c0caf5;
+  border                : #16161e;
+  black                 : #15161e;
+  red                   : #f7768e;
+  green                 : #9ece6a;
+  yellow                : #e0af68;
+  blue                  : #7aa2f7;
+  magenta               : #bb9af7;
+  cyan                  : #7dcfff;
+  white                 : #a9b1d6;
+
+  background-bright     : #24283b;
+  foreground-bright     : #a9b1d6;
+  black-bright          : #414868;
+  red-bright            : #ff899d;
+  green-bright          : #9fe044;
+  yellow-bright         : #faba4a;
+  blue-bright           : #8db0ff;
+  magenta-bright        : #c7a9ff;
+  cyan-bright           : #a4daff;
+  white-bright          : #c0caf5;
+
+  accent: @cyan;
+  urgent: @red;
+
+  background-color : transparent;
+  text-color       : @foreground;
+  text-color-invert: @black;
+
+  margin  : 0;
+  padding : 0;
+  spacing : 0;
+}
+
+element-icon, element-text, scrollbar {
+  cursor: pointer;
+}
+
+window {
+  location : center;
+  width    : 640px;
+
+  background-color: @background;
+  border: 1px;
+  border-color: @border;
+  border-radius: 6px;
+}
+
+inputbar {
+  spacing  : 8px;
+  padding  : 4px 8px;
+  children : [ icon-search, entry ];
+
+  background-color: @background;
+}
+
+icon-search, entry, element-icon, element-text {
+  vertical-align: 0.5;
+}
+
+entry {
+  placeholder        : "Search";
+  placeholder-color  : @background-bright;
+}
+
+icon-search {
+  expand   : false;
+  filename : "system-search";
+  size     : 14px;
+}
+
+textbox {
+  padding          : 4px 8px;
+  background-color : @background-bright;
+}
+
+listview {
+  padding      : 4px 0px;
+  lines        : 12;
+  columns      : 1;
+  scrollbar    : true;
+  fixed-height : false;
+  dynamic      : true;
+}
+
+element {
+  padding : 4px 8px;
+  spacing : 8px;
+}
+
+element normal urgent {
+  text-color: @urgent;
+}
+
+element normal active {
+  text-color: @accent;
+}
+
+element alternate active {
+  text-color: @accent;
+}
+
+element selected {
+  text-color       : @text-color-invert;
+  background-color : @accent;
+}
+
+element selected urgent {
+  text-color      : @text-color-invert;
+  background-color: @urgent;
+}
+
+element-icon {
+  size: 1.0em;
+}
+
+element-text {
+  text-color: inherit;
+}
+
+scrollbar {
+  handle-width : 4px;
+  handle-color : @foreground-bright;
+  padding      : 0 4px;
+}

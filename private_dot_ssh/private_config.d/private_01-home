@@ -1,0 +1,7 @@
+Host draco
+  #HostName draco.home.digitalvagabond.tech
+  HostName 192.168.1.21
+  User administrator
+  ForwardAgent yes
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null

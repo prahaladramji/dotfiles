@@ -1,0 +1,6 @@
+# Enable substitution for prompt
+setopt prompt_subst
+
+# Maia prompt
+PROMPT="%B%{$fg[cyan]%}"$'{{ if eq .chezmoi.os "darwin" }}\uf302{{ else }}\uf306{{ end }}'" %(4~|%-1~/.../%2~|%~)%u%b >%{$fg[cyan]%}>%B%(?.%{$fg[cyan]%}.%{$fg[red]%})>%{$reset_color%}%b "
+RPROMPT="%{$fg[red]%} %(?..[%?])"
