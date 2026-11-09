@@ -14,7 +14,8 @@ set $menu "rofi -modi drun,run -show drun -show-icons"
 # Desktop background image
 set $bg_image "$HOME/Pictures/wallhaven.png"
 # Lock screen
-set $screenlock "swaylock -f -i $bg_image -s fill"
+set $screenlock "pidof swaylock >/dev/null || swaylock -f -i $bg_image -s fill"
+set $before_sleep_lock "! busctl get-property org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager PreparingForSleep 2>/dev/null | grep -q false && (pidof swaylock >/dev/null || swaylock -f -i $bg_image -s fill)"
 
 include /etc/sway/config-vars.d/*
 
@@ -29,6 +30,7 @@ default_floating_border pixel 3
 
 # Ensure existing workspaces on all monitors also update their gaps on reload
 exec_always swaymsg "gaps inner all set 8; gaps outer all set 0"
+exec_always dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
 exec dex --autostart --environment sway
 
@@ -48,7 +50,7 @@ exec dex --autostart --environment sway
 
 ### Automatic monitor management
 #
-exec_always pkill kanshi; exec kanshi
+exec_always "(pkill -x kanshi || true) && exec kanshi"
 
 ### Idle configuration
 #
@@ -61,10 +63,10 @@ exec_always pkill kanshi; exec kanshi
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
-exec swayidle -w \
+exec_always (pkill -x swayidle || true) && exec swayidle -w \
   timeout 300 $screenlock \
-  timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-  before-sleep $screenlock
+  timeout 600 'grep -q open /proc/acpi/button/lid/*/state && swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+  before-sleep $before_sleep_lock
 
 ### Input configuration
 #
