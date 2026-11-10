@@ -60,13 +60,17 @@ exec_always "(pkill -x kanshi || true) && exec kanshi"
 #          timeout 300 'swaylock -f -c 000000' \
 #          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
 #          before-sleep 'swaylock -f -c 000000'
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
+# Lock after 300s (5m) idle, turn displays off 60s after locking (at 360s idle
+# or after 60s whenever swaylock is active), suspend after 600s (10m) idle on
+# battery only, and re-power/reconfigure dock displays cleanly after resume.
 exec_always (pkill -x swayidle || true) && exec swayidle -w \
+  timeout 60 'pidof swaylock >/dev/null && swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
   timeout 300 $screenlock \
-  timeout 600 'grep -q open /proc/acpi/button/lid/*/state && swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-  before-sleep $before_sleep_lock
+  timeout 360 'swaymsg "output * power off"' \
+  timeout 600 '! grep -qx 1 /sys/class/power_supply/AC*/online /sys/class/power_supply/ucsi*/online 2>/dev/null && grep -q Discharging /sys/class/power_supply/BAT*/status 2>/dev/null && systemctl suspend' \
+  lock $screenlock \
+  before-sleep $before_sleep_lock \
+  after-resume '(swaymsg "output * power on" || true) && ( (sleep 3 && (swaymsg "output * power on" || true) && (kanshictl reload || true) && (! grep -q closed /proc/acpi/button/lid/*/state 2>/dev/null || swaymsg "output eDP-1 disable" || true) && sleep 8 && (swaymsg "output * power on" || true) && (kanshictl reload || true) && (! grep -q closed /proc/acpi/button/lid/*/state 2>/dev/null || swaymsg "output eDP-1 disable" || true)) >/dev/null 2>&1 & )'
 
 ### Input configuration
 #
