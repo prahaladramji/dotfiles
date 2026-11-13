@@ -1,8 +1,12 @@
 LICENSE
 README.md
 
-{{- if ne .profile.name "personal" }}
-.config/1Password/ssh/agent.toml
+{{- if ne .profile.type "synology-nas" }}
+.profile
+{{- end }}
+
+{{- if or (ne .profile.name "personal") (eq .profile.type "synology-nas") }}
+.config/1Password
 .ssh/config.d/00-1password
 .ssh/config.d/01-home
 {{- end }}
@@ -10,7 +14,19 @@ README.md
 {{- if eq .chezmoi.os "linux" }}
 .config/aerospace
 .config/sketchybar
-{{- if eq .profile.type "virtual" }}
+run_onchange_darwin-install-packages.sh
+{{- if eq .profile.type "synology-nas" }}
+.config/alacritty
+.config/direnv
+.config/i3
+.config/kanshi
+.config/pipewire
+.config/rofi
+.config/sway
+.config/swaync
+.config/waybar
+.config/xdg-desktop-portal-wlr
+{{- else if eq .profile.type "virtual" }}
 .config/kanshi
 .config/pipewire
 .config/sway

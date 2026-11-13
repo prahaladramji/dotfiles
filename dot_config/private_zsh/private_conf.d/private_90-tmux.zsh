@@ -37,6 +37,12 @@ function _should_autostart_tmux() {
   return 0
 }
 
+# Keep forwarded SSH agent socket alive across persistent tmux re-attachments
+if [[ -n "${SSH_CONNECTION:-}" && -S "${SSH_AUTH_SOCK:-}" && "${SSH_AUTH_SOCK}" != "$HOME/.ssh/ssh_auth_sock" ]]; then
+  ln -sf "$SSH_AUTH_SOCK" "$HOME/.ssh/ssh_auth_sock"
+  export SSH_AUTH_SOCK="$HOME/.ssh/ssh_auth_sock"
+fi
+
 if _should_autostart_tmux; then
   tmux_group_session && exit
 fi

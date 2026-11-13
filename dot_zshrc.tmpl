@@ -12,18 +12,24 @@ path=(/opt/homebrew/opt/coreutils/libexec/gnubin $path)
 manpath=(/opt/homebrew/opt/coreutils/libexec/gnuman $manpath)
 {{- end }}
 {{- end }}
+{{- if eq .profile.type "synology-nas" }}
+path=($HOME/.local/bin /usr/local/bin /usr/local/sbin /usr/syno/bin /usr/syno/sbin $path)
+{{- else }}
 path=($HOME/.local/bin $HOME/go/bin $path)
+{{- end }}
 
 plugins=(
+{{- if ne .profile.type "synology-nas" }}
   direnv
   fzf
+{{- end }}
   git
   history
   history-substring-search
   timer
   zsh-autosuggestions
   zsh-syntax-highlighting
-{{- if ne .profile.type "virtual" }}
+{{- if not (has .profile.type (list "virtual" "synology-nas")) }}
   nvm
 {{- end }}
 )
@@ -38,8 +44,9 @@ TIMER_FORMAT="[%d]"
 TIMER_PRECISION="2"
 
 export EDITOR="nvim"
+export GPG_TTY=$TTY
 
-{{- if ne .profile.type "virtual" }}
+{{- if not (has .profile.type (list "virtual" "synology-nas")) }}
 zstyle ':omz:plugins:nvm' lazy yes
 zstyle ':omz:plugins:nvm' autoload yes
 {{- end }}
@@ -54,6 +61,10 @@ alias vi="nvim"
 alias vim="nvim"
 alias ls="ls -AFhl --color=auto"
 alias sshkill='pkill -f "ssh(uttle -D| -|:)"'
+
+{{- if eq .profile.type "synology-nas" }}
+[[ -r /volume1/docker/compose-files/manage ]] && source /volume1/docker/compose-files/manage
+{{- end }}
 
 # Source drop-in configs (e.g., 00-dots.zsh and work overlay configs)
 for conf in "$HOME/.config/zsh/conf.d/"*.zsh(N); do
