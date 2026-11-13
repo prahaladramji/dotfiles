@@ -28,6 +28,11 @@
   url = {{ gitHubLatestReleaseAssetURL "go-acme/lego" "lego_*_linux_amd64.tar.gz" | quote }}
   path = "lego"
   executable = true
+[".local/bin/restic"]
+  type = "file"
+  url = {{ gitHubLatestReleaseAssetURL "restic/restic" "restic_*_linux_amd64.bz2" | quote }}
+  decompress = "bzip2"
+  executable = true
 {{- else if ne .profile.type "virtual" }}
 [".nvm"]
   type = "archive"
