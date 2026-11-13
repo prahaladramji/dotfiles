@@ -13,7 +13,10 @@ manpath=(/opt/homebrew/opt/coreutils/libexec/gnuman $manpath)
 {{- end }}
 {{- end }}
 {{- if eq .profile.type "synology-nas" }}
-path=($HOME/.local/bin /usr/local/bin /usr/local/sbin /usr/syno/bin /usr/syno/sbin $path)
+export LANG="en_US.utf8"
+export LC_ALL="en_US.utf8"
+export CGO_ENABLED=0
+path=($HOME/.local/bin $HOME/.local/share/go/bin $HOME/go/bin /usr/local/bin /usr/local/sbin /usr/syno/bin /usr/syno/sbin $path)
 {{- else }}
 path=($HOME/.local/bin $HOME/go/bin $path)
 {{- end }}
@@ -21,8 +24,8 @@ path=($HOME/.local/bin $HOME/go/bin $path)
 plugins=(
 {{- if ne .profile.type "synology-nas" }}
   direnv
-  fzf
 {{- end }}
+  fzf
   git
   history
   history-substring-search
@@ -63,7 +66,7 @@ alias ls="ls -AFhl --color=auto"
 alias sshkill='pkill -f "ssh(uttle -D| -|:)"'
 
 {{- if eq .profile.type "synology-nas" }}
-[[ -r /volume1/docker/compose-files/manage ]] && source /volume1/docker/compose-files/manage
+alias hl="homelab"
 {{- end }}
 
 # Source drop-in configs (e.g., 00-dots.zsh and work overlay configs)

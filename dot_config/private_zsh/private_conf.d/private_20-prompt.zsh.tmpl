@@ -2,5 +2,5 @@
 setopt prompt_subst
 
 # Maia prompt
-PROMPT="%B%{$fg[cyan]%}"$'{{ if eq .chezmoi.os "darwin" }}\uf302{{ else }}\uf306{{ end }}'" %(4~|%-1~/.../%2~|%~)%u%b >%{$fg[cyan]%}>%B%(?.%{$fg[cyan]%}.%{$fg[red]%})>%{$reset_color%}%b "
+PROMPT="%B%{$fg[cyan]%}"$'{{ if eq .chezmoi.os "darwin" }}\uf302{{ else if eq .profile.type "synology-nas" }}\U000f08f3{{ else }}\uf306{{ end }}'" %(4~|%-1~/.../%2~|%~)%u%b >%{$fg[cyan]%}>%B%(?.%{$fg[cyan]%}.%{$fg[red]%})>%{$reset_color%}%b "
 RPROMPT="%{$fg[red]%} %(?..[%?])"

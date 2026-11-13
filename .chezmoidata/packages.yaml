@@ -36,6 +36,7 @@ packages:
       brews:
         - arduino-cli
         - coreutils
+        - dnscontrol
         - ffmpeg
         - go
         - internetarchive

@@ -18,6 +18,16 @@
   type = "archive"
   url = "https://github.com/neovim/neovim-releases/releases/latest/download/nvim-linux-x86_64.tar.gz"
   stripComponents = 1
+[".local/bin/dnscontrol"]
+  type = "archive-file"
+  url = {{ gitHubLatestReleaseAssetURL "DNSControl/dnscontrol" "dnscontrol_*_linux_amd64.tar.gz" | quote }}
+  path = "dnscontrol"
+  executable = true
+[".local/bin/lego"]
+  type = "archive-file"
+  url = {{ gitHubLatestReleaseAssetURL "go-acme/lego" "lego_*_linux_amd64.tar.gz" | quote }}
+  path = "lego"
+  executable = true
 {{- else if ne .profile.type "virtual" }}
 [".nvm"]
   type = "archive"

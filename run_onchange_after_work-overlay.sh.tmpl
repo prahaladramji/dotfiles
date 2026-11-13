@@ -22,6 +22,17 @@ if [[ -d "$HOME/.config" ]]; then
   chmod -R go-w "$HOME/.config"
 fi
 
+{{- if eq .profile.type "synology-nas" }}
+GO_VERSION="$(curl -fsSL https://go.dev/VERSION?m=text | head -n 1 | tr -d '[:space:]')"
+CURRENT_GO="$("$HOME/.local/share/go/bin/go" version 2>/dev/null | awk '{print $3}' || true)"
+if [[ -n "$GO_VERSION" && ( "$CURRENT_GO" != "$GO_VERSION" || ! -d "$HOME/.local/share/go/src/runtime" ) ]]; then
+  echo "Installing $GO_VERSION to ~/.local/share/go..."
+  rm -rf "$HOME/.local/share/go"
+  mkdir -p "$HOME/.local/share"
+  curl -fsSL "https://go.dev/dl/${GO_VERSION}.linux-amd64.tar.gz" | tar -C "$HOME/.local/share" -xzf -
+fi
+{{- end }}
+
 {{- if eq .profile.name "work" }}
 WORK_DIR="$HOME/.local/share/dotfiles-work"
 WORK_STATE="$HOME/.config/chezmoi/chezmoistate-work.boltdb"
