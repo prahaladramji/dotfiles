@@ -53,3 +53,11 @@ export LESS_TERMCAP_so=$'\E[01;47;34m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-R
+
+## Terminal state recovery
+# Reset stuck mouse-tracking and focus-event modes left behind by dropped SSH sessions or crashed TUIs
+autoload -Uz add-zsh-hook
+_reset_terminal_mouse_mode() {
+  printf '\e[?1000l\e[?1002l\e[?1003l\e[?1006l\e[?1004l'
+}
+add-zsh-hook precmd _reset_terminal_mouse_mode
