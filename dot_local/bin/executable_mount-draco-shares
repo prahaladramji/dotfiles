@@ -1,0 +1,37 @@
+#!/bin/zsh
+set -euo pipefail
+
+NAS_HOST="draco"
+SHARES=("docker" "DrAcO")
+
+# Derive the NAS SSH/SMB user from ssh config (no hardcoded usernames)
+NAS_USER="$(/usr/bin/ssh -G "$NAS_HOST" 2>/dev/null | /usr/bin/awk '$1 == "user" { print $2; exit }')"
+if [[ -z "$NAS_USER" ]]; then
+  exit 0
+fi
+
+# Quick check if all shares are already mounted
+all_mounted=true
+for share in "${SHARES[@]}"; do
+  if ! /sbin/mount | /usr/bin/grep -qi "//${NAS_USER}@${NAS_HOST}/${share} on /Volumes/${share}"; then
+    all_mounted=false
+    break
+  fi
+done
+
+if [[ "$all_mounted" == true ]]; then
+  exit 0
+fi
+
+# Verify NAS SMB port (445) is reachable on the local network (2s timeout)
+if ! /usr/bin/nc -z -G 2 "$NAS_HOST" 445 >/dev/null 2>&1; then
+  exit 0
+fi
+
+# Mount any unmounted shares silently in the background via Keychain
+for share in "${SHARES[@]}"; do
+  if ! /sbin/mount | /usr/bin/grep -qi "//${NAS_USER}@${NAS_HOST}/${share} on /Volumes/${share}"; then
+    /usr/bin/open -g "smb://${NAS_USER}@${NAS_HOST}/${share}"
+    /bin/sleep 1
+  fi
+done

@@ -1,0 +1,19 @@
+#!/bin/zsh
+REAL_TOFU="/opt/homebrew/bin/tofu"
+if [[ "$PWD" == /Volumes/docker/gcp* ]]; then
+  export TF_DATA_DIR="${TF_DATA_DIR:-$HOME/.cache/opentofu/draco-gcp}"
+  export TF_VAR_secrets_dir="${TF_VAR_secrets_dir:-/Volumes/docker/secrets}"
+  mkdir -p "$TF_DATA_DIR"
+  case "${1:-}" in
+    init|plan|apply|destroy|import|refresh)
+      has_lock=0
+      for arg in "$@"; do
+        [[ "$arg" == -lock=* ]] && has_lock=1
+      done
+      if [[ $has_lock -eq 0 ]]; then
+        exec "$REAL_TOFU" "$1" -lock=false "${@:2}"
+      fi
+      ;;
+  esac
+fi
+exec "$REAL_TOFU" "$@"

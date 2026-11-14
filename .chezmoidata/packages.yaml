@@ -41,6 +41,7 @@ packages:
         - go
         - internetarchive
         - lego
+        - opentofu
         - pipx
         - qmk
         - ykman

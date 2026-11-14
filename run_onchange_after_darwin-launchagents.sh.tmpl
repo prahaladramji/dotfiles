@@ -1,0 +1,15 @@
+{{- if and (eq .chezmoi.os "darwin") (eq .profile.name "personal") -}}
+#!/bin/zsh
+set -euo pipefail
+
+# plist hash: {{ include "private_Library/private_LaunchAgents/net.icybit.mount-draco.plist.tmpl" | sha256sum }}
+# script hash: {{ include "dot_local/bin/executable_mount-draco-shares" | sha256sum }}
+
+PLIST="$HOME/Library/LaunchAgents/net.icybit.mount-draco.plist"
+DOMAIN="gui/$(id -u)"
+
+if [[ -f "$PLIST" ]]; then
+  /bin/launchctl bootout "$DOMAIN/net.icybit.mount-draco" 2>/dev/null || true
+  /bin/launchctl bootstrap "$DOMAIN" "$PLIST"
+fi
+{{- end }}
