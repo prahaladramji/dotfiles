@@ -33,6 +33,11 @@
   url = {{ gitHubLatestReleaseAssetURL "restic/restic" "restic_*_linux_amd64.bz2" | quote }}
   decompress = "bzip2"
   executable = true
+[".local/bin/tofu"]
+  type = "archive-file"
+  url = {{ gitHubLatestReleaseAssetURL "opentofu/opentofu" "tofu_*_linux_amd64.tar.gz" | quote }}
+  path = "tofu"
+  executable = true
 {{- else if ne .profile.type "virtual" }}
 [".nvm"]
   type = "archive"
