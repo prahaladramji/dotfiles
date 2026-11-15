@@ -31,7 +31,6 @@ fi
 # Mount any unmounted shares silently in the background via Keychain
 for share in "${SHARES[@]}"; do
   if ! /sbin/mount | /usr/bin/grep -qi "//${NAS_USER}@${NAS_HOST}/${share} on /Volumes/${share}"; then
-    /usr/bin/open -g "smb://${NAS_USER}@${NAS_HOST}/${share}"
-    /bin/sleep 1
+    /usr/bin/osascript -e "mount volume \"smb://${NAS_USER}@${NAS_HOST}/${share}\"" >/dev/null
   fi
 done
