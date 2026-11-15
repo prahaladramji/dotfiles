@@ -3,6 +3,7 @@ README.md
 
 {{- if ne .profile.type "synology-nas" }}
 .profile
+.local/bin/homelab
 {{- end }}
 
 {{- if or (ne .profile.name "personal") (eq .profile.type "synology-nas") }}

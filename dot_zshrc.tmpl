@@ -67,6 +67,8 @@ alias sshkill='pkill -f "ssh(uttle -D| -|:)"'
 
 {{- if eq .profile.type "synology-nas" }}
 alias hl="homelab"
+{{- else if eq .profile.name "personal" }}
+alias hl="ssh draco /volume1/docker/homelab/homelab"
 {{- end }}
 
 # Source drop-in configs (e.g., 00-dots.zsh and work overlay configs)
