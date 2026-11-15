@@ -1,0 +1,7 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/zsh
+set -euo pipefail
+
+# Prevent Finder from creating .DS_Store files on network volumes (SMB/AFP/NFS)
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+{{- end }}

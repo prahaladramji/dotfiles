@@ -22,6 +22,7 @@ run_onchange_after_darwin-launchagents.sh
 .config/aerospace
 .config/sketchybar
 run_onchange_darwin-install-packages.sh
+run_onchange_after_darwin-defaults.sh
 {{- if eq .profile.type "synology-nas" }}
 .config/alacritty
 .config/direnv
