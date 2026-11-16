@@ -3,7 +3,9 @@ require 'core.options'
 require 'core.autocommands'
 
 local has_work_plugins, work_plugins = pcall(require, 'plugins.work')
-local has_cc = vim.fn.executable 'cc' == 1 or vim.fn.executable 'gcc' == 1 or vim.fn.executable 'clang' == 1
+local is_nas = (vim.uv or vim.loop).fs_stat '/etc/synoinfo.conf' ~= nil
+local has_cc = not is_nas and (vim.fn.executable 'cc' == 1 or vim.fn.executable 'gcc' == 1 or vim.fn.executable 'clang' == 1)
+vim.g.has_cc = has_cc
 
 local plugins = {
   require 'plugins.autopairs',
