@@ -15,7 +15,7 @@ README.md
 {{- if or (ne .chezmoi.os "darwin") (ne .profile.name "personal") }}
 .local/bin/mount-draco-shares
 .local/bin/tofu
-Library/LaunchAgents/net.icybit.mount-draco.plist
+Library
 run_onchange_after_darwin-launchagents.sh
 {{- end }}
 
