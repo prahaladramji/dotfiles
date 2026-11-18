@@ -2,31 +2,35 @@
 
 source "$HOME/.config/sketchybar/colors.sh"
 
-if [ "$SENDER" = "mouse.exited" ]; then
-  sketchybar --set "$NAME" popup.drawing=off
-  exit 0
-fi
+ITEM="${NAME:-idle_inhibitor}"
 
+# Handle direct CLI / click_script actions FIRST (before SENDER checks, since
+# SketchyBar passes the item's last SENDER into click_script's environment).
 if [ "$1" = "toggle" ]; then
+  hover_cancel "$ITEM"
   if pgrep -x "caffeinate" >/dev/null 2>&1; then
     pkill -x "caffeinate"
   else
-    caffeinate -di >/dev/null 2>&1 &
+    nohup caffeinate -di >/dev/null 2>&1 &
+  fi
+elif [ -z "$1" ]; then
+  if [ "$SENDER" = "mouse.exited" ]; then
+    hover_exit "$ITEM"
+    exit 0
+  elif [ "$SENDER" = "mouse.entered" ]; then
+    hover_enter "$ITEM"
+    exit 0
   fi
 fi
 
 if pgrep -x "caffeinate" >/dev/null 2>&1; then
-  sketchybar --set "$NAME" \
+  sketchybar --set "$ITEM" \
     icon="󰈈" \
     icon.color="$IDLE_ACTIVE_COLOR" \
-    --set "${NAME}.tooltip" label="Idle inhibitor: Activated (caffeinate)"
+    --set "${ITEM}.tooltip" label="Idle inhibitor: Activated (caffeinate)"
 else
-  sketchybar --set "$NAME" \
+  sketchybar --set "$ITEM" \
     icon="󰈉" \
     icon.color="$IDLE_COLOR" \
-    --set "${NAME}.tooltip" label="Idle inhibitor: Deactivated"
-fi
-
-if [ "$SENDER" = "mouse.entered" ]; then
-  sketchybar --set "$NAME" popup.drawing=on
+    --set "${ITEM}.tooltip" label="Idle inhibitor: Deactivated"
 fi

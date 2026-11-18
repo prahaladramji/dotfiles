@@ -3,7 +3,12 @@
 source "$HOME/.config/sketchybar/colors.sh"
 
 if [ "$SENDER" = "mouse.exited" ]; then
-  sketchybar --set "$NAME" popup.drawing=off
+  hover_exit "$NAME"
+  exit 0
+fi
+
+if [ "$SENDER" = "mouse.entered" ]; then
+  hover_enter "$NAME"
   exit 0
 fi
 
@@ -81,8 +86,4 @@ else
     icon.color="$BLUETOOTH_DISABLED_COLOR" \
     label.drawing=off \
     icon.padding_right=7
-fi
-
-if [ "$SENDER" = "mouse.entered" ]; then
-  sketchybar --set "$NAME" popup.drawing=on
 fi

@@ -3,24 +3,37 @@
 source "$HOME/.config/sketchybar/colors.sh"
 
 STATE_FILE="/tmp/sketchybar_clock_alt"
+TZ_FILE="/tmp/sketchybar_clock_tz"
 YEAR_FILE="/tmp/sketchybar_clock_year"
 OFFSET_FILE="/tmp/sketchybar_clock_offset"
 CAL_IMG="/tmp/sketchybar_clock_cal.png"
+CAL_KEY_FILE="/tmp/sketchybar_clock_cal_key"
 
-if [ "$SENDER" = "mouse.exited" ]; then
-  rm -f "$YEAR_FILE" "$OFFSET_FILE"
-  sketchybar --set clock popup.drawing=off
-  exit 0
-fi
+# Timezones matching Sway/Waybar config ("" = system local timezone, "PST8PDT")
+TIMEZONES=("" "PST8PDT")
+TZ_COUNT=${#TIMEZONES[@]}
+
+get_tz_idx() {
+  local idx
+  idx=$(<"$TZ_FILE") 2>/dev/null || idx=1
+  if ! [[ "$idx" =~ ^[0-9]+$ ]] || [ "$idx" -lt 1 ] || [ "$idx" -gt "$TZ_COUNT" ]; then
+    idx=1
+  fi
+  print -r -- "$idx"
+}
 
 render_calendar() {
   local mode="${1:-month}"
   local offset="${2:-0}"
+  local tz="${3:-}"
 
-  /usr/bin/python3 - "$mode" "$offset" "$CAL_IMG" << 'PYEOF'
-import calendar, ctypes, ctypes.util, datetime, sys
+  /usr/bin/python3 - "$mode" "$offset" "$CAL_IMG" "$tz" << 'PYEOF'
+import calendar, ctypes, ctypes.util, datetime, os, sys, time
 
-mode, offset, out_path = sys.argv[1], int(sys.argv[2]), sys.argv[3]
+mode, offset, out_path, tz = sys.argv[1], int(sys.argv[2]), sys.argv[3], sys.argv[4]
+if tz:
+  os.environ["TZ"] = tz
+  time.tzset()
 vp, u16, sz, dbl, u32, b = ctypes.c_void_p, ctypes.c_uint16, ctypes.c_size_t, ctypes.c_double, ctypes.c_uint32, ctypes.c_bool
 
 class Pt(ctypes.Structure): _fields_ = [("x", dbl), ("y", dbl)]
@@ -142,50 +155,106 @@ PYEOF
   sketchybar --set clock.cal background.image="$CAL_IMG"
 }
 
+TZ_IDX=$(get_tz_idx)
+CURRENT_TZ="${TIMEZONES[$TZ_IDX]}"
+
+if [ -z "$1" ]; then
+  if [ "$SENDER" = "mouse.exited" ]; then
+    hover_exit clock
+    if [ -f "$YEAR_FILE" ] || [ -f "$OFFSET_FILE" ]; then
+      rm -f "$YEAR_FILE" "$OFFSET_FILE"
+      render_calendar month 0 "$CURRENT_TZ" >/dev/null 2>&1 &
+    fi
+    exit 0
+  fi
+
+  if [ "$SENDER" = "mouse.entered" ]; then
+    if [ ! -f "$CAL_IMG" ]; then
+      render_calendar month 0 "$CURRENT_TZ"
+    fi
+    hover_enter clock
+    exit 0
+  fi
+
+  if [ "$SENDER" = "mouse.scrolled" ]; then
+    CURRENT_MODE="month"
+    [ -f "$YEAR_FILE" ] && CURRENT_MODE="year"
+    CURRENT_OFFSET=$(<"$OFFSET_FILE") 2>/dev/null || CURRENT_OFFSET=0
+    DELTA="${SCROLL_DELTA:-0}"
+    if [ "$DELTA" -gt 0 ]; then
+      CURRENT_OFFSET=$((CURRENT_OFFSET - 1))
+    elif [ "$DELTA" -lt 0 ]; then
+      CURRENT_OFFSET=$((CURRENT_OFFSET + 1))
+    fi
+    print -r -- "$CURRENT_OFFSET" > "$OFFSET_FILE"
+    render_calendar "$CURRENT_MODE" "$CURRENT_OFFSET" "$CURRENT_TZ"
+    sketchybar --set clock popup.drawing=on
+    exit 0
+  fi
+fi
+
 if [ "$1" = "mode" ] || { [ "$SENDER" = "mouse.clicked" ] && [ "$BUTTON" = "right" ]; }; then
   rm -f "$OFFSET_FILE"
   if [ -f "$YEAR_FILE" ]; then
     rm -f "$YEAR_FILE"
-    render_calendar month 0
+    render_calendar month 0 "$CURRENT_TZ"
   else
     touch "$YEAR_FILE"
-    render_calendar year 0
+    render_calendar year 0 "$CURRENT_TZ"
   fi
+  print -r -- "clock" > "$HOVER_DIR/_open" 2>/dev/null
   sketchybar --set clock popup.drawing=on
   exit 0
 fi
 
-if [ "$1" = "toggle" ] || { [ "$SENDER" = "mouse.clicked" ] && [ "$BUTTON" = "left" ]; }; then
-  if [ -f "$STATE_FILE" ]; then
-    rm -f "$STATE_FILE"
-  else
-    touch "$STATE_FILE"
+if [ -n "$1" ] || [ "$SENDER" = "mouse.clicked" ]; then
+  BUTTON_CODE=$(print -r -- "$INFO" | sed -n 's/.*"button_code":[[:space:]]*\([0-9]*\).*/\1/p')
+  TZ_CHANGED=0
+
+  if [ "$1" = "tz_up" ] || { [ "$SENDER" = "mouse.clicked" ] && { [ "$BUTTON_CODE" = "4" ] || [ "$BUTTON_CODE" = "2" ] || { [ "$BUTTON" = "left" ] && [ "$MODIFIER" = "shift" ]; }; }; }; then
+    TZ_IDX=$(( (TZ_IDX % TZ_COUNT) + 1 ))
+    print -r -- "$TZ_IDX" > "$TZ_FILE"
+    CURRENT_TZ="${TIMEZONES[$TZ_IDX]}"
+    TZ_CHANGED=1
+  elif [ "$1" = "tz_down" ] || { [ "$SENDER" = "mouse.clicked" ] && [ "$BUTTON_CODE" = "3" ]; }; then
+    TZ_IDX=$(( ((TZ_IDX - 2 + TZ_COUNT) % TZ_COUNT) + 1 ))
+    print -r -- "$TZ_IDX" > "$TZ_FILE"
+    CURRENT_TZ="${TIMEZONES[$TZ_IDX]}"
+    TZ_CHANGED=1
+  elif [ "$1" = "toggle" ] || { [ "$SENDER" = "mouse.clicked" ] && [ "$BUTTON" = "left" ]; }; then
+    hover_cancel clock
+    if [ -f "$STATE_FILE" ]; then
+      rm -f "$STATE_FILE"
+    else
+      touch "$STATE_FILE"
+    fi
   fi
 fi
 
-if [ -f "$STATE_FILE" ]; then
-  LABEL=$(date '+%H:%M (%Z) · %a, %b %d, %Y')
+if [ -n "$CURRENT_TZ" ]; then
+  TODAY_STR=$(TZ="$CURRENT_TZ" date '+%F')
+  if [ -f "$STATE_FILE" ]; then
+    LABEL=$(TZ="$CURRENT_TZ" date '+%H:%M (%Z) · %a, %b %d, %Y')
+  else
+    LABEL=$(TZ="$CURRENT_TZ" date '+%H:%M · %b %d')
+  fi
 else
-  LABEL=$(date '+%H:%M · %b %d')
+  TODAY_STR=$(date '+%F')
+  if [ -f "$STATE_FILE" ]; then
+    LABEL=$(date '+%H:%M (%Z) · %a, %b %d, %Y')
+  else
+    LABEL=$(date '+%H:%M · %b %d')
+  fi
 fi
 
 sketchybar --set clock label="$LABEL"
 
-if [ "$SENDER" = "mouse.entered" ]; then
-  rm -f "$YEAR_FILE" "$OFFSET_FILE"
-  render_calendar month 0
-  sketchybar --set clock popup.drawing=on
-elif [ "$SENDER" = "mouse.scrolled" ]; then
+CAL_KEY="${TODAY_STR}_${CURRENT_TZ}"
+PREV_KEY=$(<"$CAL_KEY_FILE") 2>/dev/null || PREV_KEY=""
+if [ ! -f "$CAL_IMG" ] || [ "$PREV_KEY" != "$CAL_KEY" ] || [ "${TZ_CHANGED:-0}" -eq 1 ]; then
   CURRENT_MODE="month"
   [ -f "$YEAR_FILE" ] && CURRENT_MODE="year"
-  CURRENT_OFFSET=$(cat "$OFFSET_FILE" 2>/dev/null || echo 0)
-  DELTA="${SCROLL_DELTA:-0}"
-  if [ "$DELTA" -gt 0 ]; then
-    CURRENT_OFFSET=$((CURRENT_OFFSET - 1))
-  elif [ "$DELTA" -lt 0 ]; then
-    CURRENT_OFFSET=$((CURRENT_OFFSET + 1))
-  fi
-  echo "$CURRENT_OFFSET" > "$OFFSET_FILE"
-  render_calendar "$CURRENT_MODE" "$CURRENT_OFFSET"
-  sketchybar --set clock popup.drawing=on
+  CURRENT_OFFSET=$(<"$OFFSET_FILE") 2>/dev/null || CURRENT_OFFSET=0
+  render_calendar "$CURRENT_MODE" "$CURRENT_OFFSET" "$CURRENT_TZ"
+  print -r -- "$CAL_KEY" > "$CAL_KEY_FILE"
 fi

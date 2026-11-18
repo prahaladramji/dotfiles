@@ -3,7 +3,12 @@
 source "$HOME/.config/sketchybar/colors.sh"
 
 if [ "$SENDER" = "mouse.exited" ]; then
-  sketchybar --set "$NAME" popup.drawing=off
+  hover_exit "$NAME"
+  exit 0
+fi
+
+if [ "$SENDER" = "mouse.entered" ]; then
+  hover_enter "$NAME"
   exit 0
 fi
 
@@ -15,7 +20,3 @@ DISK_DETAIL=$(echo "$DISK_LINE" | awk '{printf "/: %s used of %s (%s free)", $3,
 
 sketchybar --set "$NAME" label="$DISK_USED" \
   --set "${NAME}.tooltip" label="$DISK_DETAIL"
-
-if [ "$SENDER" = "mouse.entered" ]; then
-  sketchybar --set "$NAME" popup.drawing=on
-fi

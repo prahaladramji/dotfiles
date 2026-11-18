@@ -5,6 +5,9 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 source "$CONFIG_DIR/colors.sh"
 
+# Reset transient popup/calendar state on reload so fresh items get populated
+rm -rf "$HOVER_DIR" /tmp/sketchybar_clock_cal_key 2>/dev/null
+
 # -----------------------------------------------------------------------------
 # Bar Appearance: Transparent canvas for Minimal Floating Pills
 # -----------------------------------------------------------------------------
@@ -17,7 +20,7 @@ sketchybar --bar \
   padding_right=8 \
   color="$TRANSPARENT" \
   border_width=0 \
-  topmost=window \
+  topmost=on \
   sticky=on \
   font_smoothing=on
 
@@ -46,7 +49,7 @@ sketchybar --default \
   popup.background.border_color="$PILL_BORDER" \
   popup.blur_radius=20 \
   popup.align=right \
-  popup.y_offset=4
+  popup.y_offset=0
 
 # Helper function to add a standard hover tooltip popup item to a bar item
 add_tooltip() {
@@ -154,6 +157,7 @@ add_tooltip weather
 
 # --- Pill A (Rightmost): Clock + Power ---
 sketchybar --add item power right \
+  --subscribe power mouse.exited \
   --set power \
     icon="⏻" \
     icon.color="$RED" \
@@ -163,6 +167,7 @@ sketchybar --add item power right \
     label.drawing=off \
     background.drawing=off \
     popup.align=right \
+    script="$PLUGIN_DIR/power.sh" \
     click_script="$PLUGIN_DIR/power.sh toggle"
 
 for action in "lock:  Lock Screen" "sleep:󰤄  Suspend" "reboot:󰜉  Reboot" "shutdown:⏻  Shutdown"; do
@@ -323,6 +328,7 @@ sketchybar --add item volume right \
     icon.color="$VOLUME_COLOR" \
     label.color="$FG_COLOR" \
     background.drawing=off \
+    update_freq=30 \
     script="$PLUGIN_DIR/volume.sh" \
     click_script="$PLUGIN_DIR/volume.sh toggle"
 add_tooltip volume
@@ -360,5 +366,6 @@ sketchybar --add bracket status_pill bluetooth volume mic network cpu memory dis
     background.border_width=1 \
     background.border_color="$PILL_BORDER"
 
-# Initialize all items
+# Initialize all items and start native menu bar auto-yield watcher
 sketchybar --update
+"$PLUGIN_DIR/menubar_watcher.sh" >/dev/null 2>&1 &

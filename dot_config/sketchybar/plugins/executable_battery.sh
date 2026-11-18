@@ -3,7 +3,12 @@
 source "$HOME/.config/sketchybar/colors.sh"
 
 if [ "$SENDER" = "mouse.exited" ]; then
-  sketchybar --set "$NAME" popup.drawing=off
+  hover_exit "$NAME"
+  exit 0
+fi
+
+if [ "$SENDER" = "mouse.entered" ]; then
+  hover_enter "$NAME"
   exit 0
 fi
 
@@ -48,14 +53,11 @@ else
   fi
 fi
 
+STATUS_DETAIL=$(echo "$BATT_INFO" | awk -F'; ' 'NR==2 {print $2 " (" $3 ")"}')
+
 sketchybar --set "$NAME" \
   drawing=on \
   icon="$ICON" \
   icon.color="$COLOR" \
-  label="${PERCENTAGE}%"
-
-if [ "$SENDER" = "mouse.entered" ]; then
-  STATUS_DETAIL=$(echo "$BATT_INFO" | awk -F'; ' 'NR==2 {print $2 " (" $3 ")"}')
-  sketchybar --set "${NAME}.tooltip" label="${STATUS_DETAIL:-Battery: ${PERCENTAGE}%}" \
-    --set "$NAME" popup.drawing=on
-fi
+  label="${PERCENTAGE}%" \
+  --set "${NAME}.tooltip" label="${STATUS_DETAIL:-Battery: ${PERCENTAGE}%}"
