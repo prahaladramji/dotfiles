@@ -17,50 +17,49 @@
   bold_italic = { family = "Hack Nerd Font Mono" }
 
 # -----------------------------------------------------------------------------
-# TokyoNight Alacritty Colors
-# Theme: Tokyo Night
-# Upstream: https://github.com/folke/tokyonight.nvim/raw/main/extras/alacritty/tokyonight_night.toml
+# Everforest Dark Hard Alacritty Colors
+# Theme: Everforest Dark Hard (sainnhe/everforest)
 # -----------------------------------------------------------------------------
 
 # Default colors
 [colors.primary]
-  background = '#1a1b26'
-  foreground = '#c0caf5'
+  background = '#272e33'
+  foreground = '#d3c6aa'
 
-#[colors.cursor]
-#  cursor = '#c0caf5'
-#  text = '#1a1b26'
+[colors.selection]
+  text = '#d3c6aa'
+  background = '#414b50'
 
 # Normal colors
 [colors.normal]
-  black = '#15161e'
-  red = '#f7768e'
-  green = '#9ece6a'
-  yellow = '#e0af68'
-  blue = '#7aa2f7'
-  magenta = '#bb9af7'
-  cyan = '#7dcfff'
-  white = '#a9b1d6'
+  black = '#414b50'
+  red = '#e67e80'
+  green = '#a7c080'
+  yellow = '#dbbc7f'
+  blue = '#7fbbb3'
+  magenta = '#d699b6'
+  cyan = '#83c092'
+  white = '#9da9a0'
 
 # Bright colors
 [colors.bright]
-  black = '#414868'
-  red = '#ff899d'
-  green = '#9fe044'
-  yellow = '#faba4a'
-  blue = '#8db0ff'
-  magenta = '#c7a9ff'
-  cyan = '#a4daff'
-  white = '#c0caf5'
+  black = '#859289'
+  red = '#e67e80'
+  green = '#a7c080'
+  yellow = '#dbbc7f'
+  blue = '#7fbbb3'
+  magenta = '#d699b6'
+  cyan = '#83c092'
+  white = '#d3c6aa'
 
 # Indexed Colors
 [[colors.indexed_colors]]
   index = 16
-  color = '#ff9e64'
+  color = '#e69875'
 
 [[colors.indexed_colors]]
   index = 17
-  color = '#db4b4b'
+  color = '#e67e80'
 
 [keyboard]
   bindings = [

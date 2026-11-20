@@ -5,6 +5,6 @@ return {
   end,
   cmd = 'Notifications',
   opts = {
-    background_colour = '#000000',
+    background_colour = '#272e33',
   },
 }

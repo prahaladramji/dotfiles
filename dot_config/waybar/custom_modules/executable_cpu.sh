@@ -31,7 +31,7 @@ UP="${UP}${MINS}m"
 LOAD=$(awk '{print $1, $2, $3}' /proc/loadavg)
 TOP_PROC=$(ps -eo %cpu,comm --sort=-%cpu --no-headers | awk '$2 != "ps" {printf "%s (%s%%)", $2, $1; exit}')
 
-TEXT="<span color='#9ece6a'>󰘚</span> ${CPU_USAGE}%"
+TEXT="<span color='#a7c080'>󰘚</span> ${CPU_USAGE}%"
 TOOLTIP="Up: ${UP} | Load: ${LOAD} | Top: ${TOP_PROC}"
 
 jq -nc --arg text "$TEXT" --arg tooltip "$TOOLTIP" \

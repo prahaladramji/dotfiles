@@ -15,4 +15,4 @@ configuration {
   }
 }
 
-@theme "tokyonight.rasi"
+@theme "everforest.rasi"

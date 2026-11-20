@@ -20,7 +20,7 @@ ROUTER=$(echo "$DEFAULT_ROUTE" | awk '{for(i=1;i<=NF;i++) if($i=="via") print $(
 
 if [ -z "$DEFAULT_IFACE" ]; then
   jq -nc '{
-    text: "<span color=\"#f7768e\">󰖪</span>",
+    text: "<span color=\"#e67e80\">󰖪</span>",
     tooltip: "Status: Disconnected",
     class: "disconnected"
   }'
@@ -30,13 +30,13 @@ fi
 IP_ADDR=$(ip -4 -o addr show dev "$DEFAULT_IFACE" 2>/dev/null | awk '{split($4, a, "/"); print a[1]; exit}')
 
 if [ -d "/sys/class/net/${DEFAULT_IFACE}/wireless" ] || [ -d "/sys/class/net/${DEFAULT_IFACE}/phy80211" ]; then
-  ICON="<span color='#7aa2f7'>󰖩</span>"
+  ICON="<span color='#7fbbb3'>󰖩</span>"
   SSID=$(iwgetid -r "$DEFAULT_IFACE" 2>/dev/null)
   if [ -z "$SSID" ] && command -v nmcli >/dev/null 2>&1; then
     SSID=$(nmcli -t -f GENERAL.CONNECTION device show "$DEFAULT_IFACE" 2>/dev/null | cut -d: -f2-)
   fi
 else
-  ICON="<span color='#7aa2f7'>󰈀</span>"
+  ICON="<span color='#7fbbb3'>󰈀</span>"
   SSID=""
 fi
 

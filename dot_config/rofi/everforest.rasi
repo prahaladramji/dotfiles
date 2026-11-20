@@ -1,0 +1,129 @@
+* {
+  font:   "Hack Nerd Font 12";
+
+  background            : #272e33;
+  foreground            : #d3c6aa;
+  border                : #414b50;
+  black                 : #1e2326;
+  red                   : #e67e80;
+  green                 : #a7c080;
+  yellow                : #dbbc7f;
+  blue                  : #7fbbb3;
+  magenta               : #d699b6;
+  cyan                  : #83c092;
+  white                 : #9da9a0;
+
+  background-bright     : #374145;
+  foreground-bright     : #9da9a0;
+  black-bright          : #859289;
+  red-bright            : #e67e80;
+  green-bright          : #a7c080;
+  yellow-bright         : #dbbc7f;
+  blue-bright           : #7fbbb3;
+  magenta-bright        : #d699b6;
+  cyan-bright           : #83c092;
+  white-bright          : #d3c6aa;
+
+  accent: @green;
+  urgent: @red;
+
+  background-color : transparent;
+  text-color       : @foreground;
+  text-color-invert: @black;
+
+  margin  : 0;
+  padding : 0;
+  spacing : 0;
+}
+
+element-icon, element-text, scrollbar {
+  cursor: pointer;
+}
+
+window {
+  location : center;
+  width    : 640px;
+
+  background-color: @background;
+  border: 1px;
+  border-color: @border;
+  border-radius: 6px;
+}
+
+inputbar {
+  spacing  : 8px;
+  padding  : 6px 10px;
+  children : [ icon-search, entry ];
+
+  background-color: @background;
+}
+
+icon-search, entry, element-icon, element-text {
+  vertical-align: 0.5;
+}
+
+entry {
+  placeholder        : "Search";
+  placeholder-color  : @black-bright;
+}
+
+icon-search {
+  expand   : false;
+  filename : "system-search";
+  size     : 14px;
+}
+
+textbox {
+  padding          : 6px 10px;
+  background-color : @background-bright;
+}
+
+listview {
+  padding      : 4px 0px;
+  lines        : 12;
+  columns      : 1;
+  scrollbar    : true;
+  fixed-height : false;
+  dynamic      : true;
+}
+
+element {
+  padding : 5px 10px;
+  spacing : 8px;
+}
+
+element normal urgent {
+  text-color: @urgent;
+}
+
+element normal active {
+  text-color: @accent;
+}
+
+element alternate active {
+  text-color: @accent;
+}
+
+element selected {
+  text-color       : @text-color-invert;
+  background-color : @accent;
+}
+
+element selected urgent {
+  text-color      : @text-color-invert;
+  background-color: @urgent;
+}
+
+element-icon {
+  size: 1.0em;
+}
+
+element-text {
+  text-color: inherit;
+}
+
+scrollbar {
+  handle-width : 4px;
+  handle-color : @foreground-bright;
+  padding      : 0 4px;
+}
