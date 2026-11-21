@@ -1,0 +1,130 @@
+/* Everforest Dark Hard overrides on top of Adwaita-dark (GTK 3) */
+
+@define-color theme_bg_color #272e33;
+@define-color theme_fg_color #d3c6aa;
+@define-color theme_base_color #1e2326;
+@define-color theme_text_color #d3c6aa;
+@define-color theme_selected_bg_color #a7c080;
+@define-color theme_selected_fg_color #1e2326;
+@define-color insensitive_bg_color #272e33;
+@define-color insensitive_fg_color #859289;
+@define-color insensitive_base_color #1e2326;
+@define-color theme_unfocused_bg_color #272e33;
+@define-color theme_unfocused_fg_color #9da9a0;
+@define-color theme_unfocused_base_color #1e2326;
+@define-color theme_unfocused_text_color #9da9a0;
+@define-color theme_unfocused_selected_bg_color #414b50;
+@define-color theme_unfocused_selected_fg_color #d3c6aa;
+@define-color borders #414b50;
+@define-color unfocused_borders #374145;
+@define-color warning_color #dbbc7f;
+@define-color error_color #e67e80;
+@define-color success_color #a7c080;
+
+window.background,
+dialog.background {
+  background-color: #272e33;
+  color: #d3c6aa;
+}
+
+headerbar,
+.titlebar,
+menubar,
+toolbar,
+.primary-toolbar {
+  background-color: #2e383c;
+  background-image: none;
+  color: #d3c6aa;
+  border-color: #414b50;
+}
+
+headerbar:backdrop,
+.titlebar:backdrop {
+  background-color: #272e33;
+  color: #9da9a0;
+}
+
+menu,
+.menu,
+popover.background {
+  background-color: #2e383c;
+  color: #d3c6aa;
+  border-color: #414b50;
+}
+
+menu menuitem:hover,
+.menu menuitem:hover {
+  background-color: #374145;
+  color: #d3c6aa;
+}
+
+.view,
+treeview.view,
+iconview.view,
+textview text,
+list {
+  background-color: #1e2326;
+  color: #d3c6aa;
+}
+
+placessidebar,
+placessidebar list,
+.sidebar,
+.sidebar list {
+  background-color: #272e33;
+  color: #d3c6aa;
+}
+
+entry {
+  background-color: #1e2326;
+  color: #d3c6aa;
+  border-color: #414b50;
+}
+
+entry:focus {
+  border-color: #a7c080;
+  box-shadow: inset 0 0 0 1px #a7c080;
+}
+
+selection,
+*:selected,
+treeview.view:selected,
+treeview.view:selected:focus,
+iconview.view:selected,
+row:selected {
+  background-color: #a7c080;
+  color: #1e2326;
+}
+
+*:selected:backdrop,
+row:selected:backdrop {
+  background-color: #414b50;
+  color: #d3c6aa;
+}
+
+notebook > header {
+  background-color: #1e2326;
+  border-color: #414b50;
+}
+
+notebook > header tab:checked {
+  background-color: #272e33;
+  color: #a7c080;
+  box-shadow: inset 0 -2px #a7c080;
+}
+
+paned > separator {
+  background-color: #414b50;
+}
+
+scrollbar slider {
+  background-color: #414b50;
+}
+
+scrollbar slider:hover {
+  background-color: #859289;
+}
+
+scrollbar slider:active {
+  background-color: #a7c080;
+}

@@ -1,0 +1,28 @@
+{{- if and (eq .chezmoi.os "linux") (ne .profile.type "synology-nas") -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Sync GNOME/GTK/portal dark theme, Everforest-matched accent, icons, cursor, and fonts
+if ! command -v gsettings >/dev/null 2>&1; then
+  exit 0
+fi
+
+_apply_gsettings() {
+  gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' 2>/dev/null || true
+  gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark' 2>/dev/null || true
+  gsettings set org.gnome.desktop.interface accent-color 'green' 2>/dev/null || true
+  gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark' 2>/dev/null || true
+  gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Classic' 2>/dev/null || true
+  gsettings set org.gnome.desktop.interface cursor-size 24 2>/dev/null || true
+  gsettings set org.gnome.desktop.interface font-name 'Hack Nerd Font 12' 2>/dev/null || true
+  gsettings set org.gnome.desktop.interface monospace-font-name 'Hack Nerd Font Mono 12' 2>/dev/null || true
+  gsettings set org.gnome.desktop.interface font-antialiasing 'grayscale' 2>/dev/null || true
+  gsettings set org.gnome.desktop.interface font-hinting 'slight' 2>/dev/null || true
+}
+
+if [[ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ]]; then
+  _apply_gsettings
+elif command -v dbus-run-session >/dev/null 2>&1; then
+  dbus-run-session -- bash -c "$(declare -f _apply_gsettings); _apply_gsettings"
+fi
+{{- end -}}

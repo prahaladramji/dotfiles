@@ -1,0 +1,80 @@
+/* Everforest Dark Hard theme for SwayNC (matching Waybar & Dunst) */
+
+:root {
+  --cc-bg: rgba(30, 35, 38, 0.95);
+  --noti-border-color: #414b50;
+  --noti-bg: 39, 46, 51;
+  --noti-bg-alpha: 0.95;
+  --noti-bg-darker: #1e2326;
+  --noti-bg-hover: #374145;
+  --noti-bg-focus: rgba(65, 75, 80, 0.85);
+  --noti-close-bg: #374145;
+  --noti-close-bg-hover: #414b50;
+  --text-color: #d3c6aa;
+  --text-color-disabled: #859289;
+  --bg-selected: #a7c080;
+  --border: 1px solid var(--noti-border-color);
+  --border-radius: 8px;
+  --font-size-body: 12pt;
+  --font-size-summary: 12pt;
+}
+
+@define-color cc-bg rgba(30, 35, 38, 0.95);
+@define-color noti-border-color #414b50;
+@define-color noti-bg rgba(39, 46, 51, 0.95);
+@define-color noti-bg-opaque #272e33;
+@define-color noti-bg-darker #1e2326;
+@define-color noti-bg-hover #374145;
+@define-color noti-bg-hover-opaque #374145;
+@define-color noti-bg-focus rgba(65, 75, 80, 0.85);
+@define-color noti-close-bg #374145;
+@define-color noti-close-bg-hover #414b50;
+@define-color text-color #d3c6aa;
+@define-color text-color-disabled #859289;
+@define-color bg-selected #a7c080;
+
+* {
+  font-family: "Hack Nerd Font";
+}
+
+.notification-row .notification-background .notification.low {
+  background: #1e2326;
+  border: 2px solid #374145;
+}
+
+.notification-row .notification-background .notification.normal {
+  border: 2px solid #a7c080;
+}
+
+.notification-row .notification-background .notification.critical {
+  border: 2px solid #e67e80;
+}
+
+.control-center {
+  border: 1px solid #414b50;
+}
+
+.widget-title > button,
+.widget-inhibitors > button,
+.widget-buttons-grid flowboxchild > button {
+  background: #374145;
+  color: #d3c6aa;
+  border: 1px solid #414b50;
+}
+
+.widget-title > button:hover,
+.widget-inhibitors > button:hover,
+.widget-buttons-grid flowboxchild > button:hover {
+  background: #414b50;
+}
+
+.widget-dnd > switch {
+  background: #374145;
+  border: 1px solid #414b50;
+}
+
+.widget-dnd > switch:checked,
+.widget-buttons-grid flowboxchild > button.toggle:checked {
+  background: #a7c080;
+  color: #1e2326;
+}

@@ -49,10 +49,13 @@ export LESS_TERMCAP_mb=$'\E[01;32m'
 export LESS_TERMCAP_md=$'\E[01;32m'
 export LESS_TERMCAP_me=$'\E[0m'
 export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;47;34m'
+export LESS_TERMCAP_so=$'\E[01;30;42m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-R
+
+## FZF (Everforest Dark Hard)
+export FZF_DEFAULT_OPTS="--color=bg+:#374145,bg:#272e33,spinner:#83c092,hl:#a7c080,fg:#d3c6aa,header:#7fbbb3,info:#dbbc7f,pointer:#a7c080,marker:#e69875,fg+:#d3c6aa,prompt:#a7c080,hl+:#a7c080,border:#414b50,gutter:#272e33"
 
 ## Terminal state recovery
 # Reset stuck mouse-tracking and focus-event modes left behind by dropped SSH sessions or crashed TUIs

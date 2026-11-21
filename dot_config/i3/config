@@ -25,6 +25,11 @@ default_floating_border pixel 3
 # Ensure existing workspaces on all monitors also update their gaps on reload/restart
 exec_always --no-startup-id i3-msg "gaps inner all set 8; gaps outer all set 0"
 
+# Sync session environment and start X11 theme/notification daemons
+exec_always --no-startup-id dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME XCURSOR_THEME XCURSOR_SIZE
+exec_always --no-startup-id sh -c 'if command -v xsettingsd >/dev/null; then pgrep -x xsettingsd >/dev/null && pkill -HUP -x xsettingsd || exec xsettingsd; fi'
+exec_always --no-startup-id sh -c 'if command -v dunst >/dev/null; then pgrep -x dunst >/dev/null && dunstctl reload || exec dunst; fi'
+
 # Set desktop wallpaper
 exec_always --no-startup-id feh --no-fehbg --bg-fill $bg_image
 
@@ -189,19 +194,20 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
   position top
+  font pango:Hack Nerd Font 12
   status_command i3status --config ~/.config/i3/i3status.conf
   separator_symbol " "
 
   colors {
-    background #1A1B26
-    statusline #C0CAF5
-    separator  #565F89
+    background #272E33
+    statusline #D3C6AA
+    separator  #859289
 
-    focused_workspace  #7AA2F7 #7AA2F7 #15161E
-    active_workspace   #15161E #15161E #C0CAF5
-    inactive_workspace #15161E #15161E #565F89
-    urgent_workspace   #FF899D #FF899D #15161E
-    binding_mode       #FABA4A #FABA4A #15161E
+    focused_workspace  #A7C080 #A7C080 #1E2326
+    active_workspace   #1E2326 #1E2326 #D3C6AA
+    inactive_workspace #1E2326 #1E2326 #859289
+    urgent_workspace   #E67E80 #E67E80 #1E2326
+    binding_mode       #E69875 #E69875 #1E2326
   }
 }
 
@@ -222,11 +228,11 @@ for_window [title="Chrome Remote Desktop"] floating enable
 for_window [title="Chrome Remote Desktop -"] floating enable, resize set width 1920px height 1080px
 for_window [title="Google Meet"] floating enable, resize set width 1920px height 1080px
 
-# TokyoNight theme
+# Everforest Dark Hard theme
 # Property Name             Border  BG      Text    Indicator Child-border
-client.focused              #7aa2f7 #1a1b26 #c0caf5 #7dcfff   #7aa2f7
-client.focused_inactive     #292e42 #1a1b26 #a9b1d6 #292e42   #292e42
-client.unfocused            #292e42 #1a1b26 #565f89 #292e42   #292e42
-client.urgent               #f7768e #f7768e #15161e #f7768e   #f7768e
+client.focused              #a7c080 #272e33 #d3c6aa #83c092   #a7c080
+client.focused_inactive     #374145 #272e33 #9da9a0 #374145   #374145
+client.unfocused            #374145 #272e33 #859289 #374145   #374145
+client.urgent               #e67e80 #e67e80 #1e2326 #e67e80   #e67e80
 
 include ~/.config/i3/config.d/*

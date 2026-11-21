@@ -12,7 +12,7 @@ Work-specific configurations live in a separate overlay repository (`~/.local/sh
 chezmoi init --apply --verbose git@github.com:prahaladramji/dotfiles.git
 ```
 
-### 2. Work Overlay (Work Laptop & Cloudtop Only)
+### 2. Work Overlay (Work Devices Only)
 
 ```sh
 git clone <work-repo-url> ~/.local/share/dotfiles-work
