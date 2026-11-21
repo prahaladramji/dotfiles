@@ -44,3 +44,10 @@
   url = "https://github.com/nvm-sh/nvm/archive/master.tar.gz"
   stripComponents = 1
 {{- end }}
+{{- if and (eq .chezmoi.os "linux") (ne .profile.type "synology-nas") }}
+[".local/share/fonts/hack"]
+  type = "archive"
+  url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v{{ .versions.nerd_fonts }}/Hack.zip"
+  exact = true
+  include = ["HackNerdFont*.ttf"]
+{{- end }}

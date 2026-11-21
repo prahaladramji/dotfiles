@@ -15,11 +15,12 @@ README.md
 {{- if or (ne .chezmoi.os "darwin") (ne .profile.name "personal") }}
 .local/bin/mount-draco-shares
 .local/bin/tofu
-Library
+Library/LaunchAgents
 run_onchange_after_darwin-launchagents.sh
 {{- end }}
 
 {{- if eq .chezmoi.os "linux" }}
+Library
 .config/aerospace
 .config/sketchybar
 run_onchange_darwin-install-packages.sh
@@ -28,6 +29,7 @@ run_onchange_after_darwin-defaults.sh
 .Xresources
 .gtkrc-2.0
 .xsessionrc
+.config/Code
 .config/alacritty
 .config/btop
 .config/direnv
@@ -46,8 +48,12 @@ run_onchange_after_darwin-defaults.sh
 .config/waybar
 .config/xdg-desktop-portal
 .config/xdg-desktop-portal-wlr
+.config/xdg-terminals.list
 .config/xsettingsd
+.local/share/fonts
+run_onchange_linux-install-packages.sh
 run_onchange_after_linux-desktop-theme.sh
+run_onchange_after_vscode-extensions.sh
 {{- else if eq .profile.type "virtual" }}
 .config/kanshi
 .config/pipewire
@@ -70,6 +76,7 @@ run_onchange_after_linux-desktop-theme.sh
 .Xresources
 .gtkrc-2.0
 .xsessionrc
+.config/Code
 .config/dunst
 .config/environment.d
 .config/gtk-3.0
@@ -85,7 +92,10 @@ run_onchange_after_linux-desktop-theme.sh
 .config/waybar
 .config/xdg-desktop-portal
 .config/xdg-desktop-portal-wlr
+.config/xdg-terminals.list
 .config/xsettingsd
+.local/share/fonts
+run_onchange_linux-install-packages.sh
 run_onchange_after_linux-desktop-theme.sh
 {{- end }}
 

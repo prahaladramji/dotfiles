@@ -2,6 +2,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# nerd-fonts version: {{ .versions.nerd_fonts }}
+
+# Remove legacy ~/.fonts/hack copy once chezmoi-managed ~/.local/share/fonts/hack is present
+if [[ -d "$HOME/.local/share/fonts/hack" ]]; then
+  if [[ -d "$HOME/.fonts/hack" ]]; then
+    rm -rf "$HOME/.fonts/hack"
+    rmdir "$HOME/.fonts" 2>/dev/null || true
+  fi
+  if command -v fc-cache >/dev/null 2>&1; then
+    fc-cache -f "$HOME/.local/share/fonts" 2>/dev/null || true
+  fi
+fi
+
 # Sync GNOME/GTK/portal dark theme, Everforest-matched accent, icons, cursor, and fonts
 if ! command -v gsettings >/dev/null 2>&1; then
   exit 0

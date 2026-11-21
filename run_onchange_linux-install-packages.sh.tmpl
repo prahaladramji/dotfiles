@@ -1,0 +1,76 @@
+{{- if and (eq .chezmoi.os "linux") (ne .profile.type "synology-nas") -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Only run on Debian/Ubuntu-based Linux desktops/VMs (never Synology NAS)
+if ! command -v dpkg-query >/dev/null 2>&1 || ! command -v apt-get >/dev/null 2>&1; then
+  exit 0
+fi
+
+# 1. Core + profile-specific apt packages (split between Sway laptop/workstation vs i3/Polybar virtual VM)
+desired=(
+{{- range .packages.linux.common.apt }}
+  {{ . | quote }}
+{{- end }}
+{{- if eq .profile.type "virtual" }}
+{{- range .packages.linux.virtual.apt }}
+  {{ . | quote }}
+{{- end }}
+{{- else }}
+{{- range .packages.linux.laptop.apt }}
+  {{ . | quote }}
+{{- end }}
+{{- end }}
+)
+
+missing=()
+for pkg in "${desired[@]}"; do
+  if ! dpkg-query -W -f='${Status}\n' "$pkg" 2>/dev/null | grep -qx 'install ok installed'; then
+    missing+=("$pkg")
+  fi
+done
+
+if (( ${#missing[@]} > 0 )); then
+  echo "==> Installing missing Linux apt packages: ${missing[*]}"
+  sudo apt-get update
+  sudo apt-get install -y "${missing[@]}"
+fi
+
+# 2. 1Password desktop + CLI (.deb install, stripping external apt sources/debsig to keep apt clean)
+missing_1p=()
+for pkg in 1password 1password-cli; do
+  if ! dpkg-query -W -f='${Status}\n' "$pkg" 2>/dev/null | grep -qx 'install ok installed'; then
+    missing_1p+=("$pkg")
+  fi
+done
+
+if (( ${#missing_1p[@]} > 0 )); then
+  echo "==> Installing missing 1Password packages: ${missing_1p[*]}"
+  tmp_dir="$(mktemp -d)"
+  trap 'rm -rf "$tmp_dir"' EXIT
+  debs=()
+  for pkg in "${missing_1p[@]}"; do
+    if [[ "$pkg" == "1password" ]]; then
+      wget -q -P "$tmp_dir" "https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb"
+      debs+=("$tmp_dir/1password-latest.deb")
+    elif [[ "$pkg" == "1password-cli" ]]; then
+      wget -q -P "$tmp_dir" "https://downloads.1password.com/linux/debian/amd64/stable/1password-cli-amd64-latest.deb"
+      debs+=("$tmp_dir/1password-cli-amd64-latest.deb")
+    fi
+  done
+  sudo apt-get install -y "${debs[@]}"
+  sudo rm -f /usr/share/keyrings/1password-archive-keyring.gpg /etc/apt/sources.list.d/1password.sources
+  sudo rm -rf /usr/share/debsig/keyrings/AC2D62742012EA22 /etc/debsig/policies/AC2D62742012EA22
+  rm -rf "$tmp_dir"
+  trap - EXIT
+fi
+
+# 3. Pinned Neovim release in /usr/local
+NVIM_VERSION="{{ .versions.nvim }}"
+current_nvim="$(nvim --version 2>/dev/null | head -n 1 || true)"
+if [[ "$current_nvim" != "NVIM v${NVIM_VERSION}"* ]]; then
+  echo "==> Installing Neovim v${NVIM_VERSION} to /usr/local..."
+  curl -fsSL "https://github.com/neovim/neovim/releases/download/v${NVIM_VERSION}/nvim-linux-x86_64.tar.gz" \
+    | sudo tar --strip-components=1 -C /usr/local -xzf -
+fi
+{{- end }}

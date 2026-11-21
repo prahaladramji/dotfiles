@@ -1,3 +1,7 @@
+versions:
+  nerd_fonts: "3.4.0"
+  nvim: "0.12.0"
+
 packages:
   darwin:
     common:
@@ -65,3 +69,96 @@ packages:
         - yubico-authenticator
       taps:
         - qmk/qmk
+
+  linux:
+    common:
+      apt:
+        - alacritty
+        - bibata-cursor-theme
+        - btop
+        - curl
+        - dex
+        - direnv
+        - fd-find
+        - fonts-noto-cjk
+        - fonts-noto-core
+        - fonts-noto-ui-core
+        - fzf
+        - gdu
+        - git
+        - gnome-themes-extra
+        - gnupg2
+        - golang-go
+        - htop
+        - jq
+        - luarocks
+        - papirus-icon-theme
+        - pulseaudio-utils
+        - python3-pip
+        - python3-venv
+        - qt5ct
+        - ripgrep
+        - rofi
+        - tmux
+        - tree-sitter-cli
+        - unzip
+        - wget
+        - xdg-desktop-portal
+        - xdg-desktop-portal-gtk
+        - yq
+    laptop:
+      apt:
+        - brightnessctl
+        - grim
+        - kanshi
+        - playerctl
+        - slurp
+        - sway
+        - sway-notification-center
+        - swaybg
+        - swayidle
+        - swaylock
+        - thunar
+        - waybar
+        - wdisplays
+        - wl-clipboard
+        - wl-mirror
+        - wl-present
+        - xdg-desktop-portal-wlr
+    virtual:
+      apt:
+        - dunst
+        - feh
+        - gir1.2-gtk-3.0
+        - i3
+        - polybar
+        - python3-gi
+        - x11-utils
+        - x11-xserver-utils
+        - xsettingsd
+
+  vscode:
+    common:
+      - alefragnani.project-manager
+      - bierner.github-markdown-preview
+      - bierner.markdown-checkbox
+      - bierner.markdown-emoji
+      - bierner.markdown-footnotes
+      - bierner.markdown-mermaid
+      - bierner.markdown-preview-github-styles
+      - bierner.markdown-yaml-preamble
+      - codezombiech.gitignore
+      - donjayamanne.git-extension-pack
+      - donjayamanne.githistory
+      - eamodio.gitlens
+      - editorconfig.editorconfig
+      - google.google-antigravity
+      - llvm-vs-code-extensions.vscode-clangd
+      - ms-vscode-remote.remote-ssh
+      - ms-vscode-remote.remote-ssh-edit
+      - ms-vscode.remote-explorer
+      - sainnhe.everforest
+      - tamasfe.even-better-toml
+      - vscodevim.vim
+      - ziyasal.vscode-open-in-github
+    personal: []

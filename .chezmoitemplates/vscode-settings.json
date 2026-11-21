@@ -1,0 +1,8 @@
+{
+    "workbench.startupEditor": "none",
+    "workbench.colorTheme": "Everforest Dark",
+    "everforest.darkContrast": "hard",
+    "editor.fontFamily": "'Hack Nerd Font Mono', 'Droid Sans Mono', monospace",
+    "git.confirmSync": false,
+    "chat.viewSessions.orientation": "stacked"
+}

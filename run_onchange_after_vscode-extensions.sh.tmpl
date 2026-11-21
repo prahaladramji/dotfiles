@@ -1,0 +1,35 @@
+{{- if ne .profile.type "synology-nas" -}}
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Re-run automatically once VS Code is installed if it wasn't present on first apply
+# code binary: {{ lookPath "code" }}
+if ! command -v code >/dev/null 2>&1; then
+  exit 0
+fi
+
+desired=(
+{{- range .packages.vscode.common }}
+  {{ . | quote }}
+{{- end }}
+{{- if eq .profile.name "personal" }}
+{{- range .packages.vscode.personal }}
+  {{ . | quote }}
+{{- end }}
+{{- end }}
+)
+
+if (( ${#desired[@]} == 0 )); then
+  exit 0
+fi
+
+installed="$(code --list-extensions 2>/dev/null | tr '[:upper:]' '[:lower:]' || true)"
+
+for ext in "${desired[@]}"; do
+  ext_lc="$(printf '%s' "$ext" | tr '[:upper:]' '[:lower:]')"
+  if ! grep -Fxq "$ext_lc" <<< "$installed"; then
+    echo "==> Installing VS Code extension: $ext"
+    code --install-extension "$ext" --force >/dev/null
+  fi
+done
+{{- end }}
