@@ -29,6 +29,7 @@ run_onchange_after_darwin-defaults.sh
 .gtkrc-2.0
 .xsessionrc
 .config/alacritty
+.config/btop
 .config/direnv
 .config/dunst
 .config/environment.d
@@ -37,6 +38,7 @@ run_onchange_after_darwin-defaults.sh
 .config/i3
 .config/kanshi
 .config/pipewire
+.config/polybar
 .config/qt5ct
 .config/rofi
 .config/sway
@@ -58,6 +60,7 @@ run_onchange_after_linux-desktop-theme.sh
 .xsessionrc
 .config/dunst
 .config/i3
+.config/polybar
 .config/xdg-desktop-portal
 .config/xsettingsd
 {{- end }}
@@ -74,6 +77,7 @@ run_onchange_after_linux-desktop-theme.sh
 .config/i3
 .config/kanshi
 .config/pipewire
+.config/polybar
 .config/qt5ct
 .config/rofi
 .config/sway

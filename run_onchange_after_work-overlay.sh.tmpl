@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Clean up legacy files previously tracked in ~/.config/oh-my-zsh and stale Zsh/portal artifacts
+# Clean up legacy files previously tracked in chezmoi and stale Zsh/portal artifacts
 rm -f "$HOME/.config/oh-my-zsh/fix-paste.zsh" \
       "$HOME/.config/oh-my-zsh/manjaro-zsh-config.zsh" \
-      "$HOME/.config/oh-my-zsh/tmux-session.zsh"
+      "$HOME/.config/oh-my-zsh/tmux-session.zsh" \
+      "$HOME/.config/rofi/tokyonight.rasi" \
+      "$HOME/.config/i3/i3status.conf"
 rm -rf "$HOME/.config/oh-my-zsh/themes" \
        "$HOME/.oh-my-zsh" \
        "$HOME/.tmux.conf" \
