@@ -25,4 +25,14 @@ if [[ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ]]; then
 elif command -v dbus-run-session >/dev/null 2>&1; then
   dbus-run-session -- bash -c "$(declare -f _apply_gsettings); _apply_gsettings"
 fi
+
+# Refresh X11 resources and xsettingsd if running in an X11 session
+if [[ -n "${DISPLAY:-}" ]]; then
+  if [[ -r "$HOME/.Xresources" ]] && command -v xrdb >/dev/null 2>&1; then
+    xrdb -merge "$HOME/.Xresources" 2>/dev/null || true
+  fi
+  if pgrep -x xsettingsd >/dev/null 2>&1; then
+    pkill -HUP -x xsettingsd 2>/dev/null || true
+  fi
+fi
 {{- end -}}

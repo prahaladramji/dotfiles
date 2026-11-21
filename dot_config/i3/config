@@ -27,6 +27,7 @@ exec_always --no-startup-id i3-msg "gaps inner all set 8; gaps outer all set 0"
 
 # Sync session environment and start X11 theme/notification daemons
 exec_always --no-startup-id dbus-update-activation-environment --systemd DISPLAY XAUTHORITY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME XCURSOR_THEME XCURSOR_SIZE
+exec_always --no-startup-id sh -c '[ -r "$HOME/.Xresources" ] && xrdb -merge "$HOME/.Xresources"'
 exec_always --no-startup-id sh -c 'if command -v xsettingsd >/dev/null; then pgrep -x xsettingsd >/dev/null && pkill -HUP -x xsettingsd || exec xsettingsd; fi'
 exec_always --no-startup-id sh -c 'if command -v dunst >/dev/null; then pgrep -x dunst >/dev/null && dunstctl reload || exec dunst; fi'
 
