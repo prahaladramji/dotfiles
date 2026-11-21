@@ -3,6 +3,7 @@
 
 Matches Sway Waybar and macOS SketchyBar calendar look and interactions:
   - Pure minimal calendar popup (no toolbar buttons)
+  - Dynamically locates the clock module left of Polybar's system tray
   - Hover over the clock module: opens Month calendar right below the clock
   - Right-click clock or popup: toggles Month <-> 3-column Year calendar
   - Scroll on clock or popup: shifts month/year when visible, or cycles
@@ -16,6 +17,7 @@ import calendar
 import datetime
 import html
 import os
+import re
 import signal
 import socket
 import subprocess
@@ -38,6 +40,13 @@ TIMEZONES = ["", "PST8PDT"]
 BAR_HEIGHT = 33
 HOVER_IN_MS = 200
 HOVER_OUT_MS = 200
+
+POLYBAR_WIN_RE = re.compile(
+    r'^\s*(0x[0-9a-fA-F]+)\s+"polybar-[^"]+":\s+\("polybar"\s+"Polybar"\)\s+(\d+)x(\d+)\+(-?\d+)\+(-?\d+)\s+\+(-?\d+)\+(-?\d+)'
+)
+CHILD_GEOM_RE = re.compile(
+    r'^\s*0x[0-9a-fA-F]+\s+.*\s+(\d+)x(\d+)\+(-?\d+)\+(-?\d+)\s+\+(-?\d+)\+(-?\d+)'
+)
 
 # Everforest Dark Hard palette (matches Waybar tooltip & SketchyBar calendar)
 CSS = b"""
@@ -162,9 +171,13 @@ class CalendarDaemon:
         self.hover_out_since: float | None = None
         self.last_clock_key = ""
         self.last_net_tick = 0.0
+        self._procs: list[subprocess.Popen] = []
+
         self.clock_font_desc = Pango.FontDescription.from_string("Hack Nerd Font Bold 12")
         self.cached_hitbox_key = ""
         self.cached_hitbox_width = 180
+        self.cached_tray_ts = 0.0
+        self.cached_tray_right_edge: dict[tuple[int, int, int], int] = {}
 
         provider = Gtk.CssProvider()
         provider.load_from_data(CSS)
@@ -197,6 +210,22 @@ class CalendarDaemon:
         GLib.timeout_add(100, self._poll_hover)
         GLib.timeout_add(1000, self._tick_bar)
 
+    def _spawn(self, argv: list[str]) -> None:
+        self._reap()
+        try:
+            proc = subprocess.Popen(
+                argv,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+            self._procs.append(proc)
+        except OSError:
+            pass
+
+    def _reap(self) -> None:
+        if self._procs:
+            self._procs = [p for p in self._procs if p.poll() is None]
+
     def _setup_socket(self) -> None:
         try:
             os.unlink(SOCK_PATH)
@@ -224,25 +253,18 @@ class CalendarDaemon:
             if self.visible:
                 self.shift(-1)
             else:
-                self._run_clock("tz-prev")
+                self._spawn([CLOCK_SCRIPT, "tz-prev"])
         elif cmd == "scroll-down":
             if self.visible:
                 self.shift(1)
             else:
-                self._run_clock("tz-next")
+                self._spawn([CLOCK_SCRIPT, "tz-next"])
         elif cmd in ("tz-changed", "refresh"):
             self.cached_hitbox_key = ""
             if self.visible:
                 self._render()
                 self._position_popup()
         return True
-
-    def _run_clock(self, arg: str) -> None:
-        subprocess.Popen(
-            [CLOCK_SCRIPT, arg],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
 
     def _clock_hitbox_width(self) -> int:
         key = f"{get_tz_idx()}_{int(os.path.exists(ALT_FILE))}"
@@ -251,10 +273,73 @@ class CalendarDaemon:
             layout = self.label.create_pango_layout(text)
             layout.set_font_description(self.clock_font_desc)
             px_w, _ = layout.get_pixel_size()
-            # Add small right padding margin (Polybar padding-right = 1)
-            self.cached_hitbox_width = px_w + 18
+            self.cached_hitbox_width = px_w + 16
             self.cached_hitbox_key = key
         return self.cached_hitbox_width
+
+    def _clock_right_edge(self, geom: Gdk.Rectangle) -> int:
+        """Return X coordinate of the clock's right edge (immediately left of tray)."""
+        key = (geom.x, geom.y, geom.width)
+        now = time.monotonic()
+        if (now - self.cached_tray_ts) < 2.0 and key in self.cached_tray_right_edge:
+            return self.cached_tray_right_edge[key]
+
+        fallback = geom.x + geom.width - 10
+        edge = fallback
+        try:
+            root_out = subprocess.check_output(
+                ["xwininfo", "-root", "-tree"],
+                stderr=subprocess.DEVNULL,
+                text=True,
+                timeout=0.5,
+            )
+            bar_id = None
+            for line in root_out.splitlines():
+                m = POLYBAR_WIN_RE.match(line)
+                if not m:
+                    continue
+                wid, _, _, _, _, abs_x, abs_y = m.groups()
+                if abs(int(abs_x) - geom.x) <= 4 and abs(int(abs_y) - geom.y) <= 4:
+                    bar_id = wid
+                    break
+
+            if bar_id:
+                bar_out = subprocess.check_output(
+                    ["xwininfo", "-id", bar_id, "-tree"],
+                    stderr=subprocess.DEVNULL,
+                    text=True,
+                    timeout=0.5,
+                )
+                tray_xs: list[int] = []
+                in_children = False
+                child_indent = None
+                for line in bar_out.splitlines():
+                    if not in_children:
+                        if " children:" in line or " child:" in line:
+                            in_children = True
+                        continue
+                    stripped = line.lstrip(" ")
+                    indent = len(line) - len(stripped)
+                    if child_indent is None:
+                        if stripped.startswith("0x"):
+                            child_indent = indent
+                        else:
+                            continue
+                    if indent == child_indent and stripped.startswith("0x"):
+                        cm = CHILD_GEOM_RE.match(line)
+                        if cm:
+                            abs_x = int(cm.group(5))
+                            if geom.x <= abs_x <= geom.x + geom.width:
+                                tray_xs.append(abs_x)
+                if tray_xs:
+                    # Leave a small gap for the 2-space separator between clock and tray
+                    edge = min(tray_xs) - 10
+        except (OSError, subprocess.SubprocessError, ValueError):
+            pass
+
+        self.cached_tray_ts = now
+        self.cached_tray_right_edge[key] = edge
+        return edge
 
     def _pointer_pos(self) -> tuple[int, int, Gdk.Rectangle] | None:
         display = Gdk.Display.get_default()
@@ -273,11 +358,11 @@ class CalendarDaemon:
         return x, y, mon.get_geometry()
 
     def _in_clock_region(self, x: int, y: int, geom: Gdk.Rectangle) -> bool:
-        w = self._clock_hitbox_width()
-        return (
-            geom.y <= y <= geom.y + BAR_HEIGHT
-            and (geom.x + geom.width - w) <= x <= (geom.x + geom.width)
-        )
+        if not (geom.y <= y <= geom.y + BAR_HEIGHT):
+            return False
+        right_edge = self._clock_right_edge(geom)
+        left_edge = right_edge - self._clock_hitbox_width()
+        return left_edge <= x <= right_edge
 
     def _in_popup_region(self, x: int, y: int) -> bool:
         if not self.visible:
@@ -317,23 +402,16 @@ class CalendarDaemon:
         return True
 
     def _tick_bar(self) -> bool:
+        self._reap()
         now = time.monotonic()
         idx = get_tz_idx()
         key = f"{datetime.datetime.now().strftime('%Y%m%d%H%M')}_{idx}_{int(os.path.exists(ALT_FILE))}"
         if key != self.last_clock_key:
             self.last_clock_key = key
-            subprocess.Popen(
-                ["polybar-msg", "action", "#clock.hook.0"],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
+            self._spawn(["polybar-msg", "action", "#clock.hook.0"])
         if (now - self.last_net_tick) >= 10.0:
             self.last_net_tick = now
-            subprocess.Popen(
-                ["polybar-msg", "action", "#network.hook.0"],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
+            self._spawn(["polybar-msg", "action", "#network.hook.0"])
         return True
 
     def _render(self) -> None:
@@ -351,7 +429,8 @@ class CalendarDaemon:
             geom = mon.get_geometry()
         self.win.resize(1, 1)
         _, nat = self.win.get_preferred_size()
-        px = max(geom.x + 8, geom.x + geom.width - nat.width - 8)
+        right_edge = self._clock_right_edge(geom)
+        px = max(geom.x + 8, min(right_edge - nat.width, geom.x + geom.width - nat.width - 8))
         py = geom.y + BAR_HEIGHT + 4
         self.win.move(px, py)
 
@@ -386,7 +465,7 @@ class CalendarDaemon:
             self.toggle_mode()
             return True
         if event.button == 2:  # Middle-click toggles Local <-> Pacific TZ
-            self._run_clock("tz-next")
+            self._spawn([CLOCK_SCRIPT, "tz-next"])
             return True
         return False
 
@@ -401,7 +480,6 @@ class CalendarDaemon:
 
 
 def main() -> None:
-    signal.signal(signal.SIGCHLD, signal.SIG_IGN)
     signal.signal(signal.SIGINT, lambda *_: Gtk.main_quit())
     signal.signal(signal.SIGTERM, lambda *_: Gtk.main_quit())
     CalendarDaemon()
