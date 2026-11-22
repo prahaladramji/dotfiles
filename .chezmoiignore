@@ -25,43 +25,49 @@ Library
 .config/sketchybar
 run_onchange_darwin-install-packages.sh
 run_onchange_after_darwin-defaults.sh
-{{- if eq .profile.type "synology-nas" }}
+{{- end }}
+
+{{- if or (eq .chezmoi.os "darwin") (eq .profile.type "synology-nas") }}
 .Xresources
 .gtkrc-2.0
 .xsessionrc
 .config/Code
+.config/dunst
+.config/environment.d
+.config/gtk-3.0
+.config/gtk-4.0
+.config/i3
+.config/kanshi
+.config/pipewire
+.config/polybar
+.config/qt5ct
+.config/rofi
+.config/sway
+.config/swaync
+.config/waybar
+.config/xdg-desktop-portal
+.config/xdg-desktop-portal-wlr
+.config/xdg-terminals.list
+.config/xsettingsd
+.local/share/fonts
+run_onchange_linux-install-packages.sh
+run_onchange_after_linux-desktop-theme.sh
+{{- end }}
+
+{{- if eq .profile.type "synology-nas" }}
 .config/alacritty
 .config/btop
 .config/direnv
-.config/dunst
-.config/environment.d
-.config/gtk-3.0
-.config/gtk-4.0
-.config/i3
-.config/kanshi
-.config/pipewire
-.config/polybar
-.config/qt5ct
-.config/rofi
-.config/sway
-.config/swaync
-.config/waybar
-.config/xdg-desktop-portal
-.config/xdg-desktop-portal-wlr
-.config/xdg-terminals.list
-.config/xsettingsd
-.local/share/fonts
-run_onchange_linux-install-packages.sh
-run_onchange_after_linux-desktop-theme.sh
 run_onchange_after_vscode-extensions.sh
-{{- else if eq .profile.type "virtual" }}
+{{- else if eq .chezmoi.os "linux" }}
+{{-   if eq .profile.type "virtual" }}
 .config/kanshi
 .config/pipewire
 .config/sway
 .config/swaync
 .config/waybar
 .config/xdg-desktop-portal-wlr
-{{- else }}
+{{-   else }}
 .Xresources
 .xsessionrc
 .config/dunst
@@ -69,34 +75,11 @@ run_onchange_after_vscode-extensions.sh
 .config/polybar
 .config/xdg-desktop-portal
 .config/xsettingsd
-{{- end }}
+{{-   end }}
 {{- end }}
 
-{{- if eq .chezmoi.os "darwin" }}
-.Xresources
-.gtkrc-2.0
-.xsessionrc
-.config/Code
-.config/dunst
-.config/environment.d
-.config/gtk-3.0
-.config/gtk-4.0
-.config/i3
-.config/kanshi
-.config/pipewire
-.config/polybar
-.config/qt5ct
-.config/rofi
-.config/sway
-.config/swaync
-.config/waybar
-.config/xdg-desktop-portal
-.config/xdg-desktop-portal-wlr
-.config/xdg-terminals.list
-.config/xsettingsd
-.local/share/fonts
-run_onchange_linux-install-packages.sh
-run_onchange_after_linux-desktop-theme.sh
+{{- if ne .profile.type "synology-nas" }}
+run_onchange_after_nas-install-go.sh
 {{- end }}
 
 .nvm/.cache

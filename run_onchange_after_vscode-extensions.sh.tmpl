@@ -1,35 +1,43 @@
-{{- if ne .profile.type "synology-nas" -}}
+{{- $desired := .packages.vscode.common -}}
+{{- if eq .profile.name "personal" -}}
+{{-   $desired = concat $desired .packages.vscode.personal -}}
+{{- end -}}
+{{- if and (ne .profile.type "synology-nas") (gt (len $desired) 0) -}}
 #!/usr/bin/env bash
 set -euo pipefail
 
 # Re-run automatically once VS Code is installed if it wasn't present on first apply
-# code binary: {{ lookPath "code" }}
-if ! command -v code >/dev/null 2>&1; then
+# code binary: {{ or (lookPath "code") (and (eq .chezmoi.os "darwin") (stat "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code") "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code") }}
+CODE_BIN="$(command -v code 2>/dev/null || true)"
+if [[ -z "$CODE_BIN" && -x "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code" ]]; then
+  CODE_BIN="/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
+fi
+if [[ -z "$CODE_BIN" ]]; then
   exit 0
 fi
 
 desired=(
-{{- range .packages.vscode.common }}
+{{- range $desired }}
   {{ . | quote }}
-{{- end }}
-{{- if eq .profile.name "personal" }}
-{{- range .packages.vscode.personal }}
-  {{ . | quote }}
-{{- end }}
 {{- end }}
 )
 
-if (( ${#desired[@]} == 0 )); then
-  exit 0
-fi
+installed="$("$CODE_BIN" --list-extensions 2>/dev/null | tr -d '\r' | tr '[:upper:]' '[:lower:]' || true)"
 
-installed="$(code --list-extensions 2>/dev/null | tr '[:upper:]' '[:lower:]' || true)"
-
+failed=""
 for ext in "${desired[@]}"; do
   ext_lc="$(printf '%s' "$ext" | tr '[:upper:]' '[:lower:]')"
   if ! grep -Fxq "$ext_lc" <<< "$installed"; then
     echo "==> Installing VS Code extension: $ext"
-    code --install-extension "$ext" --force >/dev/null
+    if ! "$CODE_BIN" --install-extension "$ext" --force >/dev/null; then
+      echo "==> Warning: failed to install VS Code extension: $ext" >&2
+      failed="${failed:+$failed }$ext"
+    fi
   fi
 done
+
+if [[ -n "$failed" ]]; then
+  echo "==> Some VS Code extensions failed to install ($failed). Re-run 'dots apply' when online." >&2
+  exit 1
+fi
 {{- end }}

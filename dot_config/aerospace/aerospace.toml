@@ -7,7 +7,7 @@ config-version = 2
 # Commands that run after AeroSpace startup (start SketchyBar and JankyBorders)
 after-startup-command = [
   'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar',
-  'exec-and-forget /opt/homebrew/opt/borders/bin/borders active_color=0xff7aa2f7 inactive_color=0xff292e42 width=4.0',
+  'exec-and-forget /opt/homebrew/opt/borders/bin/borders active_color=0xffa7c080 inactive_color=0xff374145 width=4.0',
 ]
 
 # Notify SketchyBar when workspace changes
