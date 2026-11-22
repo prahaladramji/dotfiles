@@ -62,10 +62,12 @@ gaps.outer.right = 8
 # -----------------------------------------------------------------------------
 # Workspace-to-Monitor Assignment (matching Sway & Kanshi setup)
 # -----------------------------------------------------------------------------
-# Pin Workspace 1 to primary external monitor (Lenovo / Dell DZQN023 / main)
-# Pin Workspace 2 to secondary / laptop display (built-in / Dell 36SN023 / secondary)
+# Pin Workspace 1 to primary external monitor (Lenovo at work, 'main' landscape Dell at home)
+# Pin Workspace 2 to laptop or secondary display ('built-in' at work, 'secondary' portrait Dell at home)
+# Note: 'DELL U2720Q' is intentionally omitted from WS 1 because both home monitors
+# share that exact model name without EDID serials in AeroSpace.
 [workspace-to-monitor-force-assignment]
-1 = ['LEN T32p-20', 'DELL U2720Q', 'main']
+1 = ['LEN T32p-20', 'main']
 2 = ['built-in', 'secondary', 'main']
 
 # -----------------------------------------------------------------------------
@@ -99,11 +101,11 @@ alt-shift-k = 'move up'
 alt-shift-l = 'move right'
 
 # --- Splits & Layouts ---
-# Split horizontal / vertical ($mod+b and $mod+v in Sway)
-# Note: Manual splits work when enable-normalization-flatten-containers = false,
-# otherwise use join-with in service mode or layout toggles below.
-alt-b = 'split horizontal'
-alt-v = 'split vertical'
+# Horizontal / vertical tile orientation ($mod+b and $mod+v in Sway/i3;
+# uses 'layout h_tiles'/'v_tiles' because 'split' is a no-op when
+# enable-normalization-flatten-containers = true)
+alt-b = 'layout h_tiles'
+alt-v = 'layout v_tiles'
 
 # Container layouts ($mod+s stacking, $mod+w tabbed, $mod+e toggle split)
 alt-s = 'layout v_accordion'
@@ -142,11 +144,11 @@ alt-shift-2 = 'move-node-to-workspace 2'
 alt-shift-3 = 'move-node-to-workspace 3'
 alt-shift-4 = 'move-node-to-workspace 4'
 alt-shift-5 = 'move-node-to-workspace 5'
-alt-shift-6 = 'move-node-to-workspace 6'
-alt-shift-7 = 'move-node-to-workspace 7'
-alt-shift-8 = 'move-node-to-workspace 8'
-alt-shift-9 = 'move-node-to-workspace 9'
-alt-shift-0 = 'move-node-to-workspace 10'
+alt-shift-6 = ['move-node-to-workspace 6', 'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_workspace_change']
+alt-shift-7 = ['move-node-to-workspace 7', 'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_workspace_change']
+alt-shift-8 = ['move-node-to-workspace 8', 'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_workspace_change']
+alt-shift-9 = ['move-node-to-workspace 9', 'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_workspace_change']
+alt-shift-0 = ['move-node-to-workspace 10', 'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_workspace_change']
 
 # Workspace & Monitor switching
 alt-tab = 'workspace-back-and-forth'

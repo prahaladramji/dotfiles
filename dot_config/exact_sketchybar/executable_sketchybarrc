@@ -89,10 +89,11 @@ sketchybar --add event aerospace_mode_change
 # 1. AeroSpace Workspaces (1-10) inside a Floating Pill Bracket
 for sid in 1 2 3 4 5 6 7 8 9 10; do
   sketchybar --add item "space.$sid" left \
-    --subscribe "space.$sid" aerospace_workspace_change \
     --set "space.$sid" \
+      drawing=$([ "$sid" -le 5 ] && echo on || echo off) \
       icon.drawing=off \
       label="$sid" \
+      label.color="$WORKSPACES_COLOR" \
       label.padding_left=8 \
       label.padding_right=8 \
       padding_left=2 \
@@ -101,8 +102,7 @@ for sid in 1 2 3 4 5 6 7 8 9 10; do
       background.height=22 \
       background.corner_radius=11 \
       background.color="$WORKSPACES_FOCUSED_BG" \
-      click_script="/opt/homebrew/bin/aerospace workspace $sid" \
-      script="$PLUGIN_DIR/aerospace.sh $sid"
+      click_script="/opt/homebrew/bin/aerospace workspace $sid"
 done
 
 sketchybar --add bracket spaces_pill '/space\..*/' \
@@ -114,6 +114,20 @@ sketchybar --add bracket spaces_pill '/space\..*/' \
     background.border_width=1 \
     background.border_color="$PILL_BORDER"
 
+# Single batched controller for workspace updates (avoids spawning 10 scripts per switch)
+sketchybar --add item spaces_listener left \
+  --subscribe spaces_listener aerospace_workspace_change display_change system_woke \
+  --set spaces_listener \
+    drawing=off \
+    updates=on \
+    width=0 \
+    padding_left=0 \
+    padding_right=0 \
+    icon.drawing=off \
+    label.drawing=off \
+    background.drawing=off \
+    script="$PLUGIN_DIR/aerospace.sh"
+
 add_spacer spacer.left.1 left
 
 # 2. AeroSpace Binding Mode Pill (hidden in 'main' mode, orange pill in 'resize'/'service')
@@ -121,6 +135,7 @@ sketchybar --add item mode left \
   --subscribe mode aerospace_mode_change \
   --set mode \
     drawing=off \
+    updates=on \
     icon.drawing=off \
     label.font="Hack Nerd Font:Bold:15.0" \
     label.color="$BLACK" \

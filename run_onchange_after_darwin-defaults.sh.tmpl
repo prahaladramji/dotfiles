@@ -5,6 +5,7 @@ set -euo pipefail
 # aerospace.toml: {{ include "dot_config/aerospace/aerospace.toml" | sha256sum }}
 # sketchybar colors.sh: {{ include "dot_config/exact_sketchybar/colors.sh" | sha256sum }}
 # sketchybarrc: {{ include "dot_config/exact_sketchybar/executable_sketchybarrc" | sha256sum }}
+# sketchybar aerospace.sh: {{ include "dot_config/exact_sketchybar/exact_plugins/executable_aerospace.sh" | sha256sum }}
 
 # Prevent Finder from creating .DS_Store files on network volumes (SMB/AFP/NFS)
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true

@@ -2,29 +2,44 @@
 
 source "$HOME/.config/sketchybar/colors.sh"
 
-SID="$1"
-FOCUSED="${FOCUSED_WORKSPACE:-$(/opt/homebrew/bin/aerospace list-workspaces --focused 2>/dev/null)}"
+AEROSPACE="/opt/homebrew/bin/aerospace"
+SKETCHYBAR="/opt/homebrew/opt/sketchybar/bin/sketchybar"
 
-# Workspaces 1-5 are always persistent. Workspaces 6-10 appear when focused or non-empty.
-SHOW_WORKSPACE="on"
-if [ "$SID" -gt 5 ] && [ "$SID" != "$FOCUSED" ]; then
-  WIN_COUNT=$(/opt/homebrew/bin/aerospace list-windows --workspace "$SID" --count 2>/dev/null || echo 0)
-  if [ "${WIN_COUNT:-0}" -eq 0 ]; then
-    SHOW_WORKSPACE="off"
+FOCUSED="${FOCUSED_WORKSPACE:-$("$AEROSPACE" list-workspaces --focused 2>/dev/null)}"
+
+typeset -A VISIBLE_WS NON_EMPTY_WS
+for ws in ${(f)"$("$AEROSPACE" list-workspaces --monitor all --visible 2>/dev/null)"}; do
+  [[ -n "$ws" ]] && VISIBLE_WS[$ws]=1
+done
+for ws in ${(f)"$("$AEROSPACE" list-workspaces --monitor all --empty no 2>/dev/null)"}; do
+  [[ -n "$ws" ]] && NON_EMPTY_WS[$ws]=1
+done
+
+args=()
+for sid in 1 2 3 4 5 6 7 8 9 10; do
+  if [[ "$sid" == "$FOCUSED" ]]; then
+    args+=(
+      --set "space.$sid"
+        drawing=on
+        label.color="$WORKSPACES_FOCUSED_FG"
+        label.font="Hack Nerd Font:Bold:15.0"
+        background.drawing=on
+        background.color="$WORKSPACES_FOCUSED_BG"
+    )
+  else
+    # Workspaces 1-5 are persistent; 6-10 appear when visible on any monitor or non-empty
+    show_ws="on"
+    if (( sid > 5 )) && [[ -z "${VISIBLE_WS[$sid]}" && -z "${NON_EMPTY_WS[$sid]}" ]]; then
+      show_ws="off"
+    fi
+    args+=(
+      --set "space.$sid"
+        drawing="$show_ws"
+        label.color="$WORKSPACES_COLOR"
+        label.font="Hack Nerd Font:Regular:15.0"
+        background.drawing=off
+    )
   fi
-fi
+done
 
-if [ "$SID" = "$FOCUSED" ]; then
-  sketchybar --set "$NAME" \
-    drawing=on \
-    label.color="$WORKSPACES_FOCUSED_FG" \
-    label.font="Hack Nerd Font:Bold:15.0" \
-    background.drawing=on \
-    background.color="$WORKSPACES_FOCUSED_BG"
-else
-  sketchybar --set "$NAME" \
-    drawing="$SHOW_WORKSPACE" \
-    label.color="$WORKSPACES_COLOR" \
-    label.font="Hack Nerd Font:Regular:15.0" \
-    background.drawing=off
-fi
+"$SKETCHYBAR" "${args[@]}"
