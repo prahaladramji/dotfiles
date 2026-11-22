@@ -2,7 +2,17 @@
     "workbench.startupEditor": "none",
     "workbench.colorTheme": "Everforest Dark",
     "everforest.darkContrast": "hard",
+{{- if ne .chezmoi.os "darwin" }}
+    "window.zoomLevel": 0.8,
+{{- end }}
     "editor.fontFamily": "'Hack Nerd Font Mono', 'Droid Sans Mono', monospace",
+    "editor.fontSize": 13,
+    "editor.lineHeight": 1.5,
+    "editor.letterSpacing": 0.5,
+    "editor.padding.top": 10,
+    "editor.padding.bottom": 10,
+    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.lineHeight": 1.25,
     "git.confirmSync": false,
     "chat.viewSessions.orientation": "stacked"
 }

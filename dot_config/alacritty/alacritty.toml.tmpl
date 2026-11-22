@@ -10,7 +10,9 @@
   padding = { x = 12, y = 12 }
 
 [font]
-  size = 12.0
+  size = {{ if eq .chezmoi.os "darwin" }}13.0{{ else }}11.25{{ end }}
+  offset = { x = 0, y = 4 }
+  glyph_offset = { x = 0, y = 2 }
   normal = { family = "Hack Nerd Font Mono" }
   bold = { family = "Hack Nerd Font Mono" }
   italic = { family = "Hack Nerd Font Mono" }

@@ -4,15 +4,9 @@ set -euo pipefail
 
 # nerd-fonts version: {{ .versions.nerd_fonts }}
 
-# Remove legacy ~/.fonts/hack copy once chezmoi-managed ~/.local/share/fonts/hack is present
-if [[ -d "$HOME/.local/share/fonts/hack" ]]; then
-  if [[ -d "$HOME/.fonts/hack" ]]; then
-    rm -rf "$HOME/.fonts/hack"
-    rmdir "$HOME/.fonts" 2>/dev/null || true
-  fi
-  if command -v fc-cache >/dev/null 2>&1; then
-    fc-cache -f "$HOME/.local/share/fonts" 2>/dev/null || true
-  fi
+# Refresh fontconfig cache when chezmoi-managed Hack Nerd Font is installed/updated
+if [[ -d "$HOME/.local/share/fonts/hack" ]] && command -v fc-cache >/dev/null 2>&1; then
+  fc-cache -f 2>/dev/null || true
 fi
 
 # Sync GNOME/GTK/portal dark theme, Everforest-matched accent, icons, cursor, and fonts
@@ -27,8 +21,8 @@ _apply_gsettings() {
   gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark' 2>/dev/null || true
   gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Classic' 2>/dev/null || true
   gsettings set org.gnome.desktop.interface cursor-size 24 2>/dev/null || true
-  gsettings set org.gnome.desktop.interface font-name 'Hack Nerd Font 12' 2>/dev/null || true
-  gsettings set org.gnome.desktop.interface monospace-font-name 'Hack Nerd Font Mono 12' 2>/dev/null || true
+  gsettings set org.gnome.desktop.interface font-name 'Hack Nerd Font 11.25' 2>/dev/null || true
+  gsettings set org.gnome.desktop.interface monospace-font-name 'Hack Nerd Font Mono 11.25' 2>/dev/null || true
   gsettings set org.gnome.desktop.interface font-antialiasing 'grayscale' 2>/dev/null || true
   gsettings set org.gnome.desktop.interface font-hinting 'slight' 2>/dev/null || true
 }
@@ -37,6 +31,15 @@ if [[ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ]]; then
   _apply_gsettings
 elif command -v dbus-run-session >/dev/null 2>&1; then
   dbus-run-session -- bash -c "$(declare -f _apply_gsettings); _apply_gsettings"
+fi
+
+# Restart SwayNC so it picks up updated fontconfig caches and GTK font settings
+if [[ -n "${WAYLAND_DISPLAY:-}" ]]; then
+  if command -v systemctl >/dev/null 2>&1 && systemctl --user is-active --quiet swaync.service 2>/dev/null; then
+    systemctl --user restart swaync.service 2>/dev/null || true
+  elif pgrep -x swaync >/dev/null 2>&1; then
+    pkill -x swaync 2>/dev/null || true
+  fi
 fi
 
 # Refresh X11 resources and xsettingsd if running in an X11 session

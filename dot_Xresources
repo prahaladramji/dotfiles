@@ -3,4 +3,4 @@ Xcursor.size: 24
 Xft.antialias: 1
 Xft.hinting: 1
 Xft.hintstyle: hintslight
-Xft.rgba: rgb
+Xft.rgba: none

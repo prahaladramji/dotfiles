@@ -19,18 +19,18 @@ set $before_sleep_lock "! busctl get-property org.freedesktop.login1 /org/freede
 
 include /etc/sway/config-vars.d/*
 
-font pango:Hack Nerd Font Mono 12
+font pango:Hack Nerd Font Mono 11.25
 
 ### Appearance: Gaps, Borders & Theme
 # Set gaps and borders early before any outputs or workspaces are initialized
-gaps inner 8
+gaps inner 6
 gaps outer 0
-default_border pixel 3
-default_floating_border pixel 3
+default_border pixel 2
+default_floating_border pixel 2
 seat seat0 xcursor_theme Bibata-Modern-Classic 24
 
 # Ensure existing workspaces on all monitors also update their gaps on reload
-exec_always swaymsg "gaps inner all set 8; gaps outer all set 0"
+exec_always swaymsg "gaps inner all set 6; gaps outer all set 0"
 exec_always dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
 exec dex --autostart --environment sway
@@ -71,7 +71,7 @@ exec_always (pkill -x swayidle || true) && exec swayidle -w \
   timeout 600 '! grep -qx 1 /sys/class/power_supply/AC*/online /sys/class/power_supply/ucsi*/online 2>/dev/null && grep -q Discharging /sys/class/power_supply/BAT*/status 2>/dev/null && systemctl suspend' \
   lock $screenlock \
   before-sleep $before_sleep_lock \
-  after-resume '(swaymsg "output * power on" || true) && ( (sleep 3 && (swaymsg "output * power on" || true) && (kanshictl reload || true) && (! grep -q closed /proc/acpi/button/lid/*/state 2>/dev/null || swaymsg "output eDP-1 disable" || true) && sleep 8 && (swaymsg "output * power on" || true) && (kanshictl reload || true) && (! grep -q closed /proc/acpi/button/lid/*/state 2>/dev/null || swaymsg "output eDP-1 disable" || true)) >/dev/null 2>&1 & )'
+  after-resume '(swaymsg "output * power on" || true); (for delay in 3 8; do sleep "$delay"; swaymsg "output * power on" || true; kanshictl reload || true; if grep -q closed /proc/acpi/button/lid/*/state 2>/dev/null; then swaymsg "output eDP-1 disable" || true; fi; done) >/dev/null 2>&1 &'
 
 ### Input configuration
 #
@@ -261,23 +261,6 @@ bindsym XF86AudioStop exec playerctl stop
 # Read `man 5 sway-bar` for more information about this section.
 bar {
   position top
-
-  # When the status_command prints a new line to stdout, swaybar updates.
-  # The default just shows the current date and time.
-  # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-
-  colors {
-    background #272E33
-    statusline #D3C6AA
-    separator  #859289
-
-    focused_workspace  #A7C080 #A7C080 #1E2326
-    active_workspace   #1E2326 #1E2326 #D3C6AA
-    inactive_workspace #1E2326 #1E2326 #859289
-    urgent_workspace   #E67E80 #E67E80 #1E2326
-    binding_mode       #E69875 #E69875 #1E2326
-  }
-
   swaybar_command waybar
 }
 
@@ -294,7 +277,7 @@ workspace 2 output eDP-1 "Dell Inc. DELL U2720Q 36SN023"
 
 # Window mode
 # entire class of applications
-for_window [class=".*"] border pixel 3
+for_window [class=".*"] border pixel 2
 
 # specific application ids
 for_window [app_id="1password"] floating enable, resize set width 1024px height 768px

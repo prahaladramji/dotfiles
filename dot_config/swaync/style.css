@@ -15,26 +15,12 @@
   --bg-selected: #a7c080;
   --border: 1px solid var(--noti-border-color);
   --border-radius: 8px;
-  --font-size-body: 12pt;
-  --font-size-summary: 12pt;
+  --font-size-body: 15px;
+  --font-size-summary: 15px;
 }
 
-@define-color cc-bg rgba(30, 35, 38, 0.95);
-@define-color noti-border-color #414b50;
-@define-color noti-bg rgba(39, 46, 51, 0.95);
-@define-color noti-bg-opaque #272e33;
-@define-color noti-bg-darker #1e2326;
-@define-color noti-bg-hover #374145;
-@define-color noti-bg-hover-opaque #374145;
-@define-color noti-bg-focus rgba(65, 75, 80, 0.85);
-@define-color noti-close-bg #374145;
-@define-color noti-close-bg-hover #414b50;
-@define-color text-color #d3c6aa;
-@define-color text-color-disabled #859289;
-@define-color bg-selected #a7c080;
-
 * {
-  font-family: "Hack Nerd Font";
+  font-family: "Hack Nerd Font", sans-serif;
 }
 
 .notification-row .notification-background .notification.low {

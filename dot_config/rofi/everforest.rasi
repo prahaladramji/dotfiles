@@ -1,6 +1,4 @@
 * {
-  font:   "Hack Nerd Font 12";
-
   background            : #272e33;
   foreground            : #d3c6aa;
   border                : #414b50;
@@ -51,8 +49,8 @@ window {
 }
 
 inputbar {
-  spacing  : 8px;
-  padding  : 6px 10px;
+  spacing  : 10px;
+  padding  : 8px 12px;
   children : [ icon-search, entry ];
 
   background-color: @background;
@@ -70,7 +68,7 @@ entry {
 icon-search {
   expand   : false;
   filename : "system-search";
-  size     : 14px;
+  size     : 15px;
 }
 
 textbox {
@@ -80,7 +78,7 @@ textbox {
 
 listview {
   padding      : 4px 0px;
-  lines        : 12;
+  lines        : 10;
   columns      : 1;
   scrollbar    : true;
   fixed-height : false;
@@ -88,8 +86,8 @@ listview {
 }
 
 element {
-  padding : 5px 10px;
-  spacing : 8px;
+  padding : 7px 12px;
+  spacing : 10px;
 }
 
 element normal urgent {
