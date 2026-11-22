@@ -4,13 +4,13 @@
   TERM_PROGRAM = "Alacritty"
 
 [window]
-  decorations = "Buttonless"
+  decorations = "None"
   opacity = 0.94
   blur = true
   padding = { x = 12, y = 12 }
 
 [font]
-  size = {{ if eq .chezmoi.os "darwin" }}13.0{{ else }}11.25{{ end }}
+  size = {{ if eq .chezmoi.os "darwin" }}15.0{{ else }}11.25{{ end }}
   offset = { x = 0, y = 4 }
   glyph_offset = { x = 0, y = 2 }
   normal = { family = "Hack Nerd Font Mono" }

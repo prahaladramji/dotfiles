@@ -2,6 +2,28 @@
 #!/bin/zsh
 set -euo pipefail
 
+# aerospace.toml: {{ include "dot_config/aerospace/aerospace.toml" | sha256sum }}
+# sketchybar colors.sh: {{ include "dot_config/exact_sketchybar/colors.sh" | sha256sum }}
+# sketchybarrc: {{ include "dot_config/exact_sketchybar/executable_sketchybarrc" | sha256sum }}
+
 # Prevent Finder from creating .DS_Store files on network volumes (SMB/AFP/NFS)
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+# Sync macOS appearance to Dark mode with Everforest-matched green accent & selection highlight
+defaults write -g AppleInterfaceStyle -string "Dark"
+defaults write -g AppleAccentColor -int 3
+defaults write -g AppleHighlightColor -string "0.654902 0.752941 0.501961 Other"
+
+# Use light CoreText grayscale font smoothing (1) instead of macOS's heavier
+# Retina default (2) for clean strokes without fuzzy halos on native 1x 4K displays
+defaults -currentHost write -g AppleFontSmoothing -int 1
+
+# Refresh live JankyBorders & SketchyBar instances in-place when desktop configs change
+if pgrep -x borders >/dev/null 2>&1 && [[ -x /opt/homebrew/opt/borders/bin/borders ]]; then
+  /opt/homebrew/opt/borders/bin/borders style=round active_color=0xffa7c080 inactive_color=0xff374145 width=4.0 2>/dev/null || true
+fi
+
+if pgrep -x sketchybar >/dev/null 2>&1 && [[ -x /opt/homebrew/opt/sketchybar/bin/sketchybar ]]; then
+  /opt/homebrew/opt/sketchybar/bin/sketchybar --reload 2>/dev/null || true
+fi
 {{- end }}

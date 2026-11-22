@@ -2,9 +2,7 @@
     "workbench.startupEditor": "none",
     "workbench.colorTheme": "Everforest Dark",
     "everforest.darkContrast": "hard",
-{{- if ne .chezmoi.os "darwin" }}
     "window.zoomLevel": 0.8,
-{{- end }}
     "editor.fontFamily": "'Hack Nerd Font Mono', 'Droid Sans Mono', monospace",
     "editor.fontSize": 13,
     "editor.lineHeight": 1.5,

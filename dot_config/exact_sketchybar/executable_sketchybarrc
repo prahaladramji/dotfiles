@@ -6,14 +6,14 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 source "$CONFIG_DIR/colors.sh"
 
 # Reset transient popup/calendar state on reload so fresh items get populated
-rm -rf "$HOVER_DIR" /tmp/sketchybar_clock_cal_key 2>/dev/null
+rm -rf "$HOVER_DIR" /tmp/sketchybar_clock_cal_key /tmp/sketchybar_clock_cal.png 2>/dev/null
 
 # -----------------------------------------------------------------------------
 # Bar Appearance: Transparent canvas for Minimal Floating Pills
 # -----------------------------------------------------------------------------
 sketchybar --bar \
   position=top \
-  height=32 \
+  height=34 \
   margin=0 \
   y_offset=3 \
   padding_left=8 \
@@ -29,19 +29,19 @@ sketchybar --bar \
 # -----------------------------------------------------------------------------
 sketchybar --default \
   updates=when_shown \
-  icon.font="Hack Nerd Font:Regular:14.0" \
+  icon.font="Hack Nerd Font:Regular:16.0" \
   icon.color="$FG_COLOR" \
   icon.padding_left=7 \
   icon.padding_right=4 \
-  label.font="Hack Nerd Font:Regular:13.0" \
+  label.font="Hack Nerd Font:Regular:15.0" \
   label.color="$FG_COLOR" \
   label.padding_left=0 \
   label.padding_right=7 \
   padding_left=1 \
   padding_right=1 \
   background.drawing=off \
-  background.height=26 \
-  background.corner_radius=13 \
+  background.height=28 \
+  background.corner_radius=14 \
   background.color="$TRANSPARENT" \
   popup.background.color="$BG_LIGHT_COLOR" \
   popup.background.corner_radius=8 \
@@ -57,7 +57,7 @@ add_tooltip() {
   sketchybar --add item "${parent}.tooltip" "popup.${parent}" \
     --set "${parent}.tooltip" \
       icon.drawing=off \
-      label.font="Hack Nerd Font Mono:Regular:12.0" \
+      label.font="Hack Nerd Font Mono:Regular:15.0" \
       label.color="$FG_COLOR" \
       label.padding_left=10 \
       label.padding_right=10 \
@@ -98,8 +98,8 @@ for sid in 1 2 3 4 5 6 7 8 9 10; do
       padding_left=2 \
       padding_right=2 \
       background.drawing=off \
-      background.height=20 \
-      background.corner_radius=10 \
+      background.height=22 \
+      background.corner_radius=11 \
       background.color="$WORKSPACES_FOCUSED_BG" \
       click_script="/opt/homebrew/bin/aerospace workspace $sid" \
       script="$PLUGIN_DIR/aerospace.sh $sid"
@@ -109,8 +109,8 @@ sketchybar --add bracket spaces_pill '/space\..*/' \
   --set spaces_pill \
     background.drawing=on \
     background.color="$PILL_BG" \
-    background.corner_radius=13 \
-    background.height=26 \
+    background.corner_radius=14 \
+    background.height=28 \
     background.border_width=1 \
     background.border_color="$PILL_BORDER"
 
@@ -122,14 +122,14 @@ sketchybar --add item mode left \
   --set mode \
     drawing=off \
     icon.drawing=off \
-    label.font="Hack Nerd Font:Bold:13.0" \
+    label.font="Hack Nerd Font:Bold:15.0" \
     label.color="$BLACK" \
     label.padding_left=10 \
     label.padding_right=10 \
     background.drawing=on \
     background.color="$MODE_COLOR" \
-    background.corner_radius=13 \
-    background.height=26 \
+    background.corner_radius=14 \
+    background.height=28 \
     script="$PLUGIN_DIR/mode.sh"
 
 # 3. Weather Pill (compact icon + temp on bar, full forecast on hover)
@@ -142,8 +142,8 @@ sketchybar --add item weather left \
     label.padding_right=12 \
     background.drawing=on \
     background.color="$PILL_BG" \
-    background.corner_radius=13 \
-    background.height=26 \
+    background.corner_radius=14 \
+    background.height=28 \
     background.border_width=1 \
     background.border_color="$PILL_BORDER" \
     popup.align=left \
@@ -190,7 +190,7 @@ sketchybar --add item clock right \
     icon.color="$CLOCK_COLOR" \
     icon.padding_left=10 \
     label.color="$FG_COLOR" \
-    label.font="Hack Nerd Font:Bold:13.0" \
+    label.font="Hack Nerd Font:Bold:15.0" \
     label.padding_right=6 \
     background.drawing=off \
     update_freq=10 \
@@ -212,8 +212,8 @@ sketchybar --add bracket clock_pill clock power \
   --set clock_pill \
     background.drawing=on \
     background.color="$PILL_BG" \
-    background.corner_radius=13 \
-    background.height=26 \
+    background.corner_radius=14 \
+    background.height=28 \
     background.border_width=1 \
     background.border_color="$PILL_BORDER"
 
@@ -300,7 +300,7 @@ for idx in 1 2 3; do
     --set "network.tooltip.$idx" \
       drawing=off \
       icon.drawing=off \
-      label.font="Hack Nerd Font Mono:Regular:12.0" \
+      label.font="Hack Nerd Font Mono:Regular:15.0" \
       label.color="$FG_COLOR" \
       label.padding_left=10 \
       label.padding_right=10 \
@@ -350,7 +350,7 @@ for idx in 1 2 3 4 5; do
     --set "bluetooth.tooltip.$idx" \
       drawing=off \
       icon.drawing=off \
-      label.font="Hack Nerd Font Mono:Regular:12.0" \
+      label.font="Hack Nerd Font Mono:Regular:15.0" \
       label.color="$FG_COLOR" \
       label.padding_left=10 \
       label.padding_right=10 \
@@ -361,8 +361,8 @@ sketchybar --add bracket status_pill bluetooth volume mic network cpu memory dis
   --set status_pill \
     background.drawing=on \
     background.color="$PILL_BG" \
-    background.corner_radius=13 \
-    background.height=26 \
+    background.corner_radius=14 \
+    background.height=28 \
     background.border_width=1 \
     background.border_color="$PILL_BORDER"
 

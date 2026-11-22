@@ -3,29 +3,29 @@
 export PATH="/opt/homebrew/bin:/opt/homebrew/opt/sketchybar/bin:/usr/sbin:/usr/bin:/bin:/sbin:$PATH"
 
 # -----------------------------------------------------------------------------
-# Tokyo Night Palette (Minimal Floating Pills)
+# Everforest Dark Hard Palette (Minimal Floating Pills, matching Waybar)
 # -----------------------------------------------------------------------------
-export BG_COLOR=0xff1a1b26
-export PILL_BG=0xe81a1b26
-export PILL_BORDER=0xff2f3549
-export BG_LIGHT_COLOR=0xf224283b
-export FG_COLOR=0xffc0caf5
-export SUBTEXT_COLOR=0xffa9b1d6
-export MUTED_COLOR=0xff565f89
-export BLACK=0xff15161e
-export RED=0xfff7768e
-export GREEN=0xff9ece6a
-export YELLOW=0xffe0af68
-export BLUE=0xff7aa2f7
-export MAGENTA=0xffbb9af7
-export CYAN=0xff7dcfff
-export WHITE=0xffa9b1d6
-export ORANGE=0xffff9e64
+export BG_COLOR=0xff272e33
+export PILL_BG=0xf2272e33
+export PILL_BORDER=0xff414b50
+export BG_LIGHT_COLOR=0xf72e383c
+export FG_COLOR=0xffd3c6aa
+export SUBTEXT_COLOR=0xff9da9a0
+export MUTED_COLOR=0xff859289
+export BLACK=0xff1e2326
+export RED=0xffe67e80
+export GREEN=0xffa7c080
+export YELLOW=0xffdbbc7f
+export BLUE=0xff7fbbb3
+export MAGENTA=0xffd699b6
+export CYAN=0xff83c092
+export WHITE=0xffd3c6aa
+export ORANGE=0xffe69875
 export TRANSPARENT=0x00000000
 
 # Module-specific colors
 export WORKSPACES_COLOR=$SUBTEXT_COLOR
-export WORKSPACES_FOCUSED_BG=$BLUE
+export WORKSPACES_FOCUSED_BG=$GREEN
 export WORKSPACES_FOCUSED_FG=$BLACK
 export WORKSPACES_URGENT_BG=$RED
 export WORKSPACES_URGENT_FG=$BLACK

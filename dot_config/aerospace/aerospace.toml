@@ -7,7 +7,7 @@ config-version = 2
 # Commands that run after AeroSpace startup (start SketchyBar and JankyBorders)
 after-startup-command = [
   'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar',
-  'exec-and-forget /opt/homebrew/opt/borders/bin/borders active_color=0xffa7c080 inactive_color=0xff374145 width=4.0',
+  'exec-and-forget /opt/homebrew/opt/borders/bin/borders style=round active_color=0xffa7c080 inactive_color=0xff374145 width=4.0',
 ]
 
 # Notify SketchyBar when workspace changes
@@ -28,7 +28,7 @@ enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
 # Layout settings. See: https://nikitabobko.github.io/AeroSpace/guide#layouts
-accordion-padding = 30
+accordion-padding = 10
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
@@ -51,12 +51,12 @@ focus-follows-mouse.enabled = false
 key-mapping.preset = 'qwerty'
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
-# 8px gaps for rounded windows & JankyBorders; 38px top outer gap reserves space for SketchyBar pills
+# 8px gaps for JankyBorders; 40px top outer gap reserves space for SketchyBar pills
 gaps.inner.horizontal = 8
 gaps.inner.vertical = 8
 gaps.outer.left = 8
 gaps.outer.bottom = 8
-gaps.outer.top = [{ monitor."built-in" = 0 }, 38]
+gaps.outer.top = [{ monitor."built-in" = 0 }, 40]
 gaps.outer.right = 8
 
 # -----------------------------------------------------------------------------

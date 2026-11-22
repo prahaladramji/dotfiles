@@ -18,13 +18,13 @@ if [ "$SID" = "$FOCUSED" ]; then
   sketchybar --set "$NAME" \
     drawing=on \
     label.color="$WORKSPACES_FOCUSED_FG" \
-    label.font="Hack Nerd Font:Bold:13.0" \
+    label.font="Hack Nerd Font:Bold:15.0" \
     background.drawing=on \
     background.color="$WORKSPACES_FOCUSED_BG"
 else
   sketchybar --set "$NAME" \
     drawing="$SHOW_WORKSPACE" \
     label.color="$WORKSPACES_COLOR" \
-    label.font="Hack Nerd Font:Regular:13.0" \
+    label.font="Hack Nerd Font:Regular:15.0" \
     background.drawing=off
 fi

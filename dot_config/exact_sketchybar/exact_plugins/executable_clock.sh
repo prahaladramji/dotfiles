@@ -112,18 +112,19 @@ else:
   tm = today.year * 12 + today.month - 1 + offset
   grid = month_block(tm // 12, tm % 12 + 1, True)
 
-f_reg = ct.CTFontCreateWithName(cfstr("HackNFM-Regular"), 24.0, None)
-f_bold = ct.CTFontCreateWithName(cfstr("HackNFM-Bold"), 24.0, None)
+FONT_SIZE = 30.0
+f_reg = ct.CTFontCreateWithName(cfstr("HackNFM-Regular"), FONT_SIZE, None)
+f_bold = ct.CTFontCreateWithName(cfstr("HackNFM-Bold"), FONT_SIZE, None)
 ch, gl = u16(ord("M")), u16(0)
 ct.CTFontGetGlyphsForCharacters(f_reg, ctypes.byref(ch), ctypes.byref(gl), 1)
-if ct.CTFontGetAdvancesForGlyphs(f_reg, 0, ctypes.byref(gl), None, 1) > 21.0:
-  f_reg = ct.CTFontCreateWithName(cfstr("Menlo-Regular"), 24.0, None)
-  f_bold = ct.CTFontCreateWithName(cfstr("Menlo-Bold"), 24.0, None)
+if ct.CTFontGetAdvancesForGlyphs(f_reg, 0, ctypes.byref(gl), None, 1) > FONT_SIZE * 0.875:
+  f_reg = ct.CTFontCreateWithName(cfstr("Menlo-Regular"), FONT_SIZE, None)
+  f_bold = ct.CTFontCreateWithName(cfstr("Menlo-Bold"), FONT_SIZE, None)
   ct.CTFontGetGlyphsForCharacters(f_reg, ctypes.byref(ch), ctypes.byref(gl), 1)
 
 cw = ct.CTFontGetAdvancesForGlyphs(f_reg, 0, ctypes.byref(gl), None, 1)
 asc, desc = ct.CTFontGetAscent(f_reg), ct.CTFontGetDescent(f_reg)
-lh, px, py = round(asc + desc + 8.0), 24.0, 20.0
+lh, px, py = round(asc + desc + 10.0), 28.0, 24.0
 W = int(round(sum(len(t) for t, _ in grid[0]) * cw + 2 * px))
 H = int(round(len(grid) * lh + 2 * py))
 
@@ -143,7 +144,7 @@ for r_idx, row in enumerate(grid):
     ct.CTFontDrawGlyphs(font, glyphs, pts, n, ctx)
     if style == "today":
       s = 1 if text[0] == " " else 0
-      cg.CGContextFillRect(ctx, Rect(px + (col + s) * cw, by - 3.0, (n - s) * cw, 2.5))
+      cg.CGContextFillRect(ctx, Rect(px + (col + s) * cw, by - 4.0, (n - s) * cw, 3.0))
     col += n
 
 url = cf.CFURLCreateFromFileSystemRepresentation(None, out_path.encode(), len(out_path), False)
