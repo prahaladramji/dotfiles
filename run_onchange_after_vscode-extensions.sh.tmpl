@@ -22,6 +22,18 @@ desired=(
 {{- end }}
 )
 
+{{- if eq .profile.name "work" }}
+if command -v yq >/dev/null 2>&1 && [[ -d "$HOME/.local/share/dotfiles-work/.chezmoidata" ]]; then
+  for f in "$HOME/.local/share/dotfiles-work/.chezmoidata/"*.yaml "$HOME/.local/share/dotfiles-work/.chezmoidata/"*.yml; do
+    [[ -f "$f" ]] || continue
+    while IFS= read -r ext; do
+      [[ -n "$ext" ]] && desired+=("$ext")
+    done < <(yq -r '.packages.vscode // {} | .[][]?' "$f" 2>/dev/null || true)
+  done
+fi
+{{- end }}
+
+desired_lc="$(printf '%s\n' "${desired[@]}" | tr '[:upper:]' '[:lower:]')"
 installed="$(NODE_NO_WARNINGS=1 "$CODE_BIN" --list-extensions 2>/dev/null | tr -d '\r' | tr '[:upper:]' '[:lower:]' || true)"
 
 failed=""
@@ -36,6 +48,18 @@ for ext in "${desired[@]}"; do
     fi
   fi
 done
+
+while IFS= read -r inst; do
+  [[ -z "$inst" ]] && continue
+  inst_lc="$(printf '%s' "$inst" | tr '[:upper:]' '[:lower:]')"
+  if ! grep -Fxq "$inst_lc" <<< "$desired_lc"; then
+    echo "==> Uninstalling unlisted VS Code extension: $inst"
+    if ! out="$(NODE_NO_WARNINGS=1 "$CODE_BIN" --uninstall-extension "$inst" 2>&1)"; then
+      echo "==> Warning: could not uninstall VS Code extension: $inst (may be required by another extension)" >&2
+      [[ -n "$out" ]] && printf '%s\n' "$out" >&2
+    fi
+  fi
+done <<< "$(NODE_NO_WARNINGS=1 "$CODE_BIN" --list-extensions 2>/dev/null | tr -d '\r' || true)"
 
 if [[ -n "$failed" ]]; then
   echo "==> Some VS Code extensions failed to install ($failed). Re-run 'dots apply' when online." >&2

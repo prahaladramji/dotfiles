@@ -6,26 +6,27 @@ packages:
   darwin:
     common:
       brews:
-        - borders
+        - felixkratz/formulae/borders
         - btop
         - chezmoi
         - direnv
         - fd
         - fzf
         - gdu
+        - gnupg
         - jq
         - luarocks
         - nvim
         - pinentry-mac
         - ripgrep
-        - sketchybar
+        - felixkratz/formulae/sketchybar
         - tmux
         - wget
         - yq
       casks:
         - 1password
         - 1password-cli
-        - aerospace
+        - nikitabobko/tap/aerospace
         - alacritty
         - alfred
         - appcleaner
@@ -34,11 +35,12 @@ packages:
         - qmk-toolbox
         - visual-studio-code
       taps:
-        - FelixKratz/formulae
+        - felixkratz/formulae
         - nikitabobko/tap
     personal:
       brews:
         - arduino-cli
+        - clang-format
         - coreutils
         - dnscontrol
         - ffmpeg
@@ -47,7 +49,7 @@ packages:
         - lego
         - opentofu
         - pipx
-        - qmk
+        - qmk/qmk/qmk
         - ykman
         - yubico-piv-tool
       casks:
@@ -68,6 +70,8 @@ packages:
         - whatsapp
         - yubico-authenticator
       taps:
+        - osx-cross/arm
+        - osx-cross/avr
         - qmk/qmk
 
   linux:
@@ -161,4 +165,11 @@ packages:
       - tamasfe.even-better-toml
       - vscodevim.vim
       - ziyasal.vscode-open-in-github
-    personal: []
+    personal:
+      - amodio.toggle-excluded-files
+      - anthropic.claude-code
+      - golang.go
+      - ms-vscode-remote.remote-containers
+      - ms-vscode.makefile-tools
+      - opentofu.vscode-opentofu
+      - xaver.clang-format

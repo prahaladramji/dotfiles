@@ -6,16 +6,19 @@ if ! command -v brew >/dev/null 2>&1 && [[ -x /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-brew bundle --file=/dev/stdin <<EOF
+BREWFILE="$(mktemp)"
+trap 'rm -f "$BREWFILE"' EXIT
+
+cat <<'EOF' > "$BREWFILE"
 {{ range .packages.darwin.common.taps -}}
-tap {{ . | quote }}
+tap {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.darwin.common.brews -}}
 brew {{ . | quote }}
 {{ end -}}
 {{ if eq .profile.name "personal" -}}
 {{ range .packages.darwin.personal.taps -}}
-tap {{ . | quote }}
+tap {{ . | quote }}, trusted: true
 {{ end -}}
 {{ range .packages.darwin.personal.brews -}}
 brew {{ . | quote }}
@@ -28,4 +31,9 @@ cask {{ . | quote }}
 cask {{ . | quote }}
 {{ end -}}
 EOF
+
+brew bundle install --file="$BREWFILE"
+{{- if eq .profile.name "personal" }}
+brew bundle cleanup --formula --cask --tap --force --file="$BREWFILE"
+{{- end }}
 {{- end }}
