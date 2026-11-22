@@ -22,15 +22,16 @@ desired=(
 {{- end }}
 )
 
-installed="$("$CODE_BIN" --list-extensions 2>/dev/null | tr -d '\r' | tr '[:upper:]' '[:lower:]' || true)"
+installed="$(NODE_NO_WARNINGS=1 "$CODE_BIN" --list-extensions 2>/dev/null | tr -d '\r' | tr '[:upper:]' '[:lower:]' || true)"
 
 failed=""
 for ext in "${desired[@]}"; do
   ext_lc="$(printf '%s' "$ext" | tr '[:upper:]' '[:lower:]')"
   if ! grep -Fxq "$ext_lc" <<< "$installed"; then
     echo "==> Installing VS Code extension: $ext"
-    if ! "$CODE_BIN" --install-extension "$ext" --force >/dev/null; then
+    if ! out="$(NODE_NO_WARNINGS=1 "$CODE_BIN" --install-extension "$ext" --force 2>&1)"; then
       echo "==> Warning: failed to install VS Code extension: $ext" >&2
+      [[ -n "$out" ]] && printf '%s\n' "$out" >&2
       failed="${failed:+$failed }$ext"
     fi
   fi
