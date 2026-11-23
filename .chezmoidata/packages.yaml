@@ -144,6 +144,7 @@ packages:
   vscode:
     common:
       - alefragnani.project-manager
+      - andreilucaci.everforest-pro
       - bierner.github-markdown-preview
       - bierner.markdown-checkbox
       - bierner.markdown-emoji
@@ -161,7 +162,6 @@ packages:
       - ms-vscode-remote.remote-ssh
       - ms-vscode-remote.remote-ssh-edit
       - ms-vscode.remote-explorer
-      - sainnhe.everforest
       - tamasfe.even-better-toml
       - vscodevim.vim
       - ziyasal.vscode-open-in-github
