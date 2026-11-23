@@ -32,10 +32,12 @@ accordion-padding = 10
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
-# Mouse follows focus lazily (no-op if cursor is already inside the target window/monitor,
-# preventing ping-pong loops with focus-follows-mouse)
+# Mouse follows focus only when focused monitor changes (matches Sway/i3 default
+# 'mouse_warping output'). Avoid 'on-focus-changed = move-mouse window-lazy-center'
+# alongside focus-follows-mouse: in AeroSpace 0.21.x, on-focus-changed fires before
+# closed-window garbage collection and layoutWorkspaces(), posting a synthetic mouseMoved
+# event that causes focus-follows-mouse to cancel the pending re-layout session.
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
-on-focus-changed = ['move-mouse window-lazy-center']
 
 # Effectively turn off macOS "Hide application" (cmd-h) feature if desired
 automatically-unhide-macos-hidden-apps = false
@@ -85,8 +87,9 @@ gaps.outer.right = 8
 # Start a terminal ($mod+Return in Sway/i3)
 alt-enter = 'exec-and-forget open -na Alacritty'
 
-# Kill focused window ($mod+Shift+q in Sway/i3)
-alt-shift-q = 'close'
+# Kill focused window ($mod+Shift+q in Sway/i3; --quit-if-last-window quits single-window
+# apps like borderless 'open -na Alacritty' instances that lack a native AXCloseButton)
+alt-shift-q = 'close --quit-if-last-window'
 
 # Reload configuration ($mod+Shift+c and $mod+Shift+r in Sway/i3)
 alt-shift-c = 'reload-config'
