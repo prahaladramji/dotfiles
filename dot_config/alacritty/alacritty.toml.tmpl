@@ -4,7 +4,7 @@
   TERM_PROGRAM = "Alacritty"
 
 [window]
-  decorations = "None"
+  decorations = {{ if eq .chezmoi.os "darwin" }}"Buttonless"{{ else }}"None"{{ end }}
   opacity = 0.94
   blur = true
   padding = { x = 12, y = 12 }

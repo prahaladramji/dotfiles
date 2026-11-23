@@ -84,11 +84,11 @@ gaps.outer.right = 8
 [mode.main.binding]
 
 # --- Basics ---
-# Start a terminal ($mod+Return in Sway/i3)
-alt-enter = 'exec-and-forget open -na Alacritty'
+# Start a terminal ($mod+Return in Sway/i3; reuse single Alacritty process via IPC)
+alt-enter = 'exec-and-forget /opt/homebrew/bin/alacritty msg create-window || open -a Alacritty'
 
-# Kill focused window ($mod+Shift+q in Sway/i3; --quit-if-last-window quits single-window
-# apps like borderless 'open -na Alacritty' instances that lack a native AXCloseButton)
+# Kill focused window ($mod+Shift+q in Sway/i3; --quit-if-last-window cleanly quits
+# apps like Alacritty once their last window closes)
 alt-shift-q = 'close --quit-if-last-window'
 
 # Reload configuration ($mod+Shift+c and $mod+Shift+r in Sway/i3)
