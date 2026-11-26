@@ -10,11 +10,13 @@ after-startup-command = [
   'exec-and-forget /opt/homebrew/opt/borders/bin/borders style=round active_color=0xffa7c080 inactive_color=0xff374145 width=4.0',
 ]
 
-# Notify SketchyBar when workspace changes
+# Notify SketchyBar when workspace changes (direct exec without /bin/zsh;
+# aerospace.sh queries live state under a coalescing lock so rapid switches
+# never overwrite the bar out of order with stale FOCUSED_WORKSPACE values)
 exec-on-workspace-change = [
-  '/bin/zsh',
-  '-c',
-  '/opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+  '/opt/homebrew/opt/sketchybar/bin/sketchybar',
+  '--trigger',
+  'aerospace_workspace_change',
 ]
 
 # Start AeroSpace at login
@@ -33,10 +35,7 @@ default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
 # Mouse follows focus only when focused monitor changes (matches Sway/i3 default
-# 'mouse_warping output'). Avoid 'on-focus-changed = move-mouse window-lazy-center'
-# alongside focus-follows-mouse: in AeroSpace 0.21.x, on-focus-changed fires before
-# closed-window garbage collection and layoutWorkspaces(), posting a synthetic mouseMoved
-# event that causes focus-follows-mouse to cancel the pending re-layout session.
+# 'mouse_warping output')
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 # Effectively turn off macOS "Hide application" (cmd-h) feature if desired
@@ -50,8 +49,12 @@ on-mode-changed = [
   'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_mode_change',
 ]
 
-# Focus window under cursor when moving the mouse (matches Sway's 'focus_follows_mouse yes')
-focus-follows-mouse.enabled = true
+# Click-to-focus + keyboard focus (alt-h/j/k/l): AeroSpace 0.21.x's native
+# focus-follows-mouse immediately focuses and raises any window under the cursor
+# without delay or a separate macOS floating layer, which buries floating windows
+# when moving the cursor toward them and causes unintended front-window switches
+# in stacked/accordion layouts or during workspace/window swaps.
+focus-follows-mouse.enabled = false
 
 # Key mapping preset (qwerty|dvorak|colemak)
 key-mapping.preset = 'qwerty'

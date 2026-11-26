@@ -197,6 +197,10 @@ def inspect_top_windows():
 def set_bar_hidden(hide):
     if hide:
         cmd = [SKETCHYBAR, "--bar", "hidden=on", "--set", "power", "popup.drawing=off"]
+        try:
+            os.remove("/tmp/sketchybar_hover/_power_open")
+        except OSError:
+            pass
         open_file = "/tmp/sketchybar_hover/_open"
         try:
             with open(open_file, "r") as f:

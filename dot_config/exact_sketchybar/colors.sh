@@ -92,7 +92,12 @@ hover_enter() {
 
   print -r -- "$item" > "$HOVER_DIR/_open"
   print -r -- "$EPOCHREALTIME" > "$HOVER_DIR/_warm"
-  sketchybar --set "$item" popup.drawing=on
+  if [[ "$item" != "power" && -f "$HOVER_DIR/_power_open" ]]; then
+    rm -f "$HOVER_DIR/_power_open"
+    sketchybar --set power popup.drawing=off --set "$item" popup.drawing=on
+  else
+    sketchybar --set "$item" popup.drawing=on
+  fi
   return 0
 }
 

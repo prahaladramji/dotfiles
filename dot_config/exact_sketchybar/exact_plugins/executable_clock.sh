@@ -160,7 +160,7 @@ TZ_IDX=$(get_tz_idx)
 CURRENT_TZ="${TIMEZONES[$TZ_IDX]}"
 
 if [ -z "$1" ]; then
-  if [ "$SENDER" = "mouse.exited" ]; then
+  if [ "$SENDER" = "mouse.exited" ] || [ "$SENDER" = "mouse.exited.global" ]; then
     hover_exit clock
     if [ -f "$YEAR_FILE" ] || [ -f "$OFFSET_FILE" ]; then
       rm -f "$YEAR_FILE" "$OFFSET_FILE"

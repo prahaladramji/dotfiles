@@ -172,7 +172,7 @@ add_tooltip weather
 
 # --- Pill A (Rightmost): Clock + Power ---
 sketchybar --add item power right \
-  --subscribe power mouse.exited \
+  --subscribe power mouse.exited.global \
   --set power \
     icon="⏻" \
     icon.color="$RED" \
@@ -182,6 +182,7 @@ sketchybar --add item power right \
     label.drawing=off \
     background.drawing=off \
     popup.align=right \
+    popup.y_offset=-1 \
     script="$PLUGIN_DIR/power.sh" \
     click_script="$PLUGIN_DIR/power.sh toggle"
 
@@ -199,7 +200,7 @@ for action in "lock:  Lock Screen" "sleep:󰤄  Suspend" "reboot:󰜉  Reboot
 done
 
 sketchybar --add item clock right \
-  --subscribe clock mouse.entered mouse.exited mouse.scrolled mouse.clicked \
+  --subscribe clock mouse.entered mouse.exited mouse.exited.global mouse.scrolled mouse.clicked \
   --set clock \
     icon="󰥔" \
     icon.color="$CLOCK_COLOR" \
@@ -208,6 +209,7 @@ sketchybar --add item clock right \
     label.font="Hack Nerd Font:Bold:15.0" \
     label.padding_right=6 \
     background.drawing=off \
+    popup.y_offset=-1 \
     update_freq=10 \
     script="$PLUGIN_DIR/clock.sh"
 
